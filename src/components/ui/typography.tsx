@@ -45,20 +45,21 @@ export const Typography = ({ variant, children }: TypographyProps) => {
     case 'p':
       return <p className="leading-7 [&:not(:first-child)]:mt-6">{children}</p>;
     case 'blockquote':
-      <blockquote className="mt-6 border-l-2 pl-6 italic">
-        {children}
-      </blockquote>;
-    case 'large':
       return (
-        <div className="text-lg font-semibold">Are you absolutely sure?</div>
+        <blockquote className="mt-6 border-l-2 pl-6 italic">
+          {children}
+        </blockquote>
       );
+    case 'large':
+      return <div className="text-lg font-semibold">{children}</div>;
     case 'small':
       return (
-        <small className="text-sm leading-none font-medium">
-          Email address
-        </small>
+        <small className="text-sm leading-none font-medium">{children}</small>
       );
     case 'muted':
       return <p className="text-muted-foreground text-sm">{children}</p>;
+    default:
+      console.warn(`Unknown Typography variant: ${variant}`);
+      return <span>{children}</span>;
   }
 };

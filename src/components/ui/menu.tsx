@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-type menuItem = { label: string; href: string };
+type MenuItem = { label: string; href: string };
 
 interface MenuProps {
   menuItems: menuItem[];
@@ -8,16 +8,22 @@ interface MenuProps {
 
 export const Menu = ({ menuItems }: MenuProps) => {
   return (
-    <div className="flex items-center w-[20vh] h-[100vh] mx-5 ">
-      <div className="border-2 border-black rounded-2xl h-[95%] w-full">
-        <ul className="flex">
-          {menuItems.map((item: menuItem, index) => (
-            <li key={index} className="block">
-              <Link href={item.href}>{item.label}</Link>
+    <div className="flex flex-col w-64 min-h-screen p-4">
+      <nav className="border-2 border-border rounded-2xl flex-1 p-4">
+        <ul className="flex flex-col space-y-2">
+          {menuItems.map((item: MenuItem, index) => (
+            <li key={index}>
+              <Link
+                href={item.href}
+                className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                aria-label={`Navigate to ${item.label}`}
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
     </div>
   );
 };
