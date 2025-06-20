@@ -1,3 +1,9 @@
+import { Container } from '@/components/ui/container';
+
 export default function Blogs() {
-  return <h1>Blog table</h1>;
+  return (
+    <Container>
+      <h1>Blog table</h1>
+    </Container>
+  );
 }
