@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <Container>
       <div className="text-right">
-        <Typography variant="super" className="mr-16 text-gradient">
+        <Typography variant="super" className="mr-16">
           <span className="text-accent">{'<'}</span> Hello World!
         </Typography>
         <Typography variant="super">
