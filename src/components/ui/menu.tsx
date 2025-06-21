@@ -53,7 +53,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             </Typography>
           </Link>
           <Link
-            href="www.linkedin.com/in/richard-o-donoghue"
+            href="https://www.linkedin.com/in/richard-o-donoghue"
             aria-label="Check out my LinkedIn Profile"
             className="rounded-md hover:bg-accent p-0"
           >
