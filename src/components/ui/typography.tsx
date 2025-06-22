@@ -10,7 +10,8 @@ type Variants =
   | "large"
   | "small"
   | "muted"
-  | "super";
+  | "super"
+  | "hero";
 
 interface TypographyProps {
   variant: Variants;
@@ -124,6 +125,17 @@ export const Typography = ({
       return (
         <h1
           className={`scroll-m-20 text-7xl font-extrabold tracking-tight text-balance ${
+            overrideClasses ? overrideClasses : ""
+          }`}
+        >
+          {children}
+        </h1>
+      );
+
+    case "hero":
+      return (
+        <h1
+          className={`scroll-m-20 text-9xl font-extrabold tracking-tight text-balance ${
             overrideClasses ? overrideClasses : ""
           }`}
         >
