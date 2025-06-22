@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Typography } from './typography';
-import { Separator } from './separator';
+import Link from "next/link";
+import Image from "next/image";
+import { Typography } from "./typography";
+import { Separator } from "./separator";
 
 type MenuItem = { label: string; href: string };
 
@@ -11,7 +11,7 @@ interface MenuProps {
 
 export const Menu = ({ menuItems }: MenuProps) => {
   return (
-    <div className="flex flex-col w-96 min-h-screen p-4">
+    <div className="flex flex-col w-96 h-dvh p-4">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
         <Link href="/" className="m-0 w-full p-0">
           <Image
