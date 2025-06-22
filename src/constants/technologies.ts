@@ -4,7 +4,7 @@ type Category =
   | "Infrastructure"
   | "Languages"
   | "Project Management"
-  | "OSes"
+  | "Operating Systems"
   | "Test Frameworks"
   | "Web";
 
@@ -48,7 +48,7 @@ export const technologies: Technologies = {
     { name: "Confluence", logo: "Confluence.svg" },
     { name: "Jira", logo: "Jira.svg" },
   ],
-  OSes: [
+  "Operating Systems": [
     { name: "Fedora", logo: "Fedora.svg" },
     { name: "Linux", logo: "Linux.svg" },
     { name: "Windows", logo: "Windows.svg" },
