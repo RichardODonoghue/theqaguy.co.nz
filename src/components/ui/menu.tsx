@@ -1,7 +1,10 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Typography } from './typography';
-import { Separator } from './separator';
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { Typography } from "./typography";
+import { Separator } from "./separator";
+import { usePathname } from "next/navigation";
 
 type MenuItem = { label: string; href: string };
 
@@ -10,8 +13,10 @@ interface MenuProps {
 }
 
 export const Menu = ({ menuItems }: MenuProps) => {
+  const pathname = usePathname();
+
   return (
-    <div className="flex flex-col w-96 min-h-screen p-4">
+    <div className="flex flex-col w-96 h-dvh p-4">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
         <Link href="/" className="m-0 w-full p-0">
           <Image
@@ -25,13 +30,18 @@ export const Menu = ({ menuItems }: MenuProps) => {
         <Separator className="my-10" />
         <ul className="flex flex-col space-y-2">
           {menuItems.map((item: MenuItem, index) => (
-            <li key={index}>
+            <li key={index} className="my-4 w-40">
               <Link
                 href={item.href}
-                className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors my-2"
+                className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
                 aria-label={`Navigate to ${item.label}`}
               >
-                <Typography variant="large">{item.label}</Typography>
+                <div className="inline-block">
+                  <Typography variant="large">{item.label}</Typography>
+                  {pathname === item.href && (
+                    <div className="bg-accent h-1 mt-1" />
+                  )}
+                </div>
               </Link>
             </li>
           ))}
@@ -40,6 +50,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             href="https://github.com/RichardODonoghue"
             aria-label="Check out my Github Profile"
             className="rounded-md hover:bg-accent"
+            target="_blank"
           >
             <Image
               src="/github-mark-white.svg"
@@ -56,6 +67,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             href="https://www.linkedin.com/in/richard-o-donoghue"
             aria-label="Check out my LinkedIn Profile"
             className="rounded-md hover:bg-accent p-0"
+            target="_blank"
           >
             <div>
               <Image
@@ -74,6 +86,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             href="https://discordapp.com/users/324838492423061504"
             aria-label="Contact me on discord"
             className="rounded-md hover:bg-accent p-0"
+            target="_blank"
           >
             <div>
               <Image

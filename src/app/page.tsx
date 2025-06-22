@@ -1,20 +1,14 @@
-import { Typography } from '@/components/ui/typography';
-import { Container } from '@/components/ui/container';
+import { Container } from "@/components/ui/container";
+import { ContentHeader } from "@/components/ui/contentHeader";
+import { Typography } from "@/components/ui/typography";
 
 export default function Home() {
   return (
     <Container>
-      <div className="text-right">
-        <Typography variant="super" className="mr-16 text-gradient">
-          <span className="text-accent">{'<'}</span> Hello World!
-        </Typography>
-        <Typography variant="super">
-          I&apos;m Richard <span className="text-accent">{'/>'}</span>
-        </Typography>
-        <Typography variant="h1">
-          <span className="text-secondary">{'{{'}</span>{' '}
-          Quality_Assurance_Engineer{' '}
-          <span className="text-secondary">{'}}'}</span>
+      <ContentHeader>HelloWorld</ContentHeader>
+      <div id="hero" className="text-center p-40">
+        <Typography variant="hero" className="">
+          I&apos;m <span className="text-accent">Richard</span>
         </Typography>
       </div>
     </Container>

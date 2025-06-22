@@ -1,9 +1,10 @@
-import { Container } from '@/components/ui/container';
+import { Container } from "@/components/ui/container";
+import { ContentHeader } from "@/components/ui/contentHeader";
 
 export default function Blog() {
   return (
     <Container>
-      <h1>Blog</h1>
+      <ContentHeader>QA_Blog</ContentHeader>
     </Container>
   );
 }
