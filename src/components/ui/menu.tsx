@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Typography } from "./typography";
-import { Separator } from "./separator";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Typography } from './typography';
+import { Separator } from './separator';
 
 type MenuItem = { label: string; href: string };
 
@@ -40,6 +40,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             href="https://github.com/RichardODonoghue"
             aria-label="Check out my Github Profile"
             className="rounded-md hover:bg-accent"
+            target="_blank"
           >
             <Image
               src="/github-mark-white.svg"
@@ -56,6 +57,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             href="https://www.linkedin.com/in/richard-o-donoghue"
             aria-label="Check out my LinkedIn Profile"
             className="rounded-md hover:bg-accent p-0"
+            target="_blank"
           >
             <div>
               <Image
@@ -74,6 +76,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             href="https://discordapp.com/users/324838492423061504"
             aria-label="Contact me on discord"
             className="rounded-md hover:bg-accent p-0"
+            target="_blank"
           >
             <div>
               <Image

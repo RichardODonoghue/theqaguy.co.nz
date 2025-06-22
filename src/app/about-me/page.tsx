@@ -1,21 +1,21 @@
-import { Container } from "@/components/ui/container";
-import { ContentHeader } from "@/components/ui/contentHeader";
-import { Separator } from "@/components/ui/separator";
-import { Typography } from "@/components/ui/typography";
-import { differenceInYears } from "date-fns";
-import Image from "next/image";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { technologies } from "@/constants/technologies";
-import { softSkills } from "@/constants/softSkills";
-import { roles } from "@/constants/roles";
+import { Container } from '@/components/ui/container';
+import { ContentHeader } from '@/components/ui/contentHeader';
+import { Separator } from '@/components/ui/separator';
+import { Typography } from '@/components/ui/typography';
+import { differenceInYears } from 'date-fns';
+import Image from 'next/image';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { technologies } from '@/constants/technologies';
+import { softSkills } from '@/constants/softSkills';
+import { roles } from '@/constants/roles';
 
 export default function AboutMe() {
-  const experience = differenceInYears(Date.now(), "2022-10-01");
+  const experience = differenceInYears(Date.now(), '2022-10-01');
 
   const bioContent = (
     <>
       <Typography variant="p" className="text-2xl">
-        Hello Internet,{" "}
+        Hello Internet,{' '}
         <strong className="text-accent">I&apos;m Richard</strong>. <br />
         <br />I am a Software QA Engineer with {experience} years experience. I
         live in Manawatu, New Zealand with my wife, son (arriving soon), two
@@ -34,11 +34,11 @@ export default function AboutMe() {
         <Typography
           alignment="center"
           variant="h4"
-          className="text-nowrap mb-4"
+          className="text-nowrap mb-5"
         >
           {category}
         </Typography>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-0 gap-y-2 w-48 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-0 gap-y-2 w-48 mx-auto my-5">
           {tech.map((item) => (
             <div
               key={item.name}
@@ -63,7 +63,7 @@ export default function AboutMe() {
   const mySoftSkills = softSkills.map((skill) => (
     <div
       key={skill}
-      className="bg-accent mx-2 p-2 rounded-2xl inline text-slate-700 bold shadow-slate-700 shadow-sm"
+      className="bg-accent mx-2 p-2 rounded-2xl inline text-slate-700 bold shadow-slate-700 shadow-sm "
     >
       {skill}
     </div>
@@ -100,14 +100,20 @@ export default function AboutMe() {
             <Typography variant="h1" className="my-2">
               Skills
             </Typography>
-            <Typography variant="h3" className="my-5">
-              Soft Skills
-            </Typography>
-            <div className="my-2">{mySoftSkills}</div>
-            <Typography variant="h3" className="my-5">
-              Technology skills
-            </Typography>
-            <div className="grid grid-cols-4 mt-5">{technologyExperience}</div>
+            <div className="my-10">
+              <Typography variant="h3" className="my-8">
+                Soft Skills
+              </Typography>
+              <div className="my-5">{mySoftSkills}</div>
+            </div>
+            <div className="">
+              <Typography variant="h3" className="my-8">
+                Technology skills
+              </Typography>
+              <div className="grid grid-cols-4 mt-5">
+                {technologyExperience}
+              </div>
+            </div>
           </section>
           <Separator className="my-5" />
           <div>
