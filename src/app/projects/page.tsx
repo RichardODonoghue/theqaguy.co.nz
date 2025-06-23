@@ -1,18 +1,28 @@
-import { Container } from "@/components/ui/container";
-import { ContentHeader } from "@/components/ui/contentHeader";
-import { Separator } from "@/components/ui/separator";
-import { Typography } from "@/components/ui/typography";
-import { Project, projects } from "@/constants/projects";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Link from "next/link";
+import { Container } from '@/components/ui/container';
+import { ContentHeader } from '@/components/ui/contentHeader';
+import { Separator } from '@/components/ui/separator';
+import { Typography } from '@/components/ui/typography';
+import { Project, projects } from '@/constants/projects';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import Link from 'next/link';
 // import Image from "next/image";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div key={project.name} className="rounded-2xl mx-10 my-5 w-96 h-42">
-      <Typography variant="h2" className="my-4">
-        {project.name}
-      </Typography>
+      <div className="my-4">
+        <Typography variant="h2" className="inline">
+          {project.name}
+        </Typography>
+        {project.url && (
+          <Link
+            href={project.url}
+            className="bg-secondary mx-2 px-2 py-0 rounded-lg inline"
+          >
+            <Typography variant="small">Visit</Typography>
+          </Link>
+        )}
+      </div>
       <ScrollArea className="h-[calc(100%-40px)]">
         <Typography variant="p">{project.description}</Typography>
       </ScrollArea>
@@ -28,8 +38,6 @@ const ProjectCard = ({ project }: { project: Project }) => {
             </div>
           ))}
       </div>
-      <Separator className="m-2" />
-      {project.url && <Link href={project.url} />}
     </div>
   );
 };
