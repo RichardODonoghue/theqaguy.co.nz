@@ -20,6 +20,8 @@ interface TypographyProps {
   className?: string;
 }
 
+// TODO: Move to using the class variant authority because this sucks
+
 export const Typography = ({
   variant,
   children,
@@ -44,7 +46,7 @@ export const Typography = ({
     case "h2":
       return (
         <h2
-          className={`scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 ${
+          className={`scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 no-underline ${
             overrideClasses ? overrideClasses : ""
           }`}
         >
@@ -104,7 +106,7 @@ export const Typography = ({
     case "small":
       return (
         <small
-          className={`text-sm leading-none font-medium ${
+          className={`text-xs leading-none font-medium ${
             overrideClasses ? overrideClasses : ""
           }`}
         >
