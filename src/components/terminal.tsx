@@ -20,23 +20,8 @@ export const Terminal = () => {
       eventSourceRef.current.close();
     }
 
-    let jobId: string | undefined;
-    try {
-      const res = await fetch('/api/add-job', { method: 'POST' });
-      if (!res.ok) {
-        throw new Error(`Failed to queue test run: ${res.status} ${res.statusText}`);
-      }
-      const data = await res.json();
-      jobId = data.jobId;
-      if (!jobId) {
-        throw new Error('No jobId returned from server');
-      }
-    } catch (error) {
-      console.error('Error queuing test run:', error);
-      setBuffer('Failed to queue test run. Please try again later.');
-      setTestsQueued(false);
-      return;
-    }
+    const res = await fetch('/api/add-job', { method: 'POST' });
+    const { jobId } = await res.json();
 
     const events = new EventSource(`/api/test-stream?jobId=${jobId}`);
     eventSourceRef.current = events;
