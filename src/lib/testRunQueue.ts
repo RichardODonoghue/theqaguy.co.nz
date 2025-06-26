@@ -3,7 +3,7 @@ import IORedis from 'ioredis';
 import { playwrightTestRunner } from './playwrightTestRunner';
 
 const connection = new IORedis({ maxRetriesPerRequest: null });
-const pub = new IORedis();
+const pub = connection;
 
 export const testQueue = new Queue('test-runner', { connection });
 
@@ -20,11 +20,17 @@ export const worker = new Worker(
   'test-runner',
   async (job) => {
     const jobId = job.id;
-    const exitCode = await playwrightTestRunner((data: string) => {
-      pub.publish(`test-output:${jobId}`, data);
-    });
-    // Signal completion with exit code
-    pub.publish(`test-output:${jobId}`, `__END__:${exitCode}`);
+    try {
+      const exitCode = await playwrightTestRunner((data: string) => {
+        pub.publish(`test-output:${jobId}`, data);
+      });
+      // Signal completion with exit code
+      pub.publish(`test-output:${jobId}`, `__END__:${exitCode}`);
+    } catch (error) {
+      console.error(`Test job ${jobId} failed:`, error);
+      pub.publish(`test-output:${jobId}`, `__END__:-1`);
+      throw error; // Re-throw to mark job as failed
+    }
   },
   { connection, concurrency: 5 }
 );

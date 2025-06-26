@@ -1,6 +1,8 @@
 import { spawn } from 'child_process';
 
-export function playwrightTestRunner(onData?: (data: string) => void) {
+export function playwrightTestRunner(
+  onData?: (data: string) => void
+): Promise<number | null> {
   return new Promise((resolve, reject) => {
     const child = spawn('npm', ['run', 'test:e2e']);
 

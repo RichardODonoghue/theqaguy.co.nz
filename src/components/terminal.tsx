@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Button } from './ui/button';
 import AnsiToHtml from 'ansi-to-html';
 import Confetti from 'react-confetti';
@@ -8,7 +8,7 @@ export const Terminal = () => {
   const [buffer, setBuffer] = useState('');
   const [testsQueued, setTestsQueued] = useState(false);
   const eventSourceRef = useRef<EventSource | null>(null);
-  const ansiConvert = new AnsiToHtml();
+  const ansiConvert = useMemo(() => new AnsiToHtml(), []);
   const [exitCode, setExitCode] = useState<number | null>(null);
 
   const handleClick = async () => {
@@ -20,8 +20,23 @@ export const Terminal = () => {
       eventSourceRef.current.close();
     }
 
-    const res = await fetch('/api/add-job', { method: 'POST' });
-    const { jobId } = await res.json();
+    let jobId: string | undefined;
+    try {
+      const res = await fetch('/api/add-job', { method: 'POST' });
+      if (!res.ok) {
+        throw new Error(`Failed to queue test run: ${res.status} ${res.statusText}`);
+      }
+      const data = await res.json();
+      jobId = data.jobId;
+      if (!jobId) {
+        throw new Error('No jobId returned from server');
+      }
+    } catch (error) {
+      console.error('Error queuing test run:', error);
+      setBuffer('Failed to queue test run. Please try again later.');
+      setTestsQueued(false);
+      return;
+    }
 
     const events = new EventSource(`/api/test-stream?jobId=${jobId}`);
     eventSourceRef.current = events;
