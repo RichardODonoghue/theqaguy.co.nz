@@ -1,7 +1,6 @@
-import { NextRequest } from 'next/server';
 import { addJob } from '@/lib/testRunQueue';
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
     const job = await addJob();
     return Response.json({ jobId: job.id });
