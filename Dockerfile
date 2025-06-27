@@ -1,4 +1,4 @@
-FROM node:23.8.0-alpine AS builder
+FROM node:23-alpine AS builder
 
 # TODO: uncomment once prisma set up
 # RUN apk add --no-cache openssl
@@ -27,7 +27,7 @@ ENV REDIS_SERVER=${REDIS_SERVER}
 
 RUN npm run build
 
-FROM node:23.8.0-alpine AS runner
+FROM node:23-alpine AS runner
 
 # Install openssl to fix Prisma's dependency on it
 # TODO: uncomment once prisma set up
