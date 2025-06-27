@@ -49,12 +49,16 @@ export const Terminal = () => {
   };
 
   return (
-    <div className="w-200 mx-auto">
-      <Button onClick={handleClick} disabled={testsQueued} className="mx-auto">
-        Run tests
+    <div className="w-200 mx-auto text-center">
+      <Button
+        onClick={handleClick}
+        disabled={testsQueued}
+        className="mx-auto h-15 w-full"
+      >
+        Click Here To Test My Website!
       </Button>
       <div
-        className="border-2 border-slate-700 w-200 mx-auto h-[20vh] right-0 bg-slate-700/30 rounded-lg"
+        className="p-4 my-5 text-left border-2 border-slate-700 w-200 mx-auto h-[20vh] right-0 bg-slate-700/30 rounded-lg"
         aria-readonly
         aria-label="Console output from test run"
         dangerouslySetInnerHTML={{ __html: buffer }}
