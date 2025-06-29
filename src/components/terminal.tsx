@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import { Button } from './ui/button';
 import AnsiToHtml from 'ansi-to-html';
 import Confetti from 'react-confetti';
@@ -48,22 +48,40 @@ export const Terminal = () => {
     };
   };
 
+  const bufferRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to bottom when buffer updates
+  useEffect(() => {
+    if (bufferRef.current) {
+      bufferRef.current.scrollTop = bufferRef.current.scrollHeight;
+    }
+  }, [buffer]);
+
   return (
-    <div className="w-200 mx-auto text-center">
-      <Button
-        onClick={handleClick}
-        disabled={testsQueued}
-        className="mx-auto h-15 w-full"
-      >
-        Click Here To Test My Website!
-      </Button>
-      <div
-        className="p-4 my-5 text-left border-2 border-slate-700 w-200 mx-auto h-[20vh] right-0 bg-slate-700/30 rounded-lg"
-        aria-readonly
-        aria-label="Console output from test run"
-        dangerouslySetInnerHTML={{ __html: buffer }}
-      />
+    <>
       {exitCode === 0 && <Confetti numberOfPieces={500} recycle={false} />}
-    </div>
+      <div className="fixed inset-0 flex flex-col justify-end items-center p-10">
+        {/* Always render the buffer div, but control its visibility and height */}
+        <div
+          ref={bufferRef}
+          className={`transition-all duration-500 ease-in-out overflow-scroll text-left border-2 border-slate-700 w-full max-w-4xl bg-slate-700/30 rounded-lg ${
+            buffer.length > 0
+              ? 'h-[20vh] p-4 mb-5 opacity-100'
+              : 'h-0 p-0 mb-0 opacity-0'
+          }`}
+          aria-readonly
+          aria-label="Console output from test run"
+          dangerouslySetInnerHTML={{ __html: buffer }}
+        />
+
+        <Button
+          onClick={handleClick}
+          disabled={testsQueued}
+          className="h-15 w-full max-w-md transition-all duration-500 ease-in-out"
+        >
+          Click Here To Test My Website!
+        </Button>
+      </div>
+    </>
   );
 };

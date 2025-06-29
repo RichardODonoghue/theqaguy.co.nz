@@ -1,26 +1,26 @@
-import { Container } from "@/components/ui/container";
-import { ContentHeader } from "@/components/ui/contentHeader";
-import { Separator } from "@/components/ui/separator";
-import { Typography } from "@/components/ui/typography";
-import { differenceInYears } from "date-fns";
-import Image from "next/image";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { technologies } from "@/constants/technologies";
-import { softSkills } from "@/constants/softSkills";
-import { roles } from "@/constants/roles";
+import { Container } from '@/components/ui/container';
+import { ContentHeader } from '@/components/ui/contentHeader';
+import { Separator } from '@/components/ui/separator';
+import { Typography } from '@/components/ui/typography';
+import { differenceInYears } from 'date-fns';
+import Image from 'next/image';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { technologies } from '@/constants/technologies';
+import { softSkills } from '@/constants/softSkills';
+import { roles } from '@/constants/roles';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 export default function AboutMe() {
-  const experience = differenceInYears(Date.now(), "2022-10-01");
+  const experience = differenceInYears(Date.now(), '2022-10-01');
 
   const bioContent = (
     <>
       <Typography variant="p" className="text-2xl">
-        Hello Internet,{" "}
+        Hello Internet,{' '}
         <strong className="text-accent">I&apos;m Richard</strong>. <br />
         <br />I am a Software QA Engineer with {experience} years experience. I
         live in Manawatu, New Zealand with my wife, son (arriving soon), two
@@ -76,8 +76,8 @@ export default function AboutMe() {
     </div>
   ));
 
-  const myRoles = roles.map((role) => (
-    <div key={role.name} className="">
+  const myRoles = roles.map((role, index) => (
+    <div key={role.name} data-testid={`role-${index}`} className="">
       <Typography variant="h3" className="text-accent">
         {role.name}
       </Typography>

@@ -1,12 +1,12 @@
 type Category =
-  | "Databases"
-  | "Dev Tools"
-  | "Infrastructure"
-  | "Languages"
-  | "Project Management"
-  | "Operating Systems"
-  | "Test Frameworks"
-  | "Web";
+  | 'Databases'
+  | 'Dev Tools'
+  | 'Infrastructure'
+  | 'Languages'
+  | 'Project Management'
+  | 'Operating Systems'
+  | 'Test Frameworks & Tools'
+  | 'Web';
 
 interface Technology {
   name: string;
@@ -17,54 +17,54 @@ type Technologies = Record<Category, Technology[]>;
 
 export const technologies: Technologies = {
   Databases: [
-    { name: "MongoDB", logo: "MongoDB.svg" },
-    { name: "MySQL", logo: "MySQL.svg" },
-    { name: "PostgreSQL", logo: "PostgresSQL.svg" },
+    { name: 'MongoDB', logo: 'MongoDB.svg' },
+    { name: 'MySQL', logo: 'MySQL.svg' },
+    { name: 'PostgreSQL', logo: 'PostgresSQL.svg' },
   ],
-  "Dev Tools": [
+  'Dev Tools': [
     {
-      name: "Bash",
-      logo: "Bash.svg",
+      name: 'Bash',
+      logo: 'Bash.svg',
     },
-    { name: "BitBucket", logo: "BitBucket.svg" },
-    { name: "DBeaver", logo: "DBeaver.svg" },
-    { name: "Docker", logo: "Docker.svg" },
-    { name: "ESLint", logo: "ESLint.svg" },
-    { name: "Git", logo: "git.svg" },
+    { name: 'BitBucket', logo: 'BitBucket.svg' },
+    { name: 'DBeaver', logo: 'DBeaver.svg' },
+    { name: 'Docker', logo: 'Docker.svg' },
+    { name: 'ESLint', logo: 'ESLint.svg' },
+    { name: 'Git', logo: 'git.svg' },
   ],
   Infrastructure: [
-    { name: "AWS", logo: "AWS.svg" },
-    { name: "GitHub Actions", logo: "GitHub-Actions.svg" },
-    { name: "Kubernetes", logo: "Kubernetes.svg" },
-    { name: "Terraform", logo: "HashiCorp-Terraform.svg" },
-    { name: "Octopus Deploy", logo: "octopus-deploy.svg" },
+    { name: 'AWS', logo: 'AWS.svg' },
+    { name: 'GitHub Actions', logo: 'GitHub-Actions.svg' },
+    { name: 'Kubernetes', logo: 'Kubernetes.svg' },
+    { name: 'Terraform', logo: 'HashiCorp-Terraform.svg' },
+    { name: 'Octopus Deploy', logo: 'octopus-deploy.svg' },
   ],
   Languages: [
-    { name: "HTML5", logo: "HTML5.svg" },
-    { name: "JavaScript", logo: "JavaScript.svg" },
-    { name: "TypeScript", logo: "TypeScript.svg" },
+    { name: 'HTML5', logo: 'HTML5.svg' },
+    { name: 'JavaScript', logo: 'JavaScript.svg' },
+    { name: 'TypeScript', logo: 'TypeScript.svg' },
   ],
-  "Project Management": [
-    { name: "Confluence", logo: "Confluence.svg" },
-    { name: "Jira", logo: "Jira.svg" },
+  'Project Management': [
+    { name: 'Confluence', logo: 'Confluence.svg' },
+    { name: 'Jira', logo: 'Jira.svg' },
   ],
-  "Operating Systems": [
-    { name: "Fedora", logo: "Fedora.svg" },
-    { name: "Linux", logo: "Linux.svg" },
-    { name: "Windows", logo: "Windows.svg" },
+  'Operating Systems': [
+    { name: 'Fedora', logo: 'Fedora.svg' },
+    { name: 'Linux', logo: 'Linux.svg' },
+    { name: 'Windows', logo: 'Windows.svg' },
   ],
-  "Test Frameworks": [
-    { name: "Cypress", logo: "Cypress.svg" },
-    { name: "Playwright", logo: "Playwright.svg" },
-    { name: "Postman", logo: "Postman.svg" },
-    { name: "Vitest", logo: "vitest.svg" },
+  'Test Frameworks & Tools': [
+    { name: 'Cypress', logo: 'Cypress.svg' },
+    { name: 'Playwright', logo: 'Playwright.svg' },
+    { name: 'Postman', logo: 'Postman.svg' },
+    { name: 'Vitest', logo: 'vitest.svg' },
   ],
   Web: [
-    { name: "Bun", logo: "bun.svg" },
-    { name: "Next.js", logo: "Nextjs.svg" },
-    { name: "Node.js", logo: "Node.js.svg" },
-    { name: "React", logo: "React.svg" },
-    { name: "Tailwind CSS", logo: "Tailwind-CSS.svg" },
-    { name: "Vite.js", logo: "Vite.js.svg" },
+    { name: 'Bun', logo: 'bun.svg' },
+    { name: 'Next.js', logo: 'Nextjs.svg' },
+    { name: 'Node.js', logo: 'Node.js.svg' },
+    { name: 'React', logo: 'React.svg' },
+    { name: 'Tailwind CSS', logo: 'Tailwind-CSS.svg' },
+    { name: 'Vite.js', logo: 'Vite.js.svg' },
   ],
 };

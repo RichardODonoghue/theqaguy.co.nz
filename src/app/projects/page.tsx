@@ -9,7 +9,11 @@ import Link from 'next/link';
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
-    <div key={project.name} className="rounded-2xl mx-10 my-5 w-96 h-42">
+    <div
+      key={project.name}
+      data-testid={project.name}
+      className="rounded-2xl mx-10 my-5 w-96 h-42"
+    >
       <div className="my-4">
         <Typography variant="h2" className="inline">
           {project.name}
@@ -18,6 +22,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           <Link
             href={project.url}
             className="bg-secondary mx-2 px-2 py-0 rounded-lg inline"
+            target="_blank"
           >
             <Typography variant="small">Visit</Typography>
           </Link>
