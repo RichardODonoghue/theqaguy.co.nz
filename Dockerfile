@@ -8,7 +8,7 @@ COPY package*.json ./
 RUN npm install -g npm@latest
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 COPY . .
 
