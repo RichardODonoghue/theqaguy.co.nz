@@ -59,7 +59,13 @@ export const Terminal = () => {
 
   return (
     <>
-      {exitCode === 0 && <Confetti numberOfPieces={500} recycle={false} />}
+      {exitCode === 0 && (
+        <Confetti
+          numberOfPieces={500}
+          recycle={false}
+          data-testid="confetti-canvas"
+        />
+      )}
       <div className="fixed inset-0 flex flex-col justify-end items-center p-10">
         {/* Always render the buffer div, but control its visibility and height */}
         <div
