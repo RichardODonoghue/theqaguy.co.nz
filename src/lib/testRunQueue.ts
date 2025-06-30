@@ -2,7 +2,8 @@ import { Worker, Queue } from 'bullmq';
 import IORedis from 'ioredis';
 import { playwrightTestRunner } from './playwrightTestRunner';
 
-const redisUrl = process.env.REDIS_SERVER || 'redis://localhost:6379';
+const redisUrl = process.env.REDIS_SERVER!;
+console.log('Connecting to Redis at:', redisUrl);
 const connection = new IORedis(redisUrl, { maxRetriesPerRequest: null });
 const pub = connection;
 
