@@ -11,6 +11,11 @@ export default function Home() {
         <Typography variant="hero" className="">
           I&apos;m <span className="text-accent">Richard</span>
         </Typography>
+        <Typography variant="h1">
+          <span className="text-secondary">{'{ '}</span>
+          {'QA Engineer'}
+          <span className="text-secondary">{' }'}</span>
+        </Typography>
       </div>
       <Terminal />
     </Container>
