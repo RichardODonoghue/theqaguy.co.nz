@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   }
 
   const encoder = new TextEncoder();
-  const sub = new IORedis(process.env.REDIS_SEVER!);
+  const sub = new IORedis(process.env.REDIS_SERVER!);
 
   let closed = false;
   let messageHandler: ((channel: string, message: string) => void) | null =
