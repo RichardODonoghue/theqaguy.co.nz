@@ -1,13 +1,11 @@
-FROM node:23-alpine AS builder
+FROM mcr.microsoft.com/playwright:v1.53.0-noble AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
 
-# Upgrade npm
 RUN npm install -g npm@latest
 
-# Install dependencies
 RUN npm install
 
 COPY . .
@@ -17,7 +15,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 
 RUN npm run build
 
-FROM node:23-alpine AS runner
+FROM mcr.microsoft.com/playwright:v1.53.0-noble AS runner
 
 WORKDIR /app
 
@@ -27,5 +25,4 @@ COPY --from=builder /app ./
 
 EXPOSE 3000
 
-# Command to run the app
 CMD ["npm", "start"]
