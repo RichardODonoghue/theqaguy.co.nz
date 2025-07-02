@@ -1,11 +1,9 @@
-import { Container } from '@/components/ui/container';
 import { ContentHeader } from '@/components/ui/contentHeader';
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import { Project, projects } from '@/constants/projects';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
-// import Image from "next/image";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -15,7 +13,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       className="rounded-2xl mx-10 my-5 w-96 h-42"
     >
       <div className="my-4">
-        <Typography variant="h2" className="inline">
+        <Typography variant="2xl/bold" as="h3" className="inline">
           {project.name}
         </Typography>
         {project.url && (
@@ -24,12 +22,16 @@ const ProjectCard = ({ project }: { project: Project }) => {
             className="bg-secondary mx-2 px-2 py-0 rounded-lg inline"
             target="_blank"
           >
-            <Typography variant="small">Visit</Typography>
+            <Typography variant="sm/normal" className="inline">
+              Visit
+            </Typography>
           </Link>
         )}
       </div>
       <ScrollArea className="h-[calc(100%-40px)]">
-        <Typography variant="p">{project.description}</Typography>
+        <Typography variant="lg/normal" as="p">
+          {project.description}
+        </Typography>
       </ScrollArea>
       <Separator className="m-2" />
       <div className="h-20">
@@ -37,9 +39,15 @@ const ProjectCard = ({ project }: { project: Project }) => {
           project.technologies?.map((tech) => (
             <div
               key={`${project.name}-${tech}`}
-              className="inline-block my-2 mx-1 bg-accent text-slate-700 px-2 rounded-2xl shadow-2xl shadow-slate-700"
+              className="inline-block mx-1 my-2 bg-accent rounded-2xl shadow-2xl shadow-slate-700"
             >
-              <Typography variant="small">{tech}</Typography>
+              <Typography
+                variant="sm/normal"
+                as="div"
+                className="text-slate-700 px-2"
+              >
+                {tech}
+              </Typography>
             </div>
           ))}
       </div>
@@ -49,13 +57,13 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
 export default function Projects() {
   return (
-    <Container>
+    <>
       <ContentHeader>Projects</ContentHeader>
       <ScrollArea className="h-[calc(100vh-180px)]">
         <div className="grid grid-cols-1 gap-y-36">
           {Object.entries(projects).map(([classification, projects]) => (
             <div key={classification} className="mx-5">
-              <Typography variant="h1" alignment="left" className="">
+              <Typography variant="3xl/bold" as="h2" className="text-left my-5">
                 {classification}
               </Typography>
               <div className="grid grid-cols-3 my-5">
@@ -67,6 +75,6 @@ export default function Projects() {
           ))}
         </div>
       </ScrollArea>
-    </Container>
+    </>
   );
 }
