@@ -1,6 +1,6 @@
 'use client';
 
-import { Separator } from '@radix-ui/react-separator';
+import { Separator } from '../separator';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Sidebar, SidebarContent, useSidebar } from '../sidebar';
