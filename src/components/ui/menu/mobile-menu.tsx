@@ -1,28 +1,26 @@
 'use client';
 
+import { Separator } from '@radix-ui/react-separator';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Typography } from './typography';
-import { Separator } from './separator';
+import { Sidebar, SidebarContent, useSidebar } from '../sidebar';
+import { Typography } from '../typography';
+import { MenuItem, MenuProps } from './Menu';
 import { usePathname } from 'next/navigation';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-type MenuItem = { label: string; href: string };
-
-interface MenuProps {
-  menuItems: MenuItem[];
-}
-
-export const Menu = ({ menuItems }: MenuProps) => {
+export const MobileMenu = ({ menuItems }: MenuProps) => {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
 
-  const isMobile = useMediaQuery('(max-width: 1024px)');
+  const handleClick = () => {
+    setOpenMobile(false);
+  };
 
-  if (!isMobile) {
-    return (
-      <div className="flex flex-col w-96 h-dvh p-4">
-        <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
-          <Link href="/" className="m-0 w-full p-0">
+  return (
+    <Sidebar className="z-90 ">
+      <SidebarContent className="bg-slate-700/30">
+        <nav className="flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
+          <Link href="/" className="m-0 w-full p-0" onClick={handleClick}>
             <Image
               src="/theqaguy.png"
               alt="theqaguy"
@@ -39,6 +37,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
                   href={item.href}
                   className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
                   aria-label={`Navigate to ${item.label}`}
+                  onClick={handleClick}
                 >
                   <div className="inline-block">
                     <Typography variant="2xl/medium">{item.label}</Typography>
@@ -55,6 +54,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
               aria-label="Check out my Github Profile"
               className="rounded-md hover:bg-accent"
               target="_blank"
+              onClick={handleClick}
             >
               <Image
                 src="/github-mark-white.svg"
@@ -72,6 +72,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
               aria-label="Check out my LinkedIn Profile"
               className="rounded-md hover:bg-accent p-0"
               target="_blank"
+              onClick={handleClick}
             >
               <div>
                 <Image
@@ -91,6 +92,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
               aria-label="Contact me on discord"
               className="rounded-md hover:bg-accent p-0"
               target="_blank"
+              onClick={handleClick}
             >
               <div>
                 <Image
@@ -107,7 +109,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
             </Link>
           </ul>
         </nav>
-      </div>
-    );
-  }
+      </SidebarContent>
+    </Sidebar>
+  );
 };

@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { Menu } from '@/components/ui/menu';
-import { Backgrund } from '@/components/ui/background';
+import { Background } from '@/components/ui/background';
 import { Container } from '@/components/ui/container';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { getDeviceType } from '@/lib/getDeviceType';
+import { Menu } from '@/components/ui/menu/Menu';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,26 +23,28 @@ export const metadata: Metadata = {
   description: "Personal website - Richard O'Donoghue",
 };
 
-const menuItems = [
-  { label: 'About Me', href: '/about-me' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'QA Blog', href: '/qa-blog' },
-];
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerList = await headers();
+  const userAgent = headerList.get('user-agent') || '';
+  const isMobile =
+    getDeviceType(userAgent) === 'mobile' ||
+    getDeviceType(userAgent) === 'tablet';
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Backgrund />
+        <Background />
         <div className="flex overflow-y-clip">
-          <Menu menuItems={menuItems} />
-          <Container>{children}</Container>
+          <SidebarProvider defaultOpen={false}>
+            <Menu isMobile={isMobile} />
+            <Container>{children}</Container>
+          </SidebarProvider>
         </div>
       </body>
     </html>

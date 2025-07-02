@@ -1,24 +1,30 @@
 'use client';
 import { ReactNode } from 'react';
 import { Typography } from './typography';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { MenuIcon } from 'lucide-react';
+import { useSidebar } from './sidebar';
 
 interface ContentHeaderProps {
   children: ReactNode;
 }
 
 export const ContentHeader = ({ children }: ContentHeaderProps) => {
-  const isMobile = useMediaQuery('(max-width: 1024px)');
+  const isMobile = useIsMobile();
+  const { setOpenMobile } = useSidebar();
 
-  const handleShowMenu = () => {};
+  const handleShowMenu = () => {
+    setOpenMobile(true);
+  };
 
   return (
     <div className="text-right relative right-2 w-full mb-5">
       {isMobile && (
-        <button className="absolute left-0 text-left" onClick={handleShowMenu}>
-          <MenuIcon className="w-10 h-10" />
-        </button>
+        <>
+          <button className="absolute left-2 text-left z-10">
+            <MenuIcon className="w-10 h-10" onClick={handleShowMenu} />
+          </button>
+        </>
       )}
       <Typography variant="5xl/extrabold" as="h1" className="inline-block">
         <span className="text-accent">{'<'}</span>
