@@ -97,7 +97,7 @@ export default function AboutMe() {
   return (
     <>
       <ContentHeader>AboutMe</ContentHeader>
-      <ScrollArea className="h-[calc(100vh-180px)]">
+      <ScrollArea className="h-[calc(100vh-60px)]">
         <div className="pr-4">
           <section className=" mx-5">
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
@@ -128,7 +128,7 @@ export default function AboutMe() {
             </div>
           </section>
           <Separator className="my-5" />
-          <section className="mx-5">
+          <section className="m-5">
             <Typography variant="3xl/extrabold" className="my-5" as="h2">
               Roles
             </Typography>
