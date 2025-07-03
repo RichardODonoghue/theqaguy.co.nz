@@ -100,18 +100,18 @@ export default function AboutMe() {
       <ScrollArea className="h-[calc(100vh-80px)] md:h-[calc(100vh-180px)]">
         <div className="pr-4">
           <section className=" mx-5">
-            <Typography variant="3xl/extrabold" className="my-2">
+            <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
             {bioContent}
           </section>
           <Separator className="my-5" />
           <section className="mx-5">
-            <Typography variant="3xl/extrabold" className="my-2">
+            <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Skills
             </Typography>
             <div className="my-10">
-              <Typography variant="2xl/extrabold" className="my-8">
+              <Typography variant="2xl/extrabold" className="my-8" as="h3">
                 Soft Skills
               </Typography>
               <div className="my-5 flex flex-wrap justify-start md:justify-center">
@@ -119,7 +119,7 @@ export default function AboutMe() {
               </div>
             </div>
             <div className="">
-              <Typography variant="2xl/extrabold" className="my-8">
+              <Typography variant="2xl/extrabold" className="my-8" as="h3">
                 Technology Skills
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
@@ -129,7 +129,7 @@ export default function AboutMe() {
           </section>
           <Separator className="my-5" />
           <section className="mx-5">
-            <Typography variant="3xl/extrabold" className="my-5">
+            <Typography variant="3xl/extrabold" className="my-5" as="h2">
               Roles
             </Typography>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
