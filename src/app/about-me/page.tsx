@@ -97,7 +97,7 @@ export default function AboutMe() {
   return (
     <>
       <ContentHeader>AboutMe</ContentHeader>
-      <ScrollArea className="h-[calc(100vh-120px)]">
+      <ScrollArea className="h-[calc(100vh-120px)] lg:h-[calc(100vh-180px)]">
         <div className="pr-4">
           <section className=" mx-5">
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
