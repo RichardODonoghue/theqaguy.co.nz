@@ -11,7 +11,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col w-96 h-dvh p-4">
+    <div className="flex flex-col w-96 h-dvh p-4" data-testid="desktop-menu">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
         <Link href="/" className="m-0 w-full p-0">
           <Image

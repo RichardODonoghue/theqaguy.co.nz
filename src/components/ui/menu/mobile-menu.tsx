@@ -17,7 +17,7 @@ export const MobileMenu = ({ menuItems }: MenuProps) => {
   };
 
   return (
-    <Sidebar className="z-90 ">
+    <Sidebar className="z-90" data-testid="mobile-menu">
       <SidebarContent className="bg-slate-700/30">
         <nav className="flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
           <Link href="/" className="m-0 w-full p-0" onClick={handleClick}>
