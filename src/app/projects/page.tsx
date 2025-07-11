@@ -1,25 +1,26 @@
-import { ContentHeader } from '@/components/ui/contentHeader';
-import { Separator } from '@/components/ui/separator';
-import { Typography } from '@/components/ui/typography';
-import { Project, projects } from '@/constants/projects';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import Link from 'next/link';
+import { ContentHeader } from "@/components/ui/contentHeader";
+import { Separator } from "@/components/ui/separator";
+import { Typography } from "@/components/ui/typography";
+import { Project, projects } from "@/constants/projects";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
+import Image from "next/image";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div
       key={project.name}
       data-testid={project.name}
-      className="rounded-2xl mx-10 my-5 w-96 h-42"
+      className="rounded-2xl mx-auto w-96"
     >
       <div className="my-4">
-        <Typography variant="2xl/bold" as="h3" className="inline">
+        <Typography variant="2xl/bold" as="h3" className="inline my-2">
           {project.name}
         </Typography>
         {project.url && (
           <Link
             href={project.url}
-            className="bg-secondary mx-2 px-2 py-0 rounded-lg inline"
+            className=" bg-secondary mx-2 px-2 py-0 rounded-lg inline"
             target="_blank"
           >
             <Typography variant="sm/normal" className="inline">
@@ -27,14 +28,18 @@ const ProjectCard = ({ project }: { project: Project }) => {
             </Typography>
           </Link>
         )}
+        {project.image && (
+          <Image
+            src={project.image}
+            alt={project.name}
+            width={400}
+            height={400}
+            className="my-2 object-contain"
+          />
+        )}
       </div>
-      <ScrollArea className="h-[calc(100%-40px)]">
-        <Typography variant="lg/normal" as="p">
-          {project.description}
-        </Typography>
-      </ScrollArea>
       <Separator className="m-2" />
-      <div className="h-20">
+      <div className="h-20 my-2">
         {project.technologies &&
           project.technologies?.map((tech) => (
             <div
@@ -60,13 +65,17 @@ export default function Projects() {
     <>
       <ContentHeader>Projects</ContentHeader>
       <ScrollArea className="h-[calc(100vh-180px)]">
-        <div className="grid grid-cols-1 gap-y-36">
+        <div className="grid grid-cols-1">
           {Object.entries(projects).map(([classification, projects]) => (
             <div key={classification} className="mx-5">
-              <Typography variant="3xl/bold" as="h2" className="text-left my-5">
+              <Typography
+                variant="3xl/bold"
+                as="h2"
+                className="text-left md:my-5"
+              >
                 {classification}
               </Typography>
-              <div className="grid grid-cols-3 my-5">
+              <div className="grid lg:grid-cols-2">
                 {projects.map((project) => (
                   <ProjectCard key={project.name} project={project} />
                 ))}
