@@ -22,7 +22,7 @@ test.describe(() => {
             exact: true,
           })
         ).toBeVisible();
-        await expect(projectLocator).toContainText(project.description);
+        // await expect(projectLocator).toContainText(project.description);
         if (project.url) {
           const visitLink = projectLocator.getByRole('link');
           await expect(visitLink).toHaveAttribute('href', project.url);

@@ -13,7 +13,7 @@ export const projects: Record<Classification, Project[]> = {
     {
       name: 'theqaguy.co.nz',
       description:
-        "My own personal website to show off um... me and to blog about the world of software quality assurance. If you're on this page, you're probably viewing this project right now.. ",
+        "My own personal website to blog about the world of software quality assurance, share some projects I am working on and tell the internet and potential employers about me! If you're on this page, you're probably viewing this project right now.. ",
       technologies: [
         'Typescript',
         'Next.js',
@@ -25,7 +25,7 @@ export const projects: Record<Classification, Project[]> = {
         'PostgreSQL',
         'Redis',
       ],
-      image: '',
+      image: '/projects/qaguy.png',
       url: 'https://theqaguy.co.nz/',
     },
     {
@@ -57,7 +57,8 @@ export const projects: Record<Classification, Project[]> = {
       name: 'The Open Source Racecar',
       description:
         'Building a hobbiest racecar is an expensive endeavour. The most costly part often being engine management. Luckily for me there are some incredibly talented people that have made opensource daughter boards and fimrware for Arduino boards to control engines',
-      image: '',
+      image: '/projects/echo.png',
+      technologies: ['speeduino', 'arduino', 'tunerstudio'],
     },
   ],
 };

@@ -142,3 +142,4 @@ dist
 /playwright/.cache/
 
 certificates
+package-lock.json

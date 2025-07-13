@@ -1,22 +1,17 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { Typography } from "./typography";
-import { Separator } from "./separator";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Typography } from '../typography';
+import { Separator } from '../separator';
+import { usePathname } from 'next/navigation';
+import { MenuProps, MenuItem } from './Menu';
 
-type MenuItem = { label: string; href: string };
-
-interface MenuProps {
-  menuItems: MenuItem[];
-}
-
-export const Menu = ({ menuItems }: MenuProps) => {
+export const DesktopMenu = ({ menuItems }: MenuProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col w-96 h-dvh p-4">
+    <div className="flex flex-col w-96 h-dvh p-4" data-testid="desktop-menu">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
         <Link href="/" className="m-0 w-full p-0">
           <Image
@@ -37,7 +32,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
                 aria-label={`Navigate to ${item.label}`}
               >
                 <div className="inline-block">
-                  <Typography variant="large">{item.label}</Typography>
+                  <Typography variant="2xl/medium">{item.label}</Typography>
                   {pathname === item.href && (
                     <div className="bg-accent h-1 mt-1" />
                   )}
@@ -59,7 +54,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
               height="50"
               className="inline m-5"
             />
-            <Typography variant="p" className="inline">
+            <Typography variant="md/medium" className="inline">
               Check Out My Profile
             </Typography>
           </Link>
@@ -77,7 +72,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
                 height="50"
                 className="inline m-5"
               />
-              <Typography variant="p" className="p-0 inline">
+              <Typography variant="md/medium" className="p-0 inline">
                 Network With Me
               </Typography>
             </div>
@@ -96,7 +91,7 @@ export const Menu = ({ menuItems }: MenuProps) => {
                 height="50"
                 className="inline m-5"
               />
-              <Typography variant="p" className="p-0 inline">
+              <Typography variant="md/medium" className="p-0 inline">
                 Get In Touch
               </Typography>
             </div>
