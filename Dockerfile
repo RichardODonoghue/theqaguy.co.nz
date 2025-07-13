@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/playwright:latest AS builder
+FROM mcr.microsoft.com/playwright:v1.53.1-noble AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install -g npm@10.8.1
+RUN npm install -g npm@latest
 
 RUN npm install
 
@@ -15,7 +15,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 
 RUN npm run build
 
-FROM mcr.microsoft.com/playwright:latest AS runner
+FROM mcr.microsoft.com/playwright:v1.53.1-noble AS runner
 
 WORKDIR /app
 
