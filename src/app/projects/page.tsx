@@ -1,10 +1,10 @@
-import { ContentHeader } from "@/components/ui/contentHeader";
-import { Separator } from "@/components/ui/separator";
-import { Typography } from "@/components/ui/typography";
-import { Project, projects } from "@/constants/projects";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Link from "next/link";
-import Image from "next/image";
+import { ContentHeader } from '@/components/ui/contentHeader';
+import { Separator } from '@/components/ui/separator';
+import { Typography } from '@/components/ui/typography';
+import { Project, projects } from '@/constants/projects';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -20,7 +20,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         {project.url && (
           <Link
             href={project.url}
-            className=" bg-secondary mx-2 px-2 py-0 rounded-lg inline"
+            className="bg-secondary mx-2 px-2 py-0 rounded-lg inline"
             target="_blank"
           >
             <Typography variant="sm/normal" className="inline">
