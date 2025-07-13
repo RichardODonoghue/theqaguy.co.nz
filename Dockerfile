@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.53.1-noble AS builder
+FROM mcr.microsoft.com/playwright:latest AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 
 RUN npm run build
 
-FROM mcr.microsoft.com/playwright:v1.53.1-noble AS runner
+FROM mcr.microsoft.com/playwright:latest AS runner
 
 WORKDIR /app
 
