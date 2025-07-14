@@ -1,8 +1,14 @@
 'use server';
 
-import { Prisma } from '@prisma/client';
-import { DefaultArgs } from '@prisma/client/runtime/library';
 import { prisma } from './prisma';
+
+type Blog = {
+  slug: string;
+  title: string;
+  contents: string;
+  tags: string[];
+  likes: number;
+};
 
 const getBlogs = async () => {
   const blogs = await prisma.blog.findMany({
@@ -24,15 +30,39 @@ const getBlogBySlug = async (slug: string) => {
   return blog;
 };
 
-const createBlog = async (blog: {
-  select?: Prisma.blogSelect<DefaultArgs> | null | undefined;
-  omit?: Prisma.blogOmit<DefaultArgs> | null | undefined;
-  data: Prisma.XOR<Prisma.blogCreateInput, Prisma.blogUncheckedCreateInput>;
-}) => {
+const createBlog = async (blog: Blog) => {
   const newBlog = await prisma.blog.create({
-    ...blog,
+    data: blog,
   });
 
   return newBlog;
 };
-export { getBlogs, getBlogBySlug, createBlog };
+
+const updateBlogBySlug = async (slug: string, blog: Blog) => {
+  const updatedBlog = await prisma.blog.update({
+    where: {
+      slug: slug,
+    },
+    data: blog,
+  });
+
+  return updatedBlog;
+};
+
+const deleteBlogBySlug = async (slug: string) => {
+  const deletedBlog = await prisma.blog.delete({
+    where: {
+      slug: slug,
+    },
+  });
+
+  return deletedBlog;
+};
+
+export {
+  getBlogs,
+  getBlogBySlug,
+  createBlog,
+  updateBlogBySlug,
+  deleteBlogBySlug,
+};
