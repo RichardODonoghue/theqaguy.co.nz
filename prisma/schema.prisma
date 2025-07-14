@@ -21,6 +21,6 @@ model blog {
   contents String
   tags String[]
   likes Int @default(0)
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
