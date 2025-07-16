@@ -12,7 +12,9 @@ export default async function BlogsPage() {
   return (
     <>
       <ContentHeader>QA_Blog</ContentHeader>
-      <div className="grid grid-cols-3">{blogs}</div>
+      <div className="grid grid-cols-1 my-5 gap-y-5 lg:grid-cols-3">
+        {blogs}
+      </div>
     </>
   );
 }

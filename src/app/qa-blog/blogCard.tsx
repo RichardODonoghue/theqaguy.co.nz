@@ -25,7 +25,7 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
           <CldImage
             src={blog.image}
             width={400}
-            height={300}
+            height={200}
             alt="fish"
             crop="fill"
             className="rounded-sm w-full mb-5"

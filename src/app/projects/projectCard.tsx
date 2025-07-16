@@ -3,15 +3,18 @@ import Image from 'next/image';
 import { Project } from '@/constants/projects';
 import { Typography } from '@/components/ui/typography';
 import { Separator } from '@/components/ui/separator';
+import { Card } from '@/components/ui/card';
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (
-    <div
+    <Card
+      width="w-96"
+      height="h-auto"
+      overrides="mx-auto my-5"
       key={project.name}
       data-testid={project.name}
-      className="rounded-2xl mx-auto w-96"
     >
-      <div className="my-4">
+      <div className="mb-4">
         <Typography variant="2xl/bold" as="h3" className="inline my-2">
           {project.name}
         </Typography>
@@ -54,6 +57,6 @@ export const ProjectCard = ({ project }: { project: Project }) => {
             </div>
           ))}
       </div>
-    </div>
+    </Card>
   );
 };
