@@ -18,9 +18,10 @@ model blog {
   id String @id @default(cuid())
   title String
   slug String @unique
+  image String @default("")
+  summary String
   contents String
   tags String[]
-  likes Int @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }

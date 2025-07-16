@@ -2,13 +2,17 @@
 
 import { prisma } from './prisma';
 
-type Blog = {
+export type Blog = {
   slug: string;
   title: string;
+  image: string;
+  summary: string;
   contents: string;
   tags: string[];
-  likes: number;
+  createdAt: Date;
 };
+
+// TODO add error handler
 
 const getBlogs = async () => {
   const blogs = await prisma.blog.findMany({
