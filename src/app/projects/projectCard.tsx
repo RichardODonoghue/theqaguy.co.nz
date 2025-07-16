@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Project } from '@/constants/projects';
 import { Typography } from '@/components/ui/typography';
 import { Separator } from '@/components/ui/separator';
+
 import { Card } from '@/components/ui/card';
 
 export const ProjectCard = ({ project }: { project: Project }) => {
