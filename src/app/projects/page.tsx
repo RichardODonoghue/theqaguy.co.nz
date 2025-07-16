@@ -1,9 +1,9 @@
-import { ContentHeader } from '@/components/ui/contentHeader';
+import { ContentHeader } from "@/components/ui/contentHeader";
 
-import { Typography } from '@/components/ui/typography';
-import { projects } from '@/constants/projects';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { ProjectCard } from './projectCard';
+import { Typography } from "@/components/ui/typography";
+import { projects } from "@/constants/projects";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { ProjectCard } from "./projectCard";
 
 export default function Projects() {
   return (

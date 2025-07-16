@@ -1,6 +1,6 @@
-import { ContentHeader } from '@/components/ui/contentHeader';
-import { getBlogs } from '@/lib/blogs';
-import { BlogCard } from './blogCard';
+import { ContentHeader } from "@/components/ui/contentHeader";
+import { getBlogs } from "@/lib/blogs";
+import { BlogCard } from "./blogCard";
 
 export default async function BlogsPage() {
   const blogsData = await getBlogs();
