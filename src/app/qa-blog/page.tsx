@@ -1,9 +1,9 @@
-import { ContentHeader } from "@/components/ui/contentHeader";
-import { getBlogs } from "@/lib/blogs";
-import { BlogCard } from "./blogCard";
+import { ContentHeader } from '@/components/ui/contentHeader';
+import { getPublishedBlogs } from '@/lib/blogs';
+import { BlogCard } from './blogCard';
 
 export default async function BlogsPage() {
-  const blogsData = await getBlogs();
+  const blogsData = await getPublishedBlogs();
 
   const blogs = blogsData.map((blog) => (
     <BlogCard key={blog.slug} blog={blog} />

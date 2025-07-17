@@ -8,6 +8,7 @@ export type Blog = {
   image: string;
   summary: string;
   contents: string;
+  published: boolean;
   tags: string[];
   createdAt: Date;
 };
@@ -21,6 +22,18 @@ const getBlogs = async () => {
     },
   });
 
+  return blogs;
+};
+
+const getPublishedBlogs = async () => {
+  const blogs = await prisma.blog.findMany({
+    where: {
+      published: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
   return blogs;
 };
 
@@ -65,6 +78,7 @@ const deleteBlogBySlug = async (slug: string) => {
 
 export {
   getBlogs,
+  getPublishedBlogs,
   getBlogBySlug,
   createBlog,
   updateBlogBySlug,

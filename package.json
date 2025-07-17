@@ -17,6 +17,7 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@tanstack/react-table": "^8.21.3",
     "ansi-to-html": "^0.7.2",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "better-auth": "^1.2.9",
