@@ -144,3 +144,5 @@ dist
 certificates
 package-lock.json
 /src/generated/prisma
+
+./.idea

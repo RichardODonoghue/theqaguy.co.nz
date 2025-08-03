@@ -10,7 +10,7 @@ export type Blog = {
   contents: string;
   published: boolean;
   tags: string[];
-  createdAt: Date;
+  createdAt?: Date;
 };
 
 // TODO add error handler
