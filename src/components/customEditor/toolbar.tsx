@@ -1,6 +1,8 @@
-import {Editor} from "@tiptap/core";
-import {useEditorState} from "@tiptap/react";
+import { Editor } from "@tiptap/core";
+import { useEditorState } from "@tiptap/react";
 import { Button } from "../ui/button";
+import { useCallback } from "react";
+import { createBlog } from '@/lib/blogs'
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
     // Read the current editor's state, and re-render the component when it changes
@@ -33,14 +35,42 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         },
     })
 
-    const handleSave = () => {
-        const content = editor.getHTML();
-        console.log('handleSave \n', content);
+    const handleSave = async () => {
+        const title = document.getElementById('blog-title')?.innerText;
+
+        if (!title) {
+            console.error('No title found');
+        } else {
+            const slug = title?.replaceAll(' ', '_');
+            const content = editor.getHTML();
+            await createBlog({
+                contents: content,
+                title: title,
+                slug: slug,
+                image: "",
+                summary: "",
+                published: false,
+                tags: []
+            })
+        }
+    }
+
+    const addImage = useCallback(async () => {
+
+        const url = window.prompt('URL')
+
+        if (url) {
+            editor.commands.setImage({ src: url })
+        }
+    }, [editor])
+
+    if (!editor) {
+        return null
     }
 
     return (
-        <div className="control-group">
-            <div className="button-group">
+        <div className="control-group bg-slate-700/50 rounded-t-2xl">
+            <div className="button-group p-2 min-w-full mx-auto flex gap-2 flex-wrap justify-baseline">
                 <Button
                     onClick={() => editor.chain().focus().toggleBold().run()}
                     disabled={!editorState.canBold}
@@ -139,6 +169,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
                 <Button onClick={() => editor.chain().focus().redo().run()} disabled={!editorState.canRedo}>
                     Redo
                 </Button>
+                <Button onClick={addImage}>Image</Button>
                 <Button onClick={handleSave}>Save</Button>
             </div>
         </div>
