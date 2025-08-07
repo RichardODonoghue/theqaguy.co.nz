@@ -3,7 +3,7 @@ import { useEditorState } from "@tiptap/react";
 import { Button } from "../ui/button";
 import { useCallback } from "react";
 import { createBlog, updateBlogBySlug } from '@/lib/blogs'
-import { useParams } from 'next/navigation';
+import { redirect, useParams } from 'next/navigation';
 
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
@@ -45,7 +45,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
 
         if (!title || title.length === 0) throw new Error('No blog title')
 
-        const newSlug = title.replaceAll(' ', '_');
+        const newSlug = title.trim().replaceAll(/\s+/g, '_').toLowerCase();
         const content = editor.getHTML();
 
         return {
@@ -76,6 +76,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
 
         if (isNewBlog) {
             await createBlog(blog)
+            redirect(`/admin/blog/${blog.slug}`)
         } else {
             await updateBlogBySlug(slug, blog)
         }
