@@ -2,34 +2,57 @@ import { Node, mergeAttributes } from '@tiptap/core';
 import { Node as ProseMirrorNode } from 'prosemirror-model';
 import { Plugin, PluginKey } from 'prosemirror-state';
 
-export const BlogTitle = Node.create({
-  name: 'blogTitle',
+type BlogTitleStorage = {
+  hasCheckedInitialBlogTitle: boolean;
+};
 
+export const BlogTitle = Node.create<{
+  Storage: BlogTitleStorage;
+}>({
+  name: 'blogTitle',
   group: 'block',
   content: 'inline*',
   defining: true,
 
   parseHTML() {
-    return [{ tag: 'h1#blog-title' }];
+    return [
+      {
+        tag: 'h1',
+        getAttrs: (element) => {
+          const el = element as HTMLElement;
+          return el.id === 'blog-title' ? {} : false;
+        },
+      },
+    ];
   },
 
   renderHTML({ HTMLAttributes }) {
     return ['h1', mergeAttributes(HTMLAttributes, { id: 'blog-title' }), 0];
   },
 
-  onCreate() {
+  addStorage() {
+    return {
+      hasCheckedInitialBlogTitle: false,
+    };
+  },
+
+  onUpdate() {
     const { editor } = this;
     const { state, view } = editor;
+    if (this.storage.hasCheckedInitialBlogTitle) return;
+
     const firstNode = state.doc.content.firstChild;
 
     if (!firstNode || firstNode.type.name !== 'blogTitle') {
       const blogTitleNode = this.type.create(
         {},
-        editor.schema.text('Give me a title')
+        editor.schema.text('Your Blog Title')
       );
       const tr = state.tr.insert(0, blogTitleNode);
       view.dispatch(tr);
     }
+
+    this.storage.hasCheckedInitialBlogTitle = true;
   },
 
   addProseMirrorPlugins() {

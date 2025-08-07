@@ -88,3 +88,7 @@
 .tiptap h5 {
   @apply text-lg font-normal md:text-xl;
 }
+
+.tiptap p {
+  @apply text-xl;
+}

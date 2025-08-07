@@ -2,7 +2,9 @@ import { Editor } from "@tiptap/core";
 import { useEditorState } from "@tiptap/react";
 import { Button } from "../ui/button";
 import { useCallback } from "react";
-import { createBlog } from '@/lib/blogs'
+import { createBlog, updateBlogBySlug } from '@/lib/blogs'
+import { useParams } from 'next/navigation';
+
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
     // Read the current editor's state, and re-render the component when it changes
@@ -35,28 +37,29 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         },
     })
 
-    const handleSave = async () => {
+    const { slug } = useParams<{ slug: string }>();
+    const isNewBlog = !slug;
+
+    const buildBlogObject = () => {
         const title = document.getElementById('blog-title')?.innerText;
 
-        if (!title) {
-            console.error('No title found');
-        } else {
-            const slug = title?.replaceAll(' ', '_');
-            const content = editor.getHTML();
-            await createBlog({
-                contents: content,
-                title: title,
-                slug: slug,
-                image: "",
-                summary: "",
-                published: false,
-                tags: []
-            })
+        if (!title || title.length === 0) throw new Error('No blog title')
+
+        const newSlug = title.replaceAll(' ', '_');
+        const content = editor.getHTML();
+
+        return {
+            contents: content,
+            title: title,
+            slug: newSlug,
+            image: "",
+            summary: "",
+            published: false,
+            tags: []
         }
     }
 
     const addImage = useCallback(async () => {
-
         const url = window.prompt('URL')
 
         if (url) {
@@ -66,6 +69,16 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
 
     if (!editor) {
         return null
+    }
+
+    const handleSave = async () => {
+        const blog = buildBlogObject();
+
+        if (isNewBlog) {
+            await createBlog(blog)
+        } else {
+            await updateBlogBySlug(slug, blog)
+        }
     }
 
     return (

@@ -14,13 +14,13 @@ interface EditorProps {
 
 export const CustomEditor = ({ content = null }: EditorProps) => {
 
-    const extensions: Extensions = [StarterKit.configure({
+    const extensions: Extensions = [BlogTitle, StarterKit.configure({
         heading: {
             levels: [1, 2, 3, 4, 5],
         }
     }), Image.configure({
         inline: true
-    }), Document, BlogTitle]
+    }), Document]
 
     const editor = useEditor({
         extensions: extensions,
