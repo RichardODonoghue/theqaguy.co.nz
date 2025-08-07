@@ -14,7 +14,7 @@ export default async function Blogs() {
       <ContentHeader>Admin_Blogs</ContentHeader>
       <Card width="w-full" height="h-auto" overrides="mx-auto">
         <div className="flex my-5">
-          <Button className="flex flex-col-reverse">
+          <Button className="flex">
             <Link href="/admin/blog/new">New Blog</Link>
           </Button>
         </div>
