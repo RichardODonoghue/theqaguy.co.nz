@@ -9,8 +9,8 @@ export default async function EditBlog({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <ContentHeader>Admin_Blogs</ContentHeader>
-      {blog && <CustomEditor content={blog.contents!} />}
+      <ContentHeader>Edit_Blog</ContentHeader>
+      {blog && <CustomEditor content={blog.contents} />}
     </>
   )
 }
