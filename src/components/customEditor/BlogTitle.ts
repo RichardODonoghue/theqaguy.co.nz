@@ -75,7 +75,7 @@ export const BlogTitle = Node.create<{
 
           // Remove any extra blog titles
           if (blogTitles.length > 1) {
-            for (let i = 1; i < blogTitles.length; i++) {
+            for (let i = blogTitles.length - 1; i >= 1; i--) {
               tr.delete(
                 blogTitles[i].pos,
                 blogTitles[i].pos + blogTitles[i].node.nodeSize
