@@ -3,7 +3,6 @@
 import { useEditor, EditorContent, Extensions, Content } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
-import Document from '@tiptap/extension-document'
 import { BlogTitle } from './BlogTitle'
 
 import { Toolbar } from './toolbar'
@@ -20,7 +19,7 @@ export const CustomEditor = ({ content = null }: EditorProps) => {
         }
     }), Image.configure({
         inline: true
-    }), Document]
+    })]
 
     const editor = useEditor({
         extensions: extensions,
