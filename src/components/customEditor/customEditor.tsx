@@ -1,10 +1,7 @@
 'use client';
 
-import { useEditor, EditorContent, Extensions, Content } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import Image from '@tiptap/extension-image'
-import { BlogTitle } from './BlogTitle'
-
+import { useEditor, EditorContent, Content } from '@tiptap/react'
+import extensions from './extensions';
 import { Toolbar } from './toolbar'
 
 interface EditorProps {
@@ -12,14 +9,6 @@ interface EditorProps {
 }
 
 export const CustomEditor = ({ content = null }: EditorProps) => {
-
-    const extensions: Extensions = [BlogTitle, StarterKit.configure({
-        heading: {
-            levels: [1, 2, 3, 4, 5],
-        }
-    }), Image.configure({
-        inline: true
-    })]
 
     const editor = useEditor({
         extensions: extensions,

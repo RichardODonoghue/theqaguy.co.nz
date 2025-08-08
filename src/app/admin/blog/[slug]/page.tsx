@@ -10,7 +10,7 @@ export default async function EditBlog({ params }: { params: Promise<{ slug: str
   return (
     <>
       <ContentHeader>Edit_Blog</ContentHeader>
-      {blog && <CustomEditor content={blog.contents} />}
+      {blog && <CustomEditor content={JSON.parse(blog.contents)} />}
     </>
   )
 }

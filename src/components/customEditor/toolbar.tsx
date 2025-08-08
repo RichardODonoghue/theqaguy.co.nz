@@ -46,7 +46,7 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         if (!title || title.length === 0) throw new Error('No blog title')
 
         const newSlug = title.trim().replaceAll(/\s+/g, '_').toLowerCase();
-        const content = editor.getHTML();
+        const content = JSON.stringify(editor.getJSON());
 
         return {
             contents: content,

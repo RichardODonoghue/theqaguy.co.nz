@@ -1,6 +1,6 @@
-import { Typography } from '@/components/ui/typography';
 import { getBlogBySlug } from '@/lib/blogs';
 import { ContentHeader } from '@/components/ui/contentHeader';
+import { StaticRenderer } from '@/components/customEditor/staticRenderer';
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -13,7 +13,7 @@ export default async function Blog({ params }: BlogPageProps) {
     return (
       <>
         <ContentHeader>QA_Blog</ContentHeader>
-        <Typography variant="lg/normal">{blog.title}</Typography>
+        <StaticRenderer content={JSON.parse(blog.contents)} />
       </>
     );
 }
