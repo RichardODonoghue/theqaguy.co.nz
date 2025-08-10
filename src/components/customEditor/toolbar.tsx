@@ -1,9 +1,10 @@
 import { Editor } from "@tiptap/core";
 import { useEditorState } from "@tiptap/react";
 import { Button } from "../ui/button";
-import { useCallback } from "react";
 import { createBlog, updateBlogBySlug } from "@/lib/blogs";
 import { redirect, useParams } from "next/navigation";
+import { EditorDropdown } from "./dropdown";
+import { ImageUploader } from "./imageUploader";
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
   // Read the current editor's state, and re-render the component when it changes
@@ -40,35 +41,31 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
   const isNewBlog = !slug;
 
   const buildBlogObject = () => {
+    // While it may not be the "react way", this is the easiest way I found to grab the title from the editor.
     const title = document.getElementById("blog-title")?.innerText;
 
     if (!title || title.length === 0) throw new Error("No blog title");
 
     const newSlug = title.trim().replaceAll(/\s+/g, "_").toLowerCase();
     const content = JSON.stringify(editor.getJSON());
-
     return {
       contents: content,
       title: title,
       slug: newSlug,
-      image: "",
-      summary: "",
-      published: false,
-      tags: [],
     };
   };
 
-  const addImage = useCallback(async () => {
-    const url = window.prompt("URL");
+  // const addImage = useCallback(async () => {
+  //   const url = window.prompt("URL");
 
-    if (url) {
-      editor.commands.setImage({ src: url });
-    }
-  }, [editor]);
+  //   if (url) {
+  //     editor.commands.setImage({ src: url });
+  //   }
+  // }, [editor]);
 
-  if (!editor) {
-    return null;
-  }
+  // if (!editor) {
+  //   return null;
+  // }
 
   const handleSave = async () => {
     const blog = buildBlogObject();
@@ -208,8 +205,15 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         >
           Redo
         </Button>
-        <Button onClick={addImage}>Image</Button>
+        <ImageUploader slug={slug} preset="qa-blogs" label="Upload Banner" />
         <Button onClick={handleSave}>Save</Button>
+        <EditorDropdown
+          label="test"
+          options={["test", "test1"]}
+          onClick={() => console.log("selected")}
+          disabled={false}
+          defaultValue=""
+        />
       </div>
     </div>
   );

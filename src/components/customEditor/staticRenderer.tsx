@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { renderToReactElement } from "@tiptap/static-renderer";
 import { JSONContent } from "@tiptap/react";
-import extensions from "./extensions";
+import extensions from "./extensions/extensions";
 
 export const StaticRenderer = ({ content }: { content: JSONContent }) => {
   const output = useMemo(() => {
@@ -13,5 +13,5 @@ export const StaticRenderer = ({ content }: { content: JSONContent }) => {
     });
   }, [content]);
 
-  return <div className="tiptap">{output}</div>;
+  return <div className="tiptap static-render">{output}</div>;
 };
