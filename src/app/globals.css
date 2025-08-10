@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 /* @custom-variant dark (&:is(.dark *)); */
 
@@ -100,4 +100,8 @@ h5 {
 
 .tiptap p {
   @apply text-xl;
+}
+
+.static-render {
+  @apply p-5;
 }

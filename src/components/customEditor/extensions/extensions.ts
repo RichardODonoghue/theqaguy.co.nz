@@ -1,7 +1,7 @@
-import { Extensions } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import { BlogTitle } from './BlogTitle';
+import { Extensions } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Image from "@tiptap/extension-image";
+import { BlogTitle } from "./BlogTitle";
 
 const extensions: Extensions = [
   BlogTitle,

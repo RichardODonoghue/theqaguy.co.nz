@@ -1,7 +1,7 @@
 "use client";
 
 import { useEditor, EditorContent, Content } from "@tiptap/react";
-import extensions from "./extensions";
+import extensions from "./extensions/extensions";
 import { Toolbar } from "./toolbar";
 
 interface EditorProps {
