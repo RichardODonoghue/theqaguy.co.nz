@@ -1,15 +1,15 @@
-'use server';
+"use server";
 
-import { prisma } from './prisma';
+import { prisma } from "./prisma";
 
 export type Blog = {
   slug: string;
   title: string;
-  image: string;
-  summary: string;
+  image?: string;
+  summary?: string;
   contents: string;
-  published: boolean;
-  tags: string[];
+  published?: boolean;
+  tags?: string[];
   createdAt?: Date;
 };
 
@@ -18,7 +18,7 @@ export type Blog = {
 const getBlogs = async () => {
   const blogs = await prisma.blog.findMany({
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
   });
 
@@ -31,7 +31,7 @@ const getPublishedBlogs = async () => {
       published: true,
     },
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
   });
   return blogs;
@@ -55,7 +55,7 @@ const createBlog = async (blog: Blog) => {
   return newBlog;
 };
 
-const updateBlogBySlug = async (slug: string, blog: Blog) => {
+const updateBlogBySlug = async (slug: string, blog: Partial<Blog>) => {
   const updatedBlog = await prisma.blog.update({
     where: {
       slug: slug,
