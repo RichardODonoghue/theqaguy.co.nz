@@ -9,9 +9,17 @@ interface ImageUploaderProps {
   preset: string;
   label: string;
   action?: string;
+  isBlogContent?: boolean;
+  callback?: (url: string) => void;
 }
 
-export const ImageUploader = ({ slug, preset, label }: ImageUploaderProps) => {
+export const ImageUploader = ({
+  slug,
+  preset,
+  label,
+  isBlogContent = false,
+  callback,
+}: ImageUploaderProps) => {
   return (
     <CldUploadWidget
       options={{ sources: ['local'], folder: 'theqaguy.co.nz/blog' }}
@@ -19,7 +27,12 @@ export const ImageUploader = ({ slug, preset, label }: ImageUploaderProps) => {
       signatureEndpoint="/api/sign-upload"
       onSuccess={async (results, { widget }) => {
         const uploadInfo = results.info as CloudinaryUploadWidgetInfo;
-        await updateBlogBySlug(slug, { image: uploadInfo.public_id });
+        if (!isBlogContent) {
+          await updateBlogBySlug(slug, { image: uploadInfo.public_id });
+        }
+        if (isBlogContent && callback) {
+          callback(uploadInfo.public_id);
+        }
         widget.close();
       }}
     >

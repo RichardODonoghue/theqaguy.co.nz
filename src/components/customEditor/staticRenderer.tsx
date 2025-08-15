@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useMemo } from "react";
-import { renderToReactElement } from "@tiptap/static-renderer";
-import { JSONContent } from "@tiptap/react";
-import extensions from "./extensions/extensions";
+import { useMemo } from 'react';
+import { renderToReactElement } from '@tiptap/static-renderer';
+import { JSONContent } from '@tiptap/react';
+import extensions from './extensions/extensions';
 
 export const StaticRenderer = ({ content }: { content: JSONContent }) => {
   const output = useMemo(() => {
