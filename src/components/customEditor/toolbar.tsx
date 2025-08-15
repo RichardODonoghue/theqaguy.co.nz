@@ -54,6 +54,8 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       contents: content,
       title: title,
       slug: newSlug,
+      tags: [],
+      image: '',
     };
   };
 

@@ -12,7 +12,7 @@ interface BlogCardProps {
 }
 
 export const BlogCard = ({ blog }: BlogCardProps) => {
-  const formattedDate = blog.createdAt.toDateString();
+  const formattedDate = blog.createdAt?.toDateString();
 
   return (
     <Card
@@ -23,7 +23,7 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
       <Link href={`/qa-blog/${blog.slug}`} className="flex flex-col flex-grow">
         <div>
           <CldImage
-            src={blog.image}
+            src={blog.image ?? ''}
             width={400}
             height={200}
             alt="fish"
@@ -39,22 +39,23 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
         </div>
         <div className="mt-auto">
           <div className="py-2">
-            {blog.tags.map((tag, index) => {
-              return (
-                <div
-                  key={index}
-                  className="inline-block mx-1 my-2 bg-accent rounded-2xl shadow-2xl shadow-slate-700 px-2 py-0"
-                >
-                  <Typography
-                    variant="sm/normal"
-                    as="div"
-                    className="text-slate-700 px-2"
+            {blog.tags &&
+              blog.tags.map((tag, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="inline-block mx-1 my-2 bg-accent rounded-2xl shadow-2xl shadow-slate-700 px-2 py-0"
                   >
-                    {tag}
-                  </Typography>
-                </div>
-              );
-            })}
+                    <Typography
+                      variant="sm/normal"
+                      as="div"
+                      className="text-slate-700 px-2"
+                    >
+                      {tag}
+                    </Typography>
+                  </div>
+                );
+              })}
           </div>
           <Separator className="my-2" />
           <div className="flex justify-between">

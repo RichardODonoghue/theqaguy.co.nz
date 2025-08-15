@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { prisma } from "./prisma";
+import { prisma } from './prisma';
 
 export type Blog = {
   slug: string;
@@ -18,7 +18,7 @@ export type Blog = {
 const getBlogs = async () => {
   const blogs = await prisma.blog.findMany({
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 
@@ -31,7 +31,7 @@ const getPublishedBlogs = async () => {
       published: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
   return blogs;
