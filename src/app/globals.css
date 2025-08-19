@@ -99,7 +99,8 @@ h5 {
 }
 
 .tiptap p {
-  @apply text-xl p-2;
+  @apply text-xl p-2 m-2;
+  overflow: auto; /* Ensures paragraphs wrap around floated elements */
 }
 
 .static-render {
@@ -108,8 +109,4 @@ h5 {
 
 .ProseMirror {
   overflow: auto; /* Helps with float containment */
-}
-
-.ProseMirror p {
-  overflow: auto; /* Ensures paragraphs wrap around floated elements */
 }
