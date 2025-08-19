@@ -51,9 +51,10 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
 
     const newSlug = title
       .trim()
+      .toLowerCase()
       .replaceAll(/[^a-z0-9\s]/g, '')
-      .replaceAll(/\s+/g, '_')
-      .toLowerCase();
+      .replaceAll(/\s+/g, '_');
+
     const content = JSON.stringify(editor.getJSON());
     return {
       contents: content,
