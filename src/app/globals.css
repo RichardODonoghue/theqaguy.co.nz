@@ -105,3 +105,11 @@ h5 {
 .static-render {
   @apply p-5 bg-slate-700/30 rounded-sm;
 }
+
+.ProseMirror {
+  overflow: auto; /* Helps with float containment */
+}
+
+.ProseMirror p {
+  overflow: auto; /* Ensures paragraphs wrap around floated elements */
+}

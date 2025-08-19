@@ -7,6 +7,7 @@ import { CldImageWrapper } from '../cloudinaryImageWrapper';
 export const CloudinaryImage = Node.create({
   name: 'cloudinaryImage',
   group: 'block',
+  atom: true,
   addAttributes() {
     return {
       src: {
@@ -17,6 +18,7 @@ export const CloudinaryImage = Node.create({
       },
       width: { default: 400 },
       height: { default: 300 },
+      float: { default: 'left' },
     };
   },
   parseHTML() {
@@ -39,9 +41,15 @@ export const CloudinaryImage = Node.create({
     const patchedSrc =
       src && !src.startsWith('http') ? `${CLOUDINARY_BASE}${src}` : src;
 
+    const floatClass =
+      HTMLAttributes.float === 'right' ? 'float-right ml-4' : 'float-left mr-4';
+
     return [
       'img',
-      mergeAttributes(HTMLAttributes, { src: patchedSrc, class: 'my-4' }),
+      mergeAttributes(HTMLAttributes, {
+        src: patchedSrc,
+        class: `my-4 ${floatClass} inline`,
+      }),
     ];
   },
 
