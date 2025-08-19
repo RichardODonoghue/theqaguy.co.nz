@@ -45,14 +45,20 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
   const buildBlogObject = () => {
     // While it may not be the "react way", this is the easiest way I found to grab the title from the editor.
     const title = document.getElementById('blog-title')?.innerText;
+    const summary = document.getElementById('blog-summary')?.innerText;
 
     if (!title || title.length === 0) throw new Error('No blog title');
 
-    const newSlug = title.trim().replaceAll(/\s+/g, '_').toLowerCase();
+    const newSlug = title
+      .trim()
+      .replaceAll(/[^a-z0-9\s]/g, '')
+      .replaceAll(/\s+/g, '_')
+      .toLowerCase();
     const content = JSON.stringify(editor.getJSON());
     return {
       contents: content,
       title: title,
+      summary: summary,
       slug: newSlug,
       tags: [],
       image: '',
@@ -87,10 +93,11 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
 
     if (isNewBlog) {
       await createBlog(blog);
-      redirect(`/admin/blog/${blog.slug}`);
     } else {
       await updateBlogBySlug(slug, blog);
     }
+    // Redirect to the blog page after saving
+    redirect(`/admin/blog/${blog.slug}`);
   };
 
   return (

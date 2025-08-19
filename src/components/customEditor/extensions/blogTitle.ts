@@ -1,6 +1,6 @@
-import { Node, mergeAttributes } from "@tiptap/core";
-import { Node as ProseMirrorNode } from "prosemirror-model";
-import { Plugin, PluginKey } from "prosemirror-state";
+import { Node, mergeAttributes } from '@tiptap/core';
+import { Node as ProseMirrorNode } from 'prosemirror-model';
+import { Plugin, PluginKey } from 'prosemirror-state';
 
 type BlogTitleStorage = {
   hasCheckedInitialBlogTitle: boolean;
@@ -9,25 +9,25 @@ type BlogTitleStorage = {
 export const BlogTitle = Node.create<{
   Storage: BlogTitleStorage;
 }>({
-  name: "blogTitle",
-  group: "block",
-  content: "inline*",
+  name: 'blogTitle',
+  group: 'block',
+  content: 'inline*',
   defining: true,
 
   parseHTML() {
     return [
       {
-        tag: "h1",
+        tag: 'h1',
         getAttrs: (element) => {
           const el = element as HTMLElement;
-          return el.id === "blog-title" ? {} : false;
+          return el.id === 'blog-title' ? {} : false;
         },
       },
     ];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ["h1", mergeAttributes(HTMLAttributes, { id: "blog-title" }), 0];
+    return ['h1', mergeAttributes(HTMLAttributes, { id: 'blog-title' }), 0];
   },
 
   addStorage() {
@@ -43,10 +43,10 @@ export const BlogTitle = Node.create<{
 
     const firstNode = state.doc.content.firstChild;
 
-    if (!firstNode || firstNode.type.name !== "blogTitle") {
+    if (!firstNode || firstNode.type.name !== 'blogTitle') {
       const blogTitleNode = this.type.create(
         {},
-        editor.schema.text("Your Blog Title")
+        editor.schema.text('<Your Blog Title>')
       );
       const tr = state.tr.insert(0, blogTitleNode);
       view.dispatch(tr);
@@ -58,7 +58,7 @@ export const BlogTitle = Node.create<{
   addProseMirrorPlugins() {
     return [
       new Plugin({
-        key: new PluginKey("blogTitleEnforcer"),
+        key: new PluginKey('blogTitleEnforcer'),
 
         appendTransaction: (_transactions, _oldState, newState) => {
           const tr = newState.tr;
@@ -68,7 +68,7 @@ export const BlogTitle = Node.create<{
           const blogTitles: { node: ProseMirrorNode; pos: number }[] = [];
 
           doc.descendants((node, pos) => {
-            if (node.type.name === "blogTitle") {
+            if (node.type.name === 'blogTitle') {
               blogTitles.push({ node, pos });
             }
           });
@@ -87,7 +87,7 @@ export const BlogTitle = Node.create<{
           // Move to top if not first
           if (
             blogTitles.length &&
-            doc.content.firstChild?.type.name !== "blogTitle"
+            doc.content.firstChild?.type.name !== 'blogTitle'
           ) {
             const { node, pos } = blogTitles[0];
             tr.delete(pos, pos + node.nodeSize);
@@ -105,13 +105,13 @@ export const BlogTitle = Node.create<{
 
             const $from = selection.$from;
 
-            const inBlogTitle = $from.parent.type.name === "blogTitle";
+            const inBlogTitle = $from.parent.type.name === 'blogTitle';
             const atNodeStart = $from.parentOffset === 0;
 
             const tryingToDeleteBlogTitleNode =
               inBlogTitle &&
               atNodeStart &&
-              (event.key === "Backspace" || event.key === "Delete");
+              (event.key === 'Backspace' || event.key === 'Delete');
 
             if (tryingToDeleteBlogTitleNode) {
               event.preventDefault();
