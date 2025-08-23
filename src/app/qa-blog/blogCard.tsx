@@ -23,7 +23,7 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
       <Link href={`/qa-blog/${blog.slug}`} className="flex flex-col flex-grow">
         <div>
           <CldImage
-            src={blog.image ?? ''}
+            src={blog.image || 'theqaguy.co.nz/blog/fallback_wdpalc'}
             width={400}
             height={200}
             alt="fish"
