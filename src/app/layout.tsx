@@ -40,7 +40,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Background />
-        <div className="flex overflow-y-clip">
+        <div className="flex">
           <SidebarProvider defaultOpen={false}>
             <Menu isMobile={isMobile} />
             <Container>{children}</Container>
