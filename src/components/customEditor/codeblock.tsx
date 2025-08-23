@@ -26,8 +26,7 @@ const CodeBlockComponent: React.FC<NodeViewProps> = ({
             </option>
           ))}
       </select>
-      {/* The content should be a <code> tag inside the <pre> */}
-      <NodeViewContent as="code" />
+      <NodeViewContent />
     </NodeViewWrapper>
   );
 };

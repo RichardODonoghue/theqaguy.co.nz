@@ -112,10 +112,11 @@ h5 {
   @apply p-5;
 }
 
+.tiptap pre {
+  @apply bg-slate-800 p-5 rounded-lg;
+}
 .tiptap pre.code-block {
   @apply relative rounded-md p-4 font-mono text-sm text-white w-[80%] block mx-auto bg-slate-800;
-  /* Add top padding to prevent the code from overlapping with the select dropdown */
-  padding-top: 2.5rem;
 }
 
 .tiptap pre.code-block select {

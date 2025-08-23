@@ -1,6 +1,7 @@
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import CodeBlockComponent from '../codeblock';
+import type { ElementContent } from 'hast';
 
 export const CustomCodeBlock = CodeBlockLowlight.extend({
   // This adds the React component for the interactive editor.
@@ -14,7 +15,7 @@ export const CustomCodeBlock = CodeBlockLowlight.extend({
     const language = node.attrs.language || this.options.defaultLanguage;
 
     // Helper function to convert lowlight's HAST tree to Tiptap's renderHTML format.
-    const hastToTiptap = (hastNode) => {
+    const hastToTiptap = (hastNode: ElementContent): unknown => {
       if (hastNode.type === 'text') {
         return hastNode.value;
       }
@@ -30,6 +31,7 @@ export const CustomCodeBlock = CodeBlockLowlight.extend({
         return [hastNode.tagName, attrs, ...children];
       }
 
+      // Ignore comments and other node types
       return null;
     };
 
