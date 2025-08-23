@@ -108,5 +108,72 @@ h5 {
 }
 
 .ProseMirror {
-  overflow: auto; /* Helps with float containment */
+  overflow: auto;
+  @apply p-5;
+}
+
+.tiptap pre.code-block {
+  @apply relative rounded-md p-4 font-mono text-sm text-white w-[80%] block mx-auto bg-slate-800;
+  /* Add top padding to prevent the code from overlapping with the select dropdown */
+  padding-top: 2.5rem;
+}
+
+.tiptap pre.code-block select {
+  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
+}
+
+/* This rule remains the same */
+.tiptap .code-block select {
+  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
+}
+
+.tiptap .hljs-comment,
+.tiptap .hljs-quote {
+  color: #616161;
+}
+
+.tiptap .hljs-variable,
+.tiptap .hljs-template-variable,
+.tiptap .hljs-attribute,
+.tiptap .hljs-tag,
+.tiptap .hljs-name,
+.tiptap .hljs-regexp,
+.tiptap .hljs-link,
+.tiptap .hljs-selector-id,
+.tiptap .hljs-selector-class {
+  color: #f98181;
+}
+
+.tiptap .hljs-number,
+.tiptap .hljs-meta,
+.tiptap .hljs-built_in,
+.tiptap .hljs-builtin-name,
+.tiptap .hljs-literal,
+.tiptap .hljs-type,
+.tiptap .hljs-params {
+  color: #fbbc88;
+}
+
+.tiptap .hljs-string,
+.tiptap .hljs-symbol,
+.tiptap .hljs-bullet {
+  color: #b9f18d;
+}
+
+.tiptap .hljs-title,
+.tiptap .hljs-section {
+  color: #faf594;
+}
+
+.tiptap .hljs-keyword,
+.tiptap .hljs-selector-tag {
+  color: #70cff8;
+}
+
+.tiptap .hljs-emphasis {
+  font-style: italic;
+}
+
+.tiptap .hljs-strong {
+  font-weight: 700;
 }

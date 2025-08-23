@@ -5,7 +5,6 @@ import { useEditorState } from '@tiptap/react';
 import { Button } from '../ui/button';
 import { createBlog, updateBlogBySlug } from '@/lib/blogs';
 import { redirect, useParams } from 'next/navigation';
-import { EditorDropdown } from './dropdown';
 import { ImageUploader } from './imageUploader';
 
 export const Toolbar = ({ editor }: { editor: Editor }) => {
@@ -237,13 +236,6 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         />
         <ImageUploader slug={slug} preset="qa-blogs" label="Upload Banner" />
         <Button onClick={handleSave}>Save</Button>
-        <EditorDropdown
-          label="test"
-          options={['test', 'test1']}
-          onClick={() => console.log('selected')}
-          disabled={false}
-          defaultValue=""
-        />
       </div>
     </div>
   );
