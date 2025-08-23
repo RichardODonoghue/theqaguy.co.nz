@@ -67,3 +67,114 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Styles for WYSWIG Editor */
+
+.tiptap h1,
+h2,
+h3,
+h4,
+h5 {
+  @apply font-normal my-5;
+}
+
+.tiptap h1 {
+  @apply text-3xl sm:text-4xl md:text-5xl;
+}
+
+.tiptap h2 {
+  @apply text-2xl sm:text-3xl md:text-4xl;
+}
+
+.tiptap h3 {
+  @apply text-xl sm:text-2xl md:text-3xl;
+}
+
+.tiptap h4 {
+  @apply text-lg sm:text-xl md:text-2xl;
+}
+
+.tiptap h5 {
+  @apply text-lg md:text-xl;
+}
+
+.tiptap p {
+  @apply text-xl p-2 m-2;
+  overflow: auto; /* Ensures paragraphs wrap around floated elements */
+}
+
+.static-render {
+  @apply p-5 bg-slate-700/30 rounded-sm;
+}
+
+.ProseMirror {
+  overflow: auto;
+  @apply p-5;
+}
+
+.tiptap pre {
+  @apply bg-slate-800 p-5 rounded-lg;
+}
+.tiptap pre.code-block {
+  @apply relative rounded-md p-4 font-mono text-sm text-white w-[80%] block mx-auto bg-slate-800;
+}
+
+.tiptap pre.code-block select {
+  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
+}
+
+/* This rule remains the same */
+.tiptap .code-block select {
+  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
+}
+
+.tiptap .hljs-comment,
+.tiptap .hljs-quote {
+  color: #616161;
+}
+
+.tiptap .hljs-variable,
+.tiptap .hljs-template-variable,
+.tiptap .hljs-attribute,
+.tiptap .hljs-tag,
+.tiptap .hljs-name,
+.tiptap .hljs-regexp,
+.tiptap .hljs-link,
+.tiptap .hljs-selector-id,
+.tiptap .hljs-selector-class {
+  color: #f98181;
+}
+
+.tiptap .hljs-number,
+.tiptap .hljs-meta,
+.tiptap .hljs-built_in,
+.tiptap .hljs-builtin-name,
+.tiptap .hljs-literal,
+.tiptap .hljs-type,
+.tiptap .hljs-params {
+  color: #fbbc88;
+}
+
+.tiptap .hljs-string,
+.tiptap .hljs-symbol,
+.tiptap .hljs-bullet {
+  color: #b9f18d;
+}
+
+.tiptap .hljs-title,
+.tiptap .hljs-section {
+  color: #faf594;
+}
+
+.tiptap .hljs-keyword,
+.tiptap .hljs-selector-tag {
+  color: #70cff8;
+}
+
+.tiptap .hljs-emphasis {
+  font-style: italic;
+}
+
+.tiptap .hljs-strong {
+  font-weight: 700;
+}
