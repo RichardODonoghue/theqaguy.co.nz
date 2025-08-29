@@ -12,15 +12,31 @@ import {
 
 export default function AboutMe() {
   const bioContent = (
-    <>
-      <Typography variant="lg/normal" as="p">
+    <div className="w-1/2">
+      <Typography variant="xl/normal" as="h3">
         Hello Internet,{' '}
-        <strong className="text-accent">I&apos;m Richard</strong>. <br />
-        <br />I am an experienced Software QA Engineer. I live in Manawatu, New
-        Zealand with my wife, son (arriving soon), two cats and dog. <br />
+        <strong className="text-accent">I&apos;m Richard</strong>
       </Typography>
-      <br />
-    </>
+      <Typography variant="lg/normal" as="p">
+        I am an experienced QA Engineer. I live in the beautiful and marvelous
+        Manawatu region of New Zealand with my wife, new born son and two cats
+        and dog. <br />
+        <br />I have a fiery passion for Software Quality. I am a firm believer
+        that software quality is not just a phase in the software development
+        lifecycle or automated test suite, but a value that should be integrated
+        into every aspect of a business delivering software.
+        <br />
+        <br />
+        We are living in a world where software is more complex than ever, we
+        are delivering faster than ever and AI is changing the way we build
+        software.
+        <br />
+        These challenges make quality assurance and testing more critical than
+        ever. It has never been a more important and exciting time to be a QA
+        Engineer. My goal with this website is to share my experiences,
+        insights, and knowledge with others in the field.
+      </Typography>
+    </div>
   );
 
   const technologyExperience = Object.entries(technologies).map(
