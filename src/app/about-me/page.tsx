@@ -4,8 +4,6 @@ import { Typography } from '@/components/ui/typography';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { technologies } from '@/constants/technologies';
-import { softSkills } from '@/constants/softSkills';
-import { roles } from '@/constants/roles';
 import {
   Tooltip,
   TooltipContent,
@@ -62,38 +60,6 @@ export default function AboutMe() {
     )
   );
 
-  const mySoftSkills = softSkills.map((skill) => (
-    <div
-      key={skill}
-      className="bg-accent px-2 py-1 m-1 rounded-2xl shadow-slate-700 shadow-sm"
-    >
-      <Typography
-        variant="sm/normal"
-        as="p"
-        className="text-nowrap text-slate-700 bold"
-      >
-        {skill}
-      </Typography>
-    </div>
-  ));
-
-  const myRoles = roles.map((role, index) => (
-    <div key={role.name} data-testid={`role-${index}`} className="">
-      <Typography variant="2xl/extrabold" as="h3" className="text-accent">
-        {role.name}
-      </Typography>
-      <Typography variant="xl/medium" as="span" className="my-2">
-        {role.company}
-      </Typography>
-      <Typography variant="lg/normal" as="p" className="my-5">
-        {role.description}
-      </Typography>
-      <Typography variant="lg/normal" as="p" className="text-secondary my-2">
-        {role.dateRange}
-      </Typography>
-    </div>
-  ));
-
   return (
     <>
       <ContentHeader>AboutMe</ContentHeader>
@@ -110,14 +76,6 @@ export default function AboutMe() {
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Skills
             </Typography>
-            <div className="my-10">
-              <Typography variant="2xl/extrabold" className="my-8" as="h3">
-                Soft Skills
-              </Typography>
-              <div className="my-5 flex flex-wrap justify-start md:justify-center">
-                {mySoftSkills}
-              </div>
-            </div>
             <div className="">
               <Typography variant="2xl/extrabold" className="my-8" as="h3">
                 Technology Skills
@@ -128,14 +86,6 @@ export default function AboutMe() {
             </div>
           </section>
           <Separator className="my-5" />
-          <section className="m-5">
-            <Typography variant="3xl/extrabold" className="my-5" as="h2">
-              Roles
-            </Typography>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
-              {myRoles}
-            </div>
-          </section>
         </div>
       </ScrollArea>
     </>
