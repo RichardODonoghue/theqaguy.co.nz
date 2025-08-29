@@ -12,7 +12,7 @@ import {
 
 export default function AboutMe() {
   const bioContent = (
-    <div className="w-1/2">
+    <div className="">
       <Typography variant="xl/normal" as="h3">
         Hello Internet,{' '}
         <strong className="text-accent">I&apos;m Richard</strong>
@@ -36,6 +36,19 @@ export default function AboutMe() {
         <br />
         My goal with this website is to share my experiences, insights, and
         knowledge with others in the field.
+      </Typography>
+      <Typography variant="3xl/extrabold" className="my-2" as="h2">
+        Hobbies
+      </Typography>
+      <Typography variant="lg/normal" as="p">
+        In my free time I enjoy:
+      </Typography>
+      <Typography variant="lg/normal" as="ul">
+        <li className="ml-4">Building software and tools</li>
+        <li className="ml-4">Contributing to testing of FOSS software</li>
+        <li className="ml-4">Attending my local linux user group</li>
+        <li className="ml-4">Playing video games</li>
+        <li className="ml-4">Spending time with my family</li>
       </Typography>
     </div>
   );
@@ -102,7 +115,6 @@ export default function AboutMe() {
               </div>
             </div>
           </section>
-          <Separator className="my-5" />
         </div>
       </ScrollArea>
     </>
