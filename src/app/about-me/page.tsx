@@ -36,14 +36,13 @@ export default function AboutMe() {
         <br />
         My goal with this website is to share my experiences, insights, and
         knowledge with others in the field.
-      </Typography>
-      <Typography variant="3xl/extrabold" className="my-2" as="h2">
-        Hobbies
+        <br/>
+        <br/>
       </Typography>
       <Typography variant="lg/normal" as="p">
-        In my free time I enjoy:
+        Outside of work I enjoy:
       </Typography>
-      <Typography variant="lg/normal" as="ul">
+      <Typography variant="lg/normal" as="ul" className='list-disc'>
         <li className="ml-4">Building software and tools</li>
         <li className="ml-4">Contributing to testing of FOSS software</li>
         <li className="ml-4">Attending my local linux user group</li>
@@ -93,22 +92,19 @@ export default function AboutMe() {
   return (
     <>
       <ContentHeader>AboutMe</ContentHeader>
-      <ScrollArea className="h-[calc(100vh-120px)] lg:h-[calc(100vh-180px)]">
-        <div className="pr-4">
+      <ScrollArea className="h-full">
+        <div className="pr-4 mb-20">
           <section className=" mx-5">
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
             {bioContent}
           </section>
-          <Separator className="my-5" />
+          <Separator className="my-10" />
           <section className="mx-5">
-            <Typography variant="3xl/extrabold" className="my-2" as="h2">
-              Skills
-            </Typography>
             <div className="">
-              <Typography variant="2xl/extrabold" className="my-8" as="h3">
-                Technology Skills
+              <Typography variant="3xl/extrabold" className="my-8" as="h3">
+                Technologies I have experience with
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
                 {technologyExperience}
