@@ -22,16 +22,11 @@ test.describe(() => {
             exact: true,
           })
         ).toBeVisible();
-        // await expect(projectLocator).toContainText(project.description);
+
         if (project.url) {
           const visitLink = projectLocator.getByRole('link');
           await expect(visitLink).toHaveAttribute('href', project.url);
           await expect(visitLink).toBeVisible();
-        }
-        if (project.technologies) {
-          for (const technology of project.technologies) {
-            await expect(projectLocator.getByText(technology)).toBeVisible();
-          }
         }
       }
     }

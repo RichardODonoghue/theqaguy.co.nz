@@ -18,9 +18,8 @@ export default function AboutMe() {
         <strong className="text-accent">I&apos;m Richard</strong>
       </Typography>
       <Typography variant="lg/normal" as="p">
-        I am an experienced QA Engineer. I live in the beautiful and marvelous
-        Manawatu region of New Zealand with my wife, son and two cats and dog.{' '}
-        <br />
+        I am an experienced QA Engineer. I live in the beautiful Manawatu region
+        of New Zealand with my wife, son, two cats and dog. <br />
         <br />I have a fiery passion for Software Quality. I am a firm believer
         that software quality is not just a phase in the software development
         lifecycle or an automated test suite, but a value that should be
@@ -35,14 +34,18 @@ export default function AboutMe() {
         <br />
         <br />
         My goal with this website is to share my experiences, insights, and
-        knowledge with others in the field.
-        <br/>
-        <br/>
+        knowledge about software testing with others, and further my own
+        knowledge while doing so. <br />
+        <br />
+        As an added bonus, I will also share some of my personal projects as
+        well.
+        <br />
+        <br />
       </Typography>
       <Typography variant="lg/normal" as="p">
         Outside of work I enjoy:
       </Typography>
-      <Typography variant="lg/normal" as="ul" className='list-disc'>
+      <Typography variant="lg/normal" as="ul" className="list-disc">
         <li className="ml-4">Building software and tools</li>
         <li className="ml-4">Contributing to testing of FOSS software</li>
         <li className="ml-4">Attending my local linux user group</li>
@@ -94,7 +97,7 @@ export default function AboutMe() {
       <ContentHeader>AboutMe</ContentHeader>
       <ScrollArea className="h-full">
         <div className="pr-4 mb-20">
-          <section className=" mx-5">
+          <section className=" mx-5 ">
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
