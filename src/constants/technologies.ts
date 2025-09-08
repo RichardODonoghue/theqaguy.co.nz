@@ -18,7 +18,6 @@ type Technologies = Record<Category, Technology[]>;
 export const technologies: Technologies = {
   Databases: [
     { name: 'MongoDB', logo: 'MongoDB.svg' },
-    { name: 'MySQL', logo: 'MySQL.svg' },
     { name: 'PostgreSQL', logo: 'PostgresSQL.svg' },
     { name: 'Redis', logo: 'redis.svg' },
   ],
@@ -46,7 +45,6 @@ export const technologies: Technologies = {
     { name: 'TypeScript', logo: 'TypeScript.svg' },
   ],
   'Project Management': [
-    { name: 'ClickUp', logo: 'clickup.svg' },
     { name: 'Confluence', logo: 'Confluence.svg' },
     { name: 'Jira', logo: 'Jira.svg' },
   ],

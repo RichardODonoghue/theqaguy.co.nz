@@ -4,8 +4,6 @@ import { Typography } from '@/components/ui/typography';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { technologies } from '@/constants/technologies';
-import { softSkills } from '@/constants/softSkills';
-import { roles } from '@/constants/roles';
 import {
   Tooltip,
   TooltipContent,
@@ -14,15 +12,47 @@ import {
 
 export default function AboutMe() {
   const bioContent = (
-    <>
-      <Typography variant="lg/normal" as="p">
+    <div className="">
+      <Typography variant="xl/normal" as="h3">
         Hello Internet,{' '}
-        <strong className="text-accent">I&apos;m Richard</strong>. <br />
-        <br />I am an experienced Software QA Engineer. I live in Manawatu, New
-        Zealand with my wife, son (arriving soon), two cats and dog. <br />
+        <strong className="text-accent">I&apos;m Richard</strong>
       </Typography>
-      <br />
-    </>
+      <Typography variant="lg/normal" as="p">
+        I am an experienced QA Engineer. I live in the beautiful Manawatu region
+        of New Zealand with my wife, son, two cats and dog. <br />
+        <br />I have a fiery passion for Software Quality. I am a firm believer
+        that software quality is not just a phase in the software development
+        lifecycle or an automated test suite, but a value that should be
+        integrated into every aspect of a business delivering software.
+        <br />
+        <br />
+        We are living in a world where software is more complex than ever. We
+        are delivering faster than ever and AI is changing the way we build
+        software. These challenges make quality assurance and testing more
+        critical than ever. It has never been a more important and exciting time
+        to be a QA Engineer.
+        <br />
+        <br />
+        My goal with this website is to share my experiences, insights, and
+        knowledge about software testing with others, and further my own
+        knowledge while doing so. <br />
+        <br />
+        As an added bonus, I will also share some of my personal projects as
+        well.
+        <br />
+        <br />
+      </Typography>
+      <Typography variant="lg/normal" as="p">
+        Outside of work I enjoy:
+      </Typography>
+      <Typography variant="lg/normal" as="ul" className="list-disc">
+        <li className="ml-4">Building software and tools</li>
+        <li className="ml-4">Contributing to testing of FOSS software</li>
+        <li className="ml-4">Attending my local linux user group</li>
+        <li className="ml-4">Playing video games</li>
+        <li className="ml-4">Spending time with my family</li>
+      </Typography>
+    </div>
   );
 
   const technologyExperience = Object.entries(technologies).map(
@@ -62,78 +92,26 @@ export default function AboutMe() {
     )
   );
 
-  const mySoftSkills = softSkills.map((skill) => (
-    <div
-      key={skill}
-      className="bg-accent px-2 py-1 m-1 rounded-2xl shadow-slate-700 shadow-sm"
-    >
-      <Typography
-        variant="sm/normal"
-        as="p"
-        className="text-nowrap text-slate-700 bold"
-      >
-        {skill}
-      </Typography>
-    </div>
-  ));
-
-  const myRoles = roles.map((role, index) => (
-    <div key={role.name} data-testid={`role-${index}`} className="">
-      <Typography variant="2xl/extrabold" as="h3" className="text-accent">
-        {role.name}
-      </Typography>
-      <Typography variant="xl/medium" as="span" className="my-2">
-        {role.company}
-      </Typography>
-      <Typography variant="lg/normal" as="p" className="my-5">
-        {role.description}
-      </Typography>
-      <Typography variant="lg/normal" as="p" className="text-secondary my-2">
-        {role.dateRange}
-      </Typography>
-    </div>
-  ));
-
   return (
     <>
       <ContentHeader>AboutMe</ContentHeader>
-      <ScrollArea className="h-[calc(100vh-120px)] lg:h-[calc(100vh-180px)]">
-        <div className="pr-4">
-          <section className=" mx-5">
+      <ScrollArea className="h-full">
+        <div className="pr-4 mb-20">
+          <section className=" mx-5 ">
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
             {bioContent}
           </section>
-          <Separator className="my-5" />
+          <Separator className="my-10" />
           <section className="mx-5">
-            <Typography variant="3xl/extrabold" className="my-2" as="h2">
-              Skills
-            </Typography>
-            <div className="my-10">
-              <Typography variant="2xl/extrabold" className="my-8" as="h3">
-                Soft Skills
-              </Typography>
-              <div className="my-5 flex flex-wrap justify-start md:justify-center">
-                {mySoftSkills}
-              </div>
-            </div>
             <div className="">
-              <Typography variant="2xl/extrabold" className="my-8" as="h3">
-                Technology Skills
+              <Typography variant="3xl/extrabold" className="my-8" as="h3">
+                Technologies I have experience with
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
                 {technologyExperience}
               </div>
-            </div>
-          </section>
-          <Separator className="my-5" />
-          <section className="m-5">
-            <Typography variant="3xl/extrabold" className="my-5" as="h2">
-              Roles
-            </Typography>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
-              {myRoles}
             </div>
           </section>
         </div>

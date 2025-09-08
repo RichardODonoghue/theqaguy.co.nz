@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from '@/constants/projects';
 import { Typography } from '@/components/ui/typography';
-import { Separator } from '@/components/ui/separator';
 
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -40,23 +40,10 @@ export const ProjectCard = ({ project }: { project: Project }) => {
           />
         )}
       </div>
-      <Separator className="m-2" />
-      <div className="h-20 my-2">
-        {project.technologies &&
-          project.technologies?.map((tech) => (
-            <div
-              key={`${project.name}-${tech}`}
-              className="inline-block mx-1 my-2 bg-accent rounded-2xl shadow-2xl shadow-slate-700"
-            >
-              <Typography
-                variant="sm/normal"
-                as="div"
-                className="text-slate-700 px-2"
-              >
-                {tech}
-              </Typography>
-            </div>
-          ))}
+      <div>
+        <Button variant="default" className="w-full">
+          Learn More
+        </Button>
       </div>
     </Card>
   );
