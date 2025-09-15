@@ -1,16 +1,19 @@
 // src/app/api/setup-admin/route.ts
 
 import { NextResponse } from 'next/server';
+import { isAuthorizedRequest } from '@/lib/isAuthorizedRequest';
+import rateLimiter from '@/lib/rateLimiter';
 import createAdmin from '@/lib/auth/setupAdminUser';
 
 export async function GET(request: Request) {
-  // This is a security measure to ensure this route is not publicly accessible.
-  const { searchParams } = new URL(request.url);
-  const secret = searchParams.get('secret');
+  const isRateLimited = await rateLimiter(request, 1, 60);
 
-  if (secret !== process.env.BETTER_AUTH_SECRET) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (isRateLimited) {
+    return isRateLimited;
   }
+
+  const unauthorizedResponse = isAuthorizedRequest(request);
+  if (unauthorizedResponse) return unauthorizedResponse;
 
   try {
     await createAdmin();
@@ -20,7 +23,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     const errorMessage =
-      error instanceof Error ? error.message : 'An unknown error occurred';
+      error instanceof Error ? error.message : 'Server Error';
     return NextResponse.json(
       { success: false, error: errorMessage },
       { status: 500 }
