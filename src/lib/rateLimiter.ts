@@ -1,5 +1,7 @@
 import Redis from 'ioredis';
-const redis = new Redis();
+
+const redisUrl = process.env.REDIS_SERVER!;
+const redis = new Redis(redisUrl);
 
 const LIMIT = 5; // requests
 const DURATION = 60; // seconds
