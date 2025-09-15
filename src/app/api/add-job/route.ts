@@ -1,6 +1,13 @@
 import { addJob } from '@/lib/testRunQueue';
+import rateLimiter from '@/lib/rateLimiter';
 
-export async function POST() {
+export async function POST(request: Request) {
+  const isRateLimited = await rateLimiter(request);
+
+  if (isRateLimited) {
+    return isRateLimited;
+  }
+
   try {
     const job = await addJob();
     return Response.json({ jobId: job.id });
