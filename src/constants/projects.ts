@@ -3,6 +3,7 @@ type Classification = 'Software' | 'Other';
 export interface Project {
   name: string;
   description: string;
+  status: 'development' | 'complete';
   technologies?: string[];
   image: string;
   url?: string;
@@ -27,6 +28,7 @@ export const projects: Record<Classification, Project[]> = {
       ],
       image: '/projects/qaguy.png',
       url: 'https://theqaguy.co.nz/',
+      status: 'complete',
     },
     {
       name: 'MDR Terminal',
@@ -35,6 +37,7 @@ export const projects: Record<Classification, Project[]> = {
       technologies: ['Typescript', 'React', 'Vite', 'Tailwind CSS'],
       image: '/projects/mdr.png',
       url: 'https://macro-data-refinement.theqaguy.co.nz/',
+      status: 'complete',
     },
     {
       name: 'Massage+ByTheSquare',
@@ -50,6 +53,7 @@ export const projects: Record<Classification, Project[]> = {
       ],
       image: '',
       url: '',
+      status: 'development',
     },
   ],
   Other: [
@@ -59,6 +63,7 @@ export const projects: Record<Classification, Project[]> = {
         'Building a hobbiest racecar is an expensive endeavour. The most costly part often being engine management. Luckily for me there are some incredibly talented people that have made opensource daughter boards and fimrware for Arduino boards to control engines',
       image: '/projects/echo.png',
       technologies: ['speeduino', 'arduino', 'tunerstudio'],
+      status: 'development',
     },
   ],
 };

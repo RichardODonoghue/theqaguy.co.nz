@@ -9,8 +9,8 @@ export default function Projects() {
   return (
     <>
       <ContentHeader>Projects</ContentHeader>
-      <ScrollArea className="h-[calc(100vh-180px)]">
-        <div className="grid grid-cols-1">
+      <ScrollArea className="h-full">
+        <div className="grid grid-cols-1 mb-20">
           {Object.entries(projects).map(([classification, projects]) => (
             <div key={classification} className="mx-5">
               <Typography

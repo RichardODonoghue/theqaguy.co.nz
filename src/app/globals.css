@@ -104,11 +104,10 @@ h5 {
 }
 
 .static-render {
-  @apply p-5 bg-slate-700/30 rounded-sm;
+  @apply p-5 rounded-sm overflow-clip;
 }
 
 .ProseMirror {
-  overflow: auto;
   @apply p-5;
 }
 

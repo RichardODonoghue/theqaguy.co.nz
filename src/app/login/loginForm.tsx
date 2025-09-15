@@ -43,7 +43,7 @@ export const LoginForm = () => {
           id="email"
           name="email"
           required
-          className="block mx-auto mt-2 p-2 border border-gray-300 rounded-md bg-slate-500/30"
+          className="block mx-auto mt-2 p-2 border border-secondary rounded-md bg-slate-500/60"
         />
       </div>
       <div className="p-4">
@@ -55,7 +55,7 @@ export const LoginForm = () => {
           id="password"
           name="password"
           required
-          className="block mx-auto mt-2 p-2 border border-gray-300 rounded-md bg-slate-500/30"
+          className="block mx-auto mt-2 p-2 border border-secondary rounded-md bg-slate-500/60"
         />
       </div>
       <Button type="submit" className=" mt-4">

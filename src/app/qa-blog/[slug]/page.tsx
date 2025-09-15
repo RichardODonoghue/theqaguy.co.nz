@@ -14,7 +14,7 @@ export default async function Blog({ params }: BlogPageProps) {
     return (
       <>
         <ContentHeader>QA_Blog</ContentHeader>
-        <ScrollArea className="h-[calc(100vh-140px)]">
+        <ScrollArea className="h-full">
           <StaticRenderer content={JSON.parse(blog.contents)} />
         </ScrollArea>
       </>
