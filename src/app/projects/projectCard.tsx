@@ -6,6 +6,63 @@ import { Typography } from '@/components/ui/typography';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+const ProjectDialog = ({ project }: { project: Project }) => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="default" className="w-full">
+          Learn More
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="backdrop-blur-2xl">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-extrabold">
+            {project.name}
+          </DialogTitle>
+          <span className="inline text-md font-semibold">
+            Development Stage:{' '}
+            <strong
+              className={
+                project.status === 'development'
+                  ? 'text-yellow-400'
+                  : 'text-green-400'
+              }
+            >
+              {project.status}
+            </strong>
+          </span>
+          <pre className="whitespace-pre-line text-lg text-indigo-50">
+            {project.description}
+          </pre>
+        </DialogHeader>
+        <DialogFooter>
+          {project.technologies && (
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="bg-secondary text-white px-2 py-1 rounded-xl"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <Card
@@ -41,9 +98,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         )}
       </div>
       <div>
-        <Button variant="default" className="w-full">
-          Learn More
-        </Button>
+        <ProjectDialog project={project} />
       </div>
     </Card>
   );

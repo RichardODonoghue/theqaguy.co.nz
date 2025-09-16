@@ -27,7 +27,7 @@ export default async function BlogsPage() {
           Welcome to the QA_Blog!
         </Typography>
         <Typography
-          variant="4xl/normal"
+          variant="2xl/normal"
           className="bg-slate-700/30 rounded-lg py-4 w-auto"
         >
           Here I will regularly share my experiences, thoughts, tips and tricks
