@@ -25,9 +25,9 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
           <CldImage
             src={blog.image || 'theqaguy.co.nz/blog/fallback_wdpalc'}
             width={300}
-            height={100}
+            height={200}
             alt="Blog Thumbnail"
-            crop="scale"
+            crop="fit"
             className="rounded-sm w-full mb-5"
           />
           <Typography variant="2xl/bold" as="h2" className="text-left">
