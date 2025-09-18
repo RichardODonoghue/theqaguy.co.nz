@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/playwright:v1.53.1-noble AS builder
 
 WORKDIR /app
 
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 
 COPY package*.json ./
 
