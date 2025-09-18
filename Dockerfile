@@ -2,26 +2,25 @@ FROM mcr.microsoft.com/playwright:v1.53.1-noble AS builder
 
 WORKDIR /app
 
-ENV NODE_ENV=production
+# Build stage needs dev deps (Tailwind/PostCSS/TypeScript)
+ENV NODE_ENV=development
+ENV NPM_CONFIG_PRODUCTION=false
 
 COPY package*.json ./
-
-RUN npm install -g npm@latest
-
 RUN npm ci
 
+# Copy source after deps to leverage cache
 COPY . .
 
-ARG DATABASE_URL
-ENV DATABASE_URL=${DATABASE_URL}
-
+# Only codegen that doesn't need DB credentials
 RUN npx prisma generate --schema=./prisma/schema.prisma
 
-RUN npx prisma db push
-
+# Build Next.js
 RUN npm run build
 
+# Slim node_modules for runtime
 RUN npm prune --omit=dev
+
 
 FROM mcr.microsoft.com/playwright:v1.53.1-noble AS runner
 
@@ -31,6 +30,11 @@ ENV NODE_ENV=production
 
 COPY --from=builder /app ./
 
-EXPOSE 3000
+# Optional: run DB migrations at startup (uses runtime env DATABASE_URL)
+# see entrypoint script below
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
+EXPOSE 3000
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["npm", "start"]
