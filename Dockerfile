@@ -2,6 +2,8 @@ FROM mcr.microsoft.com/playwright:v1.53.1-noble AS builder
 
 WORKDIR /app
 
+ENV NODE_ENV=development
+
 COPY package*.json ./
 
 RUN npm install -g npm@latest
@@ -18,6 +20,8 @@ RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npx prisma db push
 
 RUN npm run build
+
+RUN npm prune --omit=dev
 
 FROM mcr.microsoft.com/playwright:v1.53.1-noble AS runner
 
