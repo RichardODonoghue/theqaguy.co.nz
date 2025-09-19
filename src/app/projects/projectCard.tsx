@@ -40,7 +40,7 @@ const ProjectDialog = ({ project }: { project: Project }) => {
               {project.status}
             </strong>
           </span>
-          <pre className="whitespace-pre-line text-lg text-indigo-50">
+          <pre className="whitespace-pre-line text-sm md:text-lg text-indigo-50">
             {project.description}
           </pre>
         </DialogHeader>
@@ -50,7 +50,7 @@ const ProjectDialog = ({ project }: { project: Project }) => {
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="bg-secondary text-white px-2 py-1 rounded-xl"
+                  className="bg-secondary text-white text-sm md:text-lg px-2 py-1 rounded-xl"
                 >
                   {tech}
                 </span>
@@ -66,7 +66,7 @@ const ProjectDialog = ({ project }: { project: Project }) => {
 export const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <Card
-      width="w-96"
+      width="w-72 md:w-96"
       height="h-auto"
       overrides="mx-auto my-5"
       key={project.name}
