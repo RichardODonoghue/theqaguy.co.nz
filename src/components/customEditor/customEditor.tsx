@@ -7,9 +7,13 @@ import { ScrollArea } from '../ui/scroll-area';
 
 interface EditorProps {
   content: Content;
+  isPublished: boolean;
 }
 
-export const CustomEditor = ({ content = null }: EditorProps) => {
+export const CustomEditor = ({
+  content = null,
+  isPublished = false,
+}: EditorProps) => {
   const editor = useEditor({
     extensions: extensions,
     content: content ? content : '',
@@ -19,7 +23,7 @@ export const CustomEditor = ({ content = null }: EditorProps) => {
 
   return (
     <>
-      {editor && <Toolbar editor={editor} />}
+      {editor && <Toolbar editor={editor} isPublished={isPublished} />}
       <ScrollArea className="h-full">
         <div className="mb-20">
           <EditorContent
