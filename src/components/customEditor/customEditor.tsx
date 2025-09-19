@@ -7,7 +7,7 @@ import { ScrollArea } from '../ui/scroll-area';
 
 interface EditorProps {
   content: Content;
-  isPublished: boolean;
+  isPublished?: boolean;
 }
 
 export const CustomEditor = ({
