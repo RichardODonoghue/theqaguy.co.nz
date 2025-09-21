@@ -99,7 +99,7 @@ h5 {
 }
 
 .tiptap p {
-  @apply text-xl py-2 my-2;
+  @apply text-lg md:text-xl py-2 my-2;
   overflow: auto; /* Ensures paragraphs wrap around floated elements */
 }
 
@@ -112,10 +112,10 @@ h5 {
 }
 
 .tiptap pre {
-  @apply bg-slate-800 p-5 rounded-lg;
+  @apply bg-slate-800 p-2 md:p-5 rounded-lg w-90 md:w-[90%] md:mx-auto font-mono text-xs md:text-sm overflow-x-scroll overflow-hidden;
 }
 .tiptap pre.code-block {
-  @apply relative rounded-md p-4 font-mono text-sm text-white w-[80%] block mx-auto bg-slate-800;
+  @apply relative rounded-md p-4 text-white block;
 }
 
 .tiptap pre.code-block select {
