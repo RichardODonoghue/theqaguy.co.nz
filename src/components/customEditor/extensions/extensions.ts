@@ -23,9 +23,6 @@ const extensions: Extensions = [
     // Pass the lowlight instance so `renderHTML` can use it
     lowlight,
     // Apply the class for styling
-    HTMLAttributes: {
-      class: 'code-block',
-    },
   }),
 ];
 

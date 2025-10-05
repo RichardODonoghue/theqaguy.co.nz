@@ -37,7 +37,7 @@ export default async function BlogsPage() {
           </Typography>
           {noBlogs}
         </div>
-        <div className="grid grid-cols-1 mx-auto my-5 gap-y-5 lg:grid-cols-3 mb-20 lg:justify-items-center">
+        <div className="grid grid-cols-1 mx-auto my-5 gap-y-5 lg:grid-cols-4 mb-20 lg:justify-items-center">
           {blogs}
         </div>
       </ScrollArea>

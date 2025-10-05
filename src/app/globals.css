@@ -66,6 +66,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar entirely */
+  }
 }
 
 /* Styles for WYSWIG Editor */
@@ -103,28 +106,14 @@ h5 {
   overflow: auto; /* Ensures paragraphs wrap around floated elements */
 }
 
-.static-render {
-  @apply p-5 rounded-sm overflow-clip;
-}
-
 .ProseMirror {
   @apply p-5;
 }
 
-.tiptap pre {
-  @apply bg-slate-800 p-2 md:p-5 rounded-lg w-90 md:w-[90%] md:mx-auto font-mono text-xs md:text-sm overflow-x-scroll overflow-hidden;
-}
-.tiptap pre.code-block {
-  @apply relative rounded-md p-4 text-white block;
-}
-
-.tiptap pre.code-block select {
-  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
-}
-
-/* This rule remains the same */
-.tiptap .code-block select {
-  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
+.ProseMirror,
+.tiptap {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .tiptap .hljs-comment,
