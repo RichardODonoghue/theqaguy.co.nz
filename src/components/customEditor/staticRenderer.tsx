@@ -13,5 +13,9 @@ export const StaticRenderer = ({ content }: { content: JSONContent }) => {
     });
   }, [content]);
 
-  return <div className="tiptap static-render flow-root mb-20">{output}</div>;
+  return (
+    <div id="blog" className="tiptap flow-root mb-20 p-2">
+      {output}
+    </div>
+  );
 };

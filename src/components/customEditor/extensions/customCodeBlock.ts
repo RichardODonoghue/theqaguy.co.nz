@@ -14,6 +14,11 @@ export const CustomCodeBlock = CodeBlockLowlight.extend({
     const lowlight = this.options.lowlight;
     const language = node.attrs.language || this.options.defaultLanguage;
 
+    const preAttrs = {
+      ...HTMLAttributes,
+      class: `p-2 overflow-scroll md:p-5 rounded-lg font-mono bg-slate-800 text-xs md:text-sm`,
+    };
+
     // Helper function to convert lowlight's HAST tree to Tiptap's renderHTML format.
     const hastToTiptap = (hastNode: ElementContent): unknown => {
       if (hastNode.type === 'text') {
@@ -37,7 +42,7 @@ export const CustomCodeBlock = CodeBlockLowlight.extend({
 
     // If the language isn't supported, render the code block as plain text.
     if (!language || !lowlight.registered(language)) {
-      return ['pre', HTMLAttributes, ['code', {}, node.textContent]];
+      return ['pre', preAttrs, ['code', {}, node.textContent]];
     }
 
     // Get the highlighted HAST tree from lowlight.
@@ -47,10 +52,10 @@ export const CustomCodeBlock = CodeBlockLowlight.extend({
 
     // Merge the class from HTMLAttributes with the language class.
     const codeAttrs = {
-      class: `language-${language}`,
+      class: `language-${language} text-white p-2`,
     };
 
     // Return the final structure for Tiptap to render.
-    return ['pre', HTMLAttributes, ['code', codeAttrs, ...codeContent]];
+    return ['pre', preAttrs, ['code', codeAttrs, ...codeContent]];
   },
 });

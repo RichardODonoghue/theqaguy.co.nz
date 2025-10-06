@@ -32,7 +32,7 @@ const ProjectDialog = ({ project }: { project: Project }) => {
             Development Stage:{' '}
             <strong
               className={
-                project.status === 'development'
+                project.status === 'Development'
                   ? 'text-yellow-400'
                   : 'text-green-400'
               }
@@ -50,7 +50,7 @@ const ProjectDialog = ({ project }: { project: Project }) => {
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="bg-secondary text-white text-sm md:text-lg px-2 py-1 rounded-xl"
+                  className="bg-secondary text-white text-sm md:text-sm px-2 py-1 rounded-xl"
                 >
                   {tech}
                 </span>
