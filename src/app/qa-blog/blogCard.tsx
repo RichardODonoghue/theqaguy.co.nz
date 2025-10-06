@@ -50,21 +50,21 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
   return (
     <Card
       width="w-80"
-      height="h-80"
+      height="h-90"
       overrides="flex flex-col border-2 border-transparent hover:border-2 hover:border-accent"
     >
       <Link href={`/qa-blog/${blog.slug}`} className="flex flex-col flex-grow">
-        <div>
+        <div className="my-0">
           <CldImage
             src={blog.image || 'theqaguy.co.nz/blog/fallback_wdpalc'}
             width={300}
             height={200}
             alt="Blog Thumbnail"
             crop="fit"
-            className="rounded-sm w-full mb-5"
+            className="rounded-sm w-full mb-5 mt-0 py-0"
           />
           <BlogCardTitle title={blog.title} />
-          <Typography variant="md/normal" as="p" className="text-left p-0">
+          <Typography variant="md/normal" as="p" className="text-left p-0 my-0">
             {blog.summary}
           </Typography>
         </div>

@@ -12,7 +12,7 @@ export default async function BlogsPage() {
   ));
 
   const noBlogs = blogs.length === 0 && (
-    <Typography variant="4xl/normal" className="text-center w-full my-10">
+    <Typography variant="3xl/normal" className="text-center w-full my-10">
       Sorry, there&apos;s nothing here yet.
       <br />I haven&apos;t finished writing! <br />
       <br />
@@ -37,7 +37,7 @@ export default async function BlogsPage() {
           </Typography>
           {noBlogs}
         </div>
-        <div className="grid grid-cols-1 mx-auto my-5 gap-y-5 lg:grid-cols-4 mb-20 lg:justify-items-center">
+        <div className="grid grid-cols-1 mx-auto my-5 gap-y-5 lg:grid-cols-4 mb-20 justify-items-center">
           {blogs}
         </div>
       </ScrollArea>
