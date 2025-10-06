@@ -86,7 +86,7 @@ h5 {
 }
 
 .tiptap h2 {
-  @apply text-2xl sm:text-3xl md:text-4xl;
+  @apply text-xl sm:text-2xl md:text-3xl;
 }
 
 .tiptap h3 {
@@ -102,7 +102,7 @@ h5 {
 }
 
 .tiptap p {
-  @apply text-lg md:text-xl py-2 my-2;
+  @apply md:text-lg py-2 my-2;
   overflow: auto; /* Ensures paragraphs wrap around floated elements */
 }
 
@@ -165,4 +165,13 @@ h5 {
 
 .tiptap .hljs-strong {
   font-weight: 700;
+}
+
+/* 
+  This is a fix to prevent overflow within the tiptap static renderer.
+  This is required because tiptap renders a div with display: table as the parent for all content.
+*/
+div:has(> #blog) {
+  table-layout: fixed;
+  width: 100%;
 }
