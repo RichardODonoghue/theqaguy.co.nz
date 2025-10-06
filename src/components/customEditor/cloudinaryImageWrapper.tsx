@@ -3,32 +3,12 @@
 import { NodeViewWrapper, ReactNodeViewProps } from '@tiptap/react';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
-import { useState } from 'react';
 import { Button } from '../ui/button';
 
 export const CldImageWrapper = (props: ReactNodeViewProps) => {
-  const [imageSize, setImageSize] = useState<'w-1/3' | 'w-2/3' | 'w-full'>(
-    'w-2/3'
-  );
   // Extract attributes from the node
-  const { src, alt, ...rest } = props.node.attrs;
-
-  const handleResize = (size: 'small' | 'medium' | 'large') => {
-    switch (size) {
-      case 'small':
-        setImageSize('w-1/3');
-        break;
-      case 'medium':
-        setImageSize('w-2/3');
-        break;
-      case 'large':
-        setImageSize('w-full');
-        break;
-    }
-    props.updateAttributes({ size: imageSize });
-  };
-
-  console.log(src);
+  const { updateAttributes } = props;
+  const { src, alt, size, ...rest } = props.node.attrs;
 
   return (
     <NodeViewWrapper>
@@ -39,7 +19,7 @@ export const CldImageWrapper = (props: ReactNodeViewProps) => {
             width={800}
             height={800}
             alt={alt}
-            className={`${imageSize} mx-auto rounded-sm`}
+            className={`${size} mx-auto rounded-sm`}
             {...rest}
           />
         </TooltipTrigger>
@@ -48,7 +28,7 @@ export const CldImageWrapper = (props: ReactNodeViewProps) => {
             variant="secondary"
             size="sm"
             className="hover:bg-accent hover:cursor-pointer"
-            onClick={() => handleResize('small')}
+            onClick={() => updateAttributes({ size: 'w-1/3' })}
           >
             Small
           </Button>
@@ -56,7 +36,7 @@ export const CldImageWrapper = (props: ReactNodeViewProps) => {
             variant="secondary"
             size="sm"
             className="hover:bg-accent hover:cursor-pointer"
-            onClick={() => handleResize('medium')}
+            onClick={() => updateAttributes({ size: 'w-2/3' })}
           >
             Medium
           </Button>
@@ -64,7 +44,7 @@ export const CldImageWrapper = (props: ReactNodeViewProps) => {
             variant="secondary"
             size="sm"
             className="hover:bg-accent hover:cursor-pointer"
-            onClick={() => handleResize('large')}
+            onClick={() => updateAttributes({ size: 'w-full' })}
           >
             Large
           </Button>
