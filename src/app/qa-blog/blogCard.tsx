@@ -69,25 +69,6 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
           </Typography>
         </div>
         <div className="mt-auto">
-          <div className="py-2">
-            {blog.tags &&
-              blog.tags.map((tag, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="inline-block mx-1 my-2 bg-accent rounded-2xl shadow-2xl shadow-slate-700 px-2 py-0"
-                  >
-                    <Typography
-                      variant="sm/normal"
-                      as="div"
-                      className="text-slate-700 px-2"
-                    >
-                      {tag}
-                    </Typography>
-                  </div>
-                );
-              })}
-          </div>
           <Separator className="my-2" />
           <div className="flex justify-between">
             <Typography variant="sm/normal" as="span" className="">
