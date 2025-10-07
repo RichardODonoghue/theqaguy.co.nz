@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     webpackMemoryOptimizations: true,
     reactCompiler: true,
   },
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 export default nextConfig;

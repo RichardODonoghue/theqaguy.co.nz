@@ -1,5 +1,5 @@
 'use client';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import { Button } from '../ui/button';
@@ -7,7 +7,13 @@ import { createBlog, updateBlogBySlug } from '@/lib/blogs';
 import { redirect, useParams } from 'next/navigation';
 import { ImageUploader } from './imageUploader';
 
-export const Toolbar = ({ editor }: { editor: Editor }) => {
+export const Toolbar = ({
+  editor,
+  isPublished,
+}: {
+  editor: Editor;
+  isPublished: boolean;
+}) => {
   // Read the current editor's state, and re-render the component when it changes
   const editorState = useEditorState({
     editor,
@@ -38,6 +44,8 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
     },
   });
 
+  const [published, setPublished] = useState(isPublished);
+
   const { slug } = useParams<{ slug: string }>();
   const isNewBlog = !slug;
 
@@ -61,7 +69,6 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
       summary: summary,
       slug: newSlug,
       tags: [],
-      image: '',
     };
   };
 
@@ -98,6 +105,15 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
     }
     // Redirect to the blog page after saving
     redirect(`/admin/blog/${blog.slug}`);
+  };
+
+  const handlePublish = async () => {
+    try {
+      await updateBlogBySlug(slug, { published: !published });
+      setPublished(!published);
+    } catch (error) {
+      console.error('Error updating blog:', error);
+    }
   };
 
   return (
@@ -236,6 +252,9 @@ export const Toolbar = ({ editor }: { editor: Editor }) => {
         />
         <ImageUploader slug={slug} preset="qa-blogs" label="Upload Banner" />
         <Button onClick={handleSave}>Save</Button>
+        <Button onClick={handlePublish} disabled={!slug}>
+          {published ? 'Unpublish' : 'Publish'}
+        </Button>
       </div>
     </div>
   );

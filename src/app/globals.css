@@ -66,6 +66,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar entirely */
+  }
 }
 
 /* Styles for WYSWIG Editor */
@@ -83,7 +86,7 @@ h5 {
 }
 
 .tiptap h2 {
-  @apply text-2xl sm:text-3xl md:text-4xl;
+  @apply text-xl sm:text-2xl md:text-3xl;
 }
 
 .tiptap h3 {
@@ -99,32 +102,18 @@ h5 {
 }
 
 .tiptap p {
-  @apply text-xl p-2 m-2;
+  @apply md:text-lg py-2 my-2;
   overflow: auto; /* Ensures paragraphs wrap around floated elements */
-}
-
-.static-render {
-  @apply p-5 rounded-sm overflow-clip;
 }
 
 .ProseMirror {
   @apply p-5;
 }
 
-.tiptap pre {
-  @apply bg-slate-800 p-5 rounded-lg;
-}
-.tiptap pre.code-block {
-  @apply relative rounded-md p-4 font-mono text-sm text-white w-[80%] block mx-auto bg-slate-800;
-}
-
-.tiptap pre.code-block select {
-  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
-}
-
-/* This rule remains the same */
-.tiptap .code-block select {
-  @apply absolute top-2 right-2 rounded-md border border-border bg-muted px-2 py-1 text-xs text-muted-foreground;
+.ProseMirror,
+.tiptap {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .tiptap .hljs-comment,
@@ -176,4 +165,13 @@ h5 {
 
 .tiptap .hljs-strong {
   font-weight: 700;
+}
+
+/* 
+  This is a fix to prevent overflow within the tiptap static renderer.
+  This is required because tiptap renders a div with display: table as the parent for all content.
+*/
+div:has(> #blog) {
+  table-layout: fixed;
+  width: 100%;
 }

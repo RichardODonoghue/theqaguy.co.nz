@@ -1,6 +1,6 @@
-import { ContentHeader } from "@/components/ui/contentHeader";
-import { CustomEditor } from "@/components/customEditor/customEditor";
-import { getBlogBySlug } from "@/lib/blogs";
+import { ContentHeader } from '@/components/ui/contentHeader';
+import { CustomEditor } from '@/components/customEditor/customEditor';
+import { getBlogBySlug } from '@/lib/blogs';
 
 export default async function EditBlog({
   params,
@@ -13,7 +13,12 @@ export default async function EditBlog({
   return (
     <>
       <ContentHeader>Edit_Blog</ContentHeader>
-      {blog && <CustomEditor content={JSON.parse(blog.contents)} />}
+      {blog && (
+        <CustomEditor
+          content={JSON.parse(blog.contents)}
+          isPublished={blog.published}
+        />
+      )}
     </>
   );
 }

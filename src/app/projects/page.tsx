@@ -1,9 +1,9 @@
-import { ContentHeader } from "@/components/ui/contentHeader";
+import { ContentHeader } from '@/components/ui/contentHeader';
 
-import { Typography } from "@/components/ui/typography";
-import { projects } from "@/constants/projects";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { ProjectCard } from "./projectCard";
+import { Typography } from '@/components/ui/typography';
+import { projects } from '@/constants/projects';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { ProjectCard } from './projectCard';
 
 export default function Projects() {
   return (
@@ -16,11 +16,11 @@ export default function Projects() {
               <Typography
                 variant="3xl/bold"
                 as="h2"
-                className="text-left md:my-5"
+                className="text-center md:my-5"
               >
                 {classification}
               </Typography>
-              <div className="grid lg:grid-cols-2">
+              <div className="grid lg:grid-cols-3">
                 {projects.map((project) => (
                   <ProjectCard key={project.name} project={project} />
                 ))}

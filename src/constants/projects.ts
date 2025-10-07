@@ -3,7 +3,7 @@ type Classification = 'Software' | 'Other';
 export interface Project {
   name: string;
   description: string;
-  status: 'development' | 'complete';
+  status: 'Development' | 'Complete';
   technologies?: string[];
   image: string;
   url?: string;
@@ -13,8 +13,12 @@ export const projects: Record<Classification, Project[]> = {
   Software: [
     {
       name: 'theqaguy.co.nz',
-      description:
-        "My own personal website to blog about the world of software quality assurance, share some projects I am working on and tell the internet and potential employers about me! If you're on this page, you're probably viewing this project right now.. ",
+      description: `My Personal website to tell the world a bit about me and blog about software quality assurance.
+      
+      The site features a WYSIWIG editor and static renderer built from TipTap, with various extensions such as highlighted code blocks and image upload to provide the richest content possible.
+      
+      As a fun gimmic I also set up a button on the home page that allows a user to run an automated testsuite on the website. Try it out if you haven't already.
+`,
       technologies: [
         'Typescript',
         'Next.js',
@@ -28,16 +32,18 @@ export const projects: Record<Classification, Project[]> = {
       ],
       image: '/projects/qaguy.png',
       url: 'https://theqaguy.co.nz/',
-      status: 'complete',
+      status: 'Complete',
     },
     {
       name: 'MDR Terminal',
-      description:
-        "After binge watching Severance with my wife, I couldn't help but try to build my own spin on the MDR terminal.",
+      description: `After binge watching Severance with my wife, I couldn't help but try to build my own spin on the MDR terminal.
+        
+         While I consider this to be complete, there are some features I would like to revisit in the future such as adding a proper algorithm for detetecting valid/invalid data in selected clusters.
+        `,
       technologies: ['Typescript', 'React', 'Vite', 'Tailwind CSS'],
       image: '/projects/mdr.png',
       url: 'https://macro-data-refinement.theqaguy.co.nz/',
-      status: 'complete',
+      status: 'Complete',
     },
     {
       name: 'Massage+ByTheSquare',
@@ -53,7 +59,15 @@ export const projects: Record<Classification, Project[]> = {
       ],
       image: '',
       url: '',
-      status: 'development',
+      status: 'Development',
+    },
+    {
+      name: 'ETextToZen',
+      description: `A Zendesk plugin that integrates with Spark's E-Text service, allowing users to send text messages to customers within support tickets`,
+      technologies: ['Javascript', 'Zendesk API'],
+      image: '',
+      url: '',
+      status: 'Complete',
     },
   ],
   Other: [
@@ -63,7 +77,7 @@ export const projects: Record<Classification, Project[]> = {
         'Building a hobbiest racecar is an expensive endeavour. The most costly part often being engine management. Luckily for me there are some incredibly talented people that have made opensource daughter boards and fimrware for Arduino boards to control engines',
       image: '/projects/echo.png',
       technologies: ['speeduino', 'arduino', 'tunerstudio'],
-      status: 'development',
+      status: 'Development',
     },
   ],
 };
