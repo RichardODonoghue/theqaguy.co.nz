@@ -2,6 +2,7 @@
 
 import { NodeViewWrapper, ReactNodeViewProps } from '@tiptap/react';
 import Image from 'next/image';
+import { cloudinaryURL } from '@/constants/constants';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 import { Button } from '../ui/button';
 
@@ -15,7 +16,7 @@ export const CldImageWrapper = (props: ReactNodeViewProps) => {
       <Tooltip>
         <TooltipTrigger className="w-full">
           <Image
-            src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/${src}`}
+            src={`${cloudinaryURL}${src}`}
             width={800}
             height={800}
             alt={alt}
