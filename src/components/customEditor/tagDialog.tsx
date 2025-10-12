@@ -26,7 +26,13 @@ export const TagDialog = ({
   };
 
   const saveTags = async () => {
-    await updateBlogBySlug(blogSlug, { tags });
+    try {
+      await updateBlogBySlug(blogSlug, { tags });
+      // Optionally show success message
+    } catch (error) {
+      console.error('Failed to update tags:', error);
+      // Show error message to user
+    }
   };
 
   return (
@@ -45,7 +51,7 @@ export const TagDialog = ({
             type="text"
             placeholder="Enter tags..."
             className="w-full p-2 border rounded-md"
-            value={tags.toString()}
+            value={tags.join(', ')}
             onChange={onTagChange}
           />
           <DialogFooter className="w-full mx-auto my-2">

@@ -19,8 +19,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'TheQAGuy',
-  description: "Personal website - Richard O'Donoghue",
+  title: "Richard O'Donoghue | QA Engineer",
+  description: "Personal website of Richard O'Donoghue | QA Engineer",
+  keywords: [
+    "Richard O'Donoghue",
+    'QA Engineer',
+    'Quality Assurance',
+    'Software Testing',
+    'Automation',
+    'SDET',
+    'Cypress',
+    'Playwright',
+    'Selenium',
+    'JavaScript',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js',
+    'Blog',
+    'ISTQB',
+  ],
+  authors: [{ name: "Richard O'Donoghue", url: 'https://theqaguy.co.nz' }],
+  creator: "Richard O'Donoghue",
+  openGraph: {
+    title: "Richard O'Donoghue | QA Engineer",
+    description: "Personal website of Richard O'Donoghue | QA Engineer",
+    url: 'https://theqaguy.co.nz',
+    siteName: "Richard O'Donoghue | QA Engineer",
+    images: ['/theqaguy.png'],
+  },
 };
 
 export default async function RootLayout({

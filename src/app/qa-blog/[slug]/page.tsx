@@ -1,3 +1,6 @@
+import type { Metadata } from 'next';
+import { unstable_cache } from 'next/cache';
+import { cloudinaryURL } from '@/constants/constants';
 import { getBlogBySlug } from '@/lib/blogs';
 import { ContentHeader } from '@/components/ui/contentHeader';
 import { StaticRenderer } from '@/components/customEditor/staticRenderer';
@@ -9,9 +12,62 @@ interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
 
+const getCachedBlog = unstable_cache(
+  async (slug: string) => getBlogBySlug(slug),
+  ['blog-by-slug'],
+  { revalidate: 300, tags: ['blog'] }
+);
+
+export async function generateMetadata({
+  params,
+}: BlogPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const blog = await getCachedBlog(slug);
+
+  if (!blog) {
+    return {
+      title: 'Blog Not Found',
+      description: 'The requested blog could not be found.',
+    };
+  }
+
+  const blogImage = blog.image
+    ? `${cloudinaryURL}${blog.image}`
+    : `${cloudinaryURL}/theqaguy.co.nz/blog/fallback_wdpalc`;
+
+  return {
+    title: blog.title,
+    description: blog.summary || 'Read this blog post on theqaguy.co.nz.',
+    keywords: blog.tags.join(', '),
+    openGraph: {
+      title: blog.title,
+      description: blog.summary || 'Read this blog post on theqaguy.co.nz.',
+      type: 'article',
+      publishedTime: new Date(blog.createdAt).toISOString(),
+      modifiedTime: new Date(blog.updatedAt).toISOString(),
+      url: `https://theqaguy.co.nz/qa-blog/${blog.slug}`,
+      images: [
+        {
+          url: blogImage,
+          width: 800,
+          height: 600,
+          alt: blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.summary || 'Read this blog post on TheQAGuy.',
+      images: [blogImage],
+    },
+  };
+}
+
 export default async function Blog({ params }: BlogPageProps) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const blog = await getCachedBlog(slug);
 
   if (blog)
     return (
