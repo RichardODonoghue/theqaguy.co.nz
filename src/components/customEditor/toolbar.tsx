@@ -6,13 +6,16 @@ import { Button } from '../ui/button';
 import { createBlog, updateBlogBySlug } from '@/lib/blogs';
 import { redirect, useParams } from 'next/navigation';
 import { ImageUploader } from './imageUploader';
+import { TagDialog } from './tagDialog';
 
 export const Toolbar = ({
   editor,
   isPublished,
+  tags,
 }: {
   editor: Editor;
   isPublished: boolean;
+  tags: string[];
 }) => {
   // Read the current editor's state, and re-render the component when it changes
   const editorState = useEditorState({
@@ -68,7 +71,6 @@ export const Toolbar = ({
       title: title,
       summary: summary,
       slug: newSlug,
-      tags: [],
     };
   };
 
@@ -255,6 +257,7 @@ export const Toolbar = ({
         <Button onClick={handlePublish} disabled={!slug}>
           {published ? 'Unpublish' : 'Publish'}
         </Button>
+        <TagDialog blogSlug={slug} blogTags={tags} />
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ export type Blog = {
   published?: boolean;
   tags?: string[];
   createdAt?: Date;
+  updatedAt?: Date;
 };
 
 // TODO add error handler

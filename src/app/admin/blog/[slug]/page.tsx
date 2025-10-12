@@ -17,6 +17,7 @@ export default async function EditBlog({
         <CustomEditor
           content={JSON.parse(blog.contents)}
           isPublished={blog.published}
+          tags={blog.tags}
         />
       )}
     </>
