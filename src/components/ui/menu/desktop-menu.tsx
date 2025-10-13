@@ -19,7 +19,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
             alt="theqaguy"
             width="250"
             height="250"
-            className="rounded-lg"
+            className="rounded-lg mx-auto"
           />
         </Link>
         <Separator className="my-10" />
