@@ -61,7 +61,7 @@ const updateBlogBySlug = async (slug: string, blog: Partial<Blog>) => {
     where: {
       slug: slug,
     },
-    data: blog,
+    data: { ...blog, updatedAt: new Date() },
   });
 
   return updatedBlog;
