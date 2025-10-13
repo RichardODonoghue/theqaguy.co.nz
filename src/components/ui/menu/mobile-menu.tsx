@@ -24,9 +24,9 @@ export const MobileMenu = ({ menuItems }: MenuProps) => {
             <Image
               src="/theqaguy.png"
               alt="theqaguy"
-              width="300"
+              width="200"
               height="200"
-              className="rounded-lg"
+              className="rounded-lg mx-auto"
             />
           </Link>
           <Separator className="my-5" />
