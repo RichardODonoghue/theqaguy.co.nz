@@ -76,6 +76,9 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate --schema=./prisma/schema.prisma
 
+      - name: Push Prisma Schema
+        run: npx prisma db push --schema=./prisma/schema.prisma
+
       - name: Seed database
         run: npx tsx prisma/seed_blogs.ts
 
