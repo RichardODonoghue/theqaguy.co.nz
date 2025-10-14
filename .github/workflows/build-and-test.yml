@@ -56,11 +56,11 @@ jobs:
       DATABASE_URL: postgres://postgres:password@localhost:5432/theqaguy
       REDIS_URL: redis://localhost:6379
       BASE_URL: http://localhost:3000
-      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: $NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{vars.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}}
       NEXT_PUBLIC_CLOUDINARY_API_KEY: ${{secrets.NEXT_PUBLIC_CLOUDINARY_API_KEY}}
       CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
       BETTER_AUTH_SECRET: ${{secrets.BETTER_AUTH_SECRET}}
-      ADMIN_EMAIL: $ADMIN_EMAIL
+      ADMIN_EMAIL: ${{vars.ADMIN_EMAIL}}
       ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
 
     steps:
@@ -77,7 +77,7 @@ jobs:
         run: npx prisma generate --schema=./prisma/schema.prisma
 
       - name: Seed database
-        run: npx prisma/seed_blogs.ts
+        run: npx tsx prisma/seed_blogs.ts
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
