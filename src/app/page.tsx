@@ -8,9 +8,9 @@ export default function Home() {
       <ContentHeader>HelloWorld</ContentHeader>
       <div
         id="hero"
-        className="flex flex-col items-center justify-center text-center min-h-[60vh] md:min-h-0 md:block md:p-60"
+        className="flex flex-col items-center justify-center text-center min-h-[60vh] md:min-h-0 md:block md:p-60 fade-in"
       >
-        <Typography variant="7xl/extrabold" as="h1" className="">
+        <Typography variant="7xl/extrabold" as="h1">
           I&apos;m <span className="text-accent">Richard</span>
         </Typography>
         <Typography variant="5xl/extrabold" as="h2">

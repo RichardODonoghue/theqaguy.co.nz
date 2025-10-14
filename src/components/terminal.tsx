@@ -64,6 +64,7 @@ export const Terminal = () => {
           numberOfPieces={500}
           recycle={false}
           data-testid="confetti-canvas"
+          className="w-full"
         />
       )}
       <div className="fixed inset-0 flex flex-col justify-end items-center p-10">
