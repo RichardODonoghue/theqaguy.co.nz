@@ -13,7 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Cache the full production build
       - name: Restore Next build (artifact cache)
         id: next-build-cache
         uses: actions/cache@v4
@@ -31,17 +30,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build application
-        if: steps.next-build-cache.outputs.cache-hit != 'true'
-        run: npm run build
+      # Ensure a production build exists; build only if missing
+      - name: Ensure Next production build
+        run: |
+          if [ ! -f ".next/BUILD_ID" ]; then
+            echo "No .next build found, running next build..."
+            npm run build
+          else
+            echo "Using restored .next build"
+          fi
 
-      # Upload the production build for reuse in the test job
       - name: Upload Next build artifact
         uses: actions/upload-artifact@v4
         with:
           name: next-build
-          path: |
-            .next
+          path: .next
           if-no-files-found: error
 
   test:
