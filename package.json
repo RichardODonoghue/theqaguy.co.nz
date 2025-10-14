@@ -60,7 +60,6 @@
     "tw-animate-css": "^1.3.4",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4",
-    "wait-on": "^9.0.1"
+    "vitest": "^3.2.4"
   }
 }
