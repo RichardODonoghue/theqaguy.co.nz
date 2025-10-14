@@ -13,11 +13,11 @@ export const projects: Record<Classification, Project[]> = {
   Software: [
     {
       name: 'theqaguy.co.nz',
-      description: `My Personal website to tell the world a bit about me and blog about software quality assurance.
+      description: `My Personal website to share a bit about me and blog about software quality assurance.
       
       The site features a WYSIWIG editor and static renderer built from TipTap, with various extensions such as highlighted code blocks and image upload to provide the richest content possible.
       
-      As a fun gimmic I also set up a button on the home page that allows a user to run an automated testsuite on the website. Try it out if you haven't already.
+      As a fun gimmic I also set up a button on the home page that allows a user to run an automated test suite on the website. Try it out if you haven't already.
 `,
       technologies: [
         'Typescript',
@@ -57,7 +57,7 @@ export const projects: Record<Classification, Project[]> = {
         'Tailwind CSS',
         'Playwright',
       ],
-      image: '',
+      image: '/projects/MassageLogo.svg',
       url: '',
       status: 'Development',
     },
@@ -73,8 +73,12 @@ export const projects: Record<Classification, Project[]> = {
   Other: [
     {
       name: 'The Open Source Racecar',
-      description:
-        'Building a hobbiest racecar is an expensive endeavour. The most costly part often being engine management. Luckily for me there are some incredibly talented people that have made opensource daughter boards and fimrware for Arduino boards to control engines',
+      description: `Building a hobbiest racecar is an expensive endeavour with one of the most expensive parts being engine management.
+         Luckily for me there are some incredibly talented people that have made opensource daughter boards and fimrware for the Arduino Mega 2560 to control engines.
+
+         This is a requirement for the build as the car has been turbocharged and the standard Toyota ECU cannot be reflashed to run the required fueling and ignition maps.
+
+         All the fabrication and plumbing work has been done for the car and it has run on a basic tune using the speeduino firmware. All that remains is to tidy up the wiring harness and dial in the car.`,
       image: '/projects/echo.png',
       technologies: ['speeduino', 'arduino', 'tunerstudio'],
       status: 'Development',

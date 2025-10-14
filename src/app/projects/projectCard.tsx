@@ -93,7 +93,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
             alt={project.name}
             width={400}
             height={400}
-            className="my-2 object-contain"
+            className="my-2 object-contain w-100 h-50"
           />
         )}
       </div>
