@@ -13,14 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/cache@v4
+      # Cache the full production build
+      - name: Restore Next build (artifact cache)
+        id: next-build-cache
+        uses: actions/cache@v4
         with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          path: .next
+          key: ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}-
 
       - uses: actions/setup-node@v4
         with:
@@ -29,8 +30,19 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
       - name: Build application
+        if: steps.next-build-cache.outputs.cache-hit != 'true'
         run: npm run build
+
+      # Upload the production build for reuse in the test job
+      - name: Upload Next build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: |
+            .next
+          if-no-files-found: error
 
   test:
     runs-on: ubuntu-latest
@@ -77,15 +89,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -106,9 +109,17 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Download Next build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: next-build
+          path: .
+
+      # Start app and wait without npx (curl loop)
       - name: Start Application
-        run: npm run start & \
-          npx wait-on http://localhost:3000
+        run: |
+          npm run start &
+          until curl -sSf http://localhost:3000 > /dev/null; do sleep 1; done
 
       - name: Setup Admin User
         run: curl --location 'http://localhost:3000/api/initialize?secret=${BETTER_AUTH_SECRET}'
