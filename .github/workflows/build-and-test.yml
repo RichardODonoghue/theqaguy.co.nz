@@ -1,0 +1,98 @@
+name: Build and Test Application
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Build application
+        run: npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: theqaguy
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+      valkey:
+        image: valkey/valkey:latest
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="valkey-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      DATABASE_URL: postgres://postgres:password@localhost:5432/theqaguy
+      REDIS_URL: redis://localhost:6379
+      BASE_URL: http://localhost:3000
+      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: $NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+      NEXT_PUBLIC_CLOUDINARY_API_KEY: ${{secrets.NEXT_PUBLIC_CLOUDINARY_API_KEY}}
+      CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
+      BETTER_AUTH_SECRET: ${{secrets.BETTER_AUTH_SECRET}}
+      ADMIN_EMAIL: $ADMIN_EMAIL
+      ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate --schema=./prisma/schema.prisma
+
+      - name: Seed database
+        run: npx prisma/seed_blogs.ts
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Start Application
+        run: npm run dev & \
+          npx wait-on http://localhost:3000
+
+      - name: Setup Admin User
+        run: curl --location 'http://localhost:3000/api/initialize?secret=${BETTER_AUTH_SECRET}'
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
