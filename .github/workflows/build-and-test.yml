@@ -92,7 +92,7 @@ jobs:
           until curl -sSf http://localhost:3000 > /dev/null; do sleep 1; done
 
       - name: Setup Admin User
-        run: curl --location 'http://localhost:3000/api/initialize?secret=${BETTER_AUTH_SECRET}'
+        run: curl --fail --show-error "http://localhost:3000/api/initialize?secret=${BETTER_AUTH_SECRET}"
 
       - name: Run Playwright tests
         run: npx playwright test
