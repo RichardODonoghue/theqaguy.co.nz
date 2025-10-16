@@ -16,19 +16,21 @@ export const projects: Record<Classification, Project[]> = {
       description: `My Personal website to share a bit about me and blog about software quality assurance.
       
       The site features a WYSIWIG editor and static renderer built from TipTap, with various extensions such as highlighted code blocks and image upload to provide the richest content possible.
-      
+
       As a fun gimmic I also set up a button on the home page that allows a user to run an automated test suite on the website. Try it out if you haven't already.
 `,
       technologies: [
         'Typescript',
         'Next.js',
         'ShadCN',
-        'Vitest',
         'Playwright',
         'Tailwind CSS',
         'Prisma ORM',
         'PostgreSQL',
         'Redis',
+        'Docker',
+        'Github Actions',
+        'Coolify',
       ],
       image: '/projects/qaguy.png',
       url: 'https://theqaguy.co.nz/',
@@ -60,14 +62,6 @@ export const projects: Record<Classification, Project[]> = {
       image: '/projects/MassageLogo.svg',
       url: '',
       status: 'Development',
-    },
-    {
-      name: 'ETextToZen',
-      description: `A Zendesk plugin that integrates with Spark's E-Text service, allowing users to send text messages to customers within support tickets`,
-      technologies: ['Javascript', 'Zendesk API'],
-      image: '',
-      url: '',
-      status: 'Complete',
     },
   ],
   Other: [
