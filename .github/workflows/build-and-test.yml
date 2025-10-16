@@ -45,6 +45,7 @@ jobs:
       BETTER_AUTH_SECRET: ${{secrets.BETTER_AUTH_SECRET}}
       ADMIN_EMAIL: ${{vars.ADMIN_EMAIL}}
       ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
+      HUSKY: 0
 
     steps:
       - uses: actions/checkout@v4
