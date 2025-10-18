@@ -104,14 +104,14 @@ export default function AboutMe() {
       <ContentHeader>AboutMe</ContentHeader>
       <ScrollArea className="h-full">
         <div className="pr-4 mb-20">
-          <section className=" mx-5 ">
+          <section aria-labelledby="about-me-bio" className="mx-5">
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
             {bioContent}
           </section>
           <Separator className="my-10" />
-          <section className="mx-5">
+          <section aria-labelledby="about-me-technologies" className="mx-5">
             <div className="">
               <Typography variant="3xl/extrabold" className="my-8" as="h3">
                 Technologies I have experience with

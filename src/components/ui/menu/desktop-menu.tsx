@@ -23,23 +23,25 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
           />
         </Link>
         <Separator className="my-10" />
-        <ul className="flex flex-col space-y-2">
-          {menuItems.map((item: MenuItem, index) => (
-            <li key={index} className="my-4 w-40">
-              <Link
-                href={item.href}
-                className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
-                aria-label={`Navigate to ${item.label}`}
-              >
-                <div className="inline-block">
-                  <Typography variant="2xl/medium">{item.label}</Typography>
-                  {pathname === item.href && (
-                    <div className="bg-accent h-1 mt-1" />
-                  )}
-                </div>
-              </Link>
-            </li>
-          ))}
+        <div className="flex flex-col space-y-2">
+          <ul>
+            {menuItems.map((item: MenuItem, index) => (
+              <li key={index} className="my-4 w-40">
+                <Link
+                  href={item.href}
+                  className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+                  aria-label={`Navigate to ${item.label}`}
+                >
+                  <div className="inline-block">
+                    <Typography variant="2xl/medium">{item.label}</Typography>
+                    {pathname === item.href && (
+                      <div className="bg-accent h-1 mt-1" />
+                    )}
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
           <Separator className="my-10" />
           <Link
             href="https://github.com/RichardODonoghue"
@@ -96,7 +98,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
               </Typography>
             </div>
           </Link>
-        </ul>
+        </div>
       </nav>
     </div>
   );

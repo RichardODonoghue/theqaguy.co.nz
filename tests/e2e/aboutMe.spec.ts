@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import config from '../../playwright.config';
 import { technologies } from '@/constants/technologies';
 import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
+import AxeBuilder from '@axe-core/playwright';
 
 const baseURL = config.use?.baseURL as string;
 
@@ -66,5 +67,10 @@ test.describe('About Me Page', () => {
         await expect(page.locator(`img[alt="${item.name}"]`)).toBeVisible();
       }
     }
+  });
+
+  test('Accessibility Audit', async ({ page }) => {
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    expect(accessibilityScanResults.violations).toEqual([]);
   });
 });

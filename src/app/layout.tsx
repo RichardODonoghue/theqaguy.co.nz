@@ -66,13 +66,17 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Skip link for keyboard users */}
+        <a href="#main-content" className="sr-only focus:not-sr-only">
+          Skip to content
+        </a>
         <Background />
-        <div className="flex">
+        <main id="main-content" role="main" className="flex">
           <SidebarProvider defaultOpen={false}>
             <Menu isMobile={isMobile} />
             <Container>{children}</Container>
           </SidebarProvider>
-        </div>
+        </main>
       </body>
     </html>
   );
