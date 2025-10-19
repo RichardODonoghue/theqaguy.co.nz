@@ -37,7 +37,9 @@ test.describe('About Me Page', () => {
   });
 
   test('Verify AboutMe page content', async ({ page }) => {
-    await expect(page.locator('_react=ContentHeader')).toHaveText('<AboutMe/>');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+      '<AboutMe/>'
+    );
     await expect(page.getByRole('heading', { name: 'Bio' })).toBeVisible();
     await expect(page.getByTestId('about-me-blurb')).toHaveText(aboutMeBlurb);
 
