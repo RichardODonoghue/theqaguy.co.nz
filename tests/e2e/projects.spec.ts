@@ -53,7 +53,7 @@ test.describe(() => {
   });
 
   test('Verify Projects Page Content', async ({ page }) => {
-    await expect(page.locator('_react=ContentHeader')).toHaveText(
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
       '<Projects/>'
     );
 
