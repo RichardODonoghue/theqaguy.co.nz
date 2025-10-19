@@ -5,6 +5,51 @@ import { getPublishedBlogs } from '@/lib/blogs';
 import { BlogCard } from './blogCard';
 import { Typography } from '@/components/ui/typography';
 
+export async function generateMetadata() {
+  return {
+    title: 'The QA Blog | The QA Guy',
+    description:
+      'Shared experiences, tips and insights on software testing and quality assurance.',
+    keywords: [
+      'QA Blog',
+      'Software Testing',
+      'Quality Assurance',
+      'Test Automation',
+      'Testing Tips',
+      'QA Insights',
+      'Software Quality',
+      'Testing Strategies',
+      'Bug Reporting',
+      'Test Management',
+      'Agile Testing',
+      'Performance Testing',
+      'Security Testing',
+      'Manual Testing',
+      'Continuous Integration',
+      'DevOps',
+      'Test Frameworks',
+      'QA Best Practices',
+      'Software Development',
+      'Quality Engineering',
+      'Test Automation Tools',
+    ],
+    openGraph: {
+      title: 'The QA Blog | The QA Guy',
+      description:
+        'Shared experiences, tips and insights on software testing and quality assurance.',
+      url: '/qa-blog',
+      images: [
+        {
+          url: '/theqaguy.png',
+          width: 1200,
+          height: 630,
+          alt: 'The QA Blog | The QA Guy',
+        },
+      ],
+    },
+  };
+}
+
 const fetchPublishedBlogs = unstable_cache(
   async () => getPublishedBlogs(),
   ['published-blogs'],

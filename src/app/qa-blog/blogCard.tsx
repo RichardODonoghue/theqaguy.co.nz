@@ -53,6 +53,7 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
       width="w-80"
       height="h-90"
       overrides="flex flex-col border-2 border-transparent hover:border-2 hover:border-accent"
+      data-testid={`blog-card-${blog.slug}`}
     >
       <Link href={`/qa-blog/${blog.slug}`} className="flex flex-col flex-grow">
         <div className="my-0">
@@ -65,14 +66,19 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
             className="rounded-sm w-full mb-5 mt-0 py-0"
           />
           <BlogCardTitle title={blog.title} />
-          <Typography variant="md/normal" as="p" className="text-left p-0 my-0">
+          <Typography
+            id="blog-summary"
+            variant="md/normal"
+            as="p"
+            className="text-left p-0 my-0"
+          >
             {blog.summary}
           </Typography>
         </div>
         <div className="mt-auto">
           <Separator className="my-2" />
           <div className="flex justify-between">
-            <Typography variant="sm/normal" as="span" className="">
+            <Typography id="blog-published-date" variant="sm/normal" as="span">
               Posted {formattedDate}
             </Typography>
           </div>
