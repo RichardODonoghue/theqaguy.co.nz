@@ -1,11 +1,26 @@
 import { ContentHeader } from '@/components/ui/contentHeader';
+import { unstable_cache } from 'next/cache';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getPublishedBlogs } from '@/lib/blogs';
 import { BlogCard } from './blogCard';
 import { Typography } from '@/components/ui/typography';
 
+const fetchPublishedBlogs = unstable_cache(
+  async () => getPublishedBlogs(),
+  ['published-blogs'],
+  { revalidate: 300, tags: ['blog'] }
+);
+
 export default async function BlogsPage() {
-  const blogsData = await getPublishedBlogs();
+  const blogsJSON = await fetchPublishedBlogs();
+
+  // Because of how unstable_cache works, the dates are mutated into strings,
+  //  so we need to convert them back to date objects
+  const blogsData = blogsJSON.map((blog) => ({
+    ...blog,
+    createdAt: blog.createdAt ? new Date(blog.createdAt) : undefined,
+    updatedAt: blog.updatedAt ? new Date(blog.updatedAt) : undefined,
+  }));
 
   const blogs = blogsData.map((blog) => (
     <BlogCard key={blog.slug} blog={blog} />

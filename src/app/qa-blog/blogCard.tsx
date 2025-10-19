@@ -45,6 +45,7 @@ const BlogCardTitle = ({ title }: { title: string }) => {
 };
 
 export const BlogCard = ({ blog }: BlogCardProps) => {
+  // TODO: Implement published date instead.
   const formattedDate = blog.createdAt?.toDateString();
 
   return (
