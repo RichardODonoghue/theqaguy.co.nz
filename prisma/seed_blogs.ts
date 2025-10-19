@@ -8,21 +8,100 @@ const seedBlogs = async () => {
   await prisma.blog.createMany({
     data: [
       {
-        title: 'A Blog About A Fish',
-        slug: 'a-blog-about-a-fish',
-        summary: 'Today we explore the adventures of a fish',
-        contents:
-          '{"type":"doc","content":[{"type":"blogTitle","content":[{"type":"text","text":"Test Blog"}]},{"type":"blogSummary","content":[{"type":"text","text":"A summary for a test blog about testing the editor and static renderer"}]},{"type":"paragraph","content":[{"type":"text","text":"This is a paragraph about testing the tiptap based editor and static renderer. Turns out it was really hard to get this to work properly and it fucking sucks. "}]},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"Below is a codeblock which is hopefully responsive and will not overflow the page. We shall see. "}]},{"type":"paragraph"},{"type":"codeBlock","attrs":{"language":"typescript"},"content":[{"type":"text","text":"export const variable = 0;\n\n// comment\n// asdjfkajsdf;adsjf;asdfjasdjfalsdkf;aklsdfjasdfjlsdkfjasdfladsf;asdjf;lasdjf;adsfjkal;sdfjas;dfjadsl;fjads;fajsldf;asdlfjalsdfja;lsdfjasdl;fj\n\nreturn 1;"}]},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"wow"}]},{"type":"cloudinaryImage","attrs":{"src":"theqaguy.co.nz/blog/ceqfhmpdz1m5qiplg38r","alt":"description","size":"w-2/3"}},{"type":"paragraph"}]}',
+        title: 'A Test Blog',
+        slug: 'a-test-blog',
+        summary: 'A blog used for testing purposes',
+        contents: JSON.stringify({
+          type: 'doc',
+          content: [
+            {
+              type: 'blogTitle',
+              content: [
+                {
+                  type: 'text',
+                  text: 'A Test Blog',
+                },
+              ],
+            },
+            {
+              type: 'blogSummary',
+              content: [
+                {
+                  type: 'text',
+                  text: 'A blog used for testing purposes',
+                },
+              ],
+            },
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: "Yes this is a blog which is used solely for testing the application's blog static renderer and the blog WYSIWYG editor. ",
+                },
+              ],
+            },
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'The editor should be able to add different heading sizes, images, tags and code blocks. ',
+                },
+              ],
+            },
+            {
+              type: 'heading',
+              attrs: {
+                level: 3,
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: 'this is an h3',
+                },
+              ],
+            },
+            {
+              type: 'paragraph',
+            },
+            {
+              type: 'cloudinaryImage',
+              attrs: {
+                src: 'theqaguy.co.nz/blog/qxyrdn9yz0yyll3poeob',
+                alt: 'description',
+                size: 'w-1/3',
+              },
+            },
+            {
+              type: 'paragraph',
+            },
+            {
+              type: 'codeBlock',
+              attrs: {
+                language: 'typescript',
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: "// This is a codeblock \n\nexport default function blog() {\n  console.log('Yep this is a blog');\n}",
+                },
+              ],
+            },
+            {
+              type: 'paragraph',
+            },
+          ],
+        }),
         image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
         published: true,
-        tags: ['fish', 'ocean', 'adventure'],
+        tags: ['testing', 'screaming_internally', 'test'],
       },
       {
-        title: 'A Blog About A Place',
-        slug: 'a-blog-about-a-place',
-        summary: 'Today we explore the a cool place where cool things happen',
-        contents:
-          '{"type":"doc","content":[{"type":"blogTitle","content":[{"type":"text","text":"This is in fact a blog. With a summary. Isn\'t that interesting? "}]},{"type":"blogSummary","content":[{"type":"text","text":"<Here is a summary>"}]},{"type":"paragraph"},{"type":"blogSummary","content":[{"type":"text","text":"Enter the world of my head. Trust me its a dark place."}]},{"type":"codeBlock","attrs":{"language":"javascript"},"content":[{"type":"text","text":"\nconst javascript = true;"}]},{"type":"paragraph"}]}',
+        title: 'A Second test blog',
+        slug: 'a-second-test-blog',
+        summary: 'This is empty but published',
+        contents: '',
         image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
         published: true,
         tags: ['tag', 'tag-2', 'tag-3'],
