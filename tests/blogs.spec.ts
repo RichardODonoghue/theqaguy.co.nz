@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import config from '../../playwright.config';
-import { testBlogs } from '../../src/constants/testBlogs';
+import config from '../playwright.config';
+import { testBlogs } from '../src/constants/testBlogs';
 import { AxeBuilder } from '@axe-core/playwright';
 
 const baseURL = config.use?.baseURL;

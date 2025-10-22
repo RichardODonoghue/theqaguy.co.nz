@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import config from '../../playwright.config';
+import config from '../playwright.config';
 
 const baseURL = config.use?.baseURL as string;
 

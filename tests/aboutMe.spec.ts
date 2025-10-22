@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import config from '../../playwright.config';
+import config from '../playwright.config';
 import { technologies } from '@/constants/technologies';
 import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
 import AxeBuilder from '@axe-core/playwright';
