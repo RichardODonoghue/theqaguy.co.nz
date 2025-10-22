@@ -112,7 +112,7 @@ export const testBlogs = [
           content: [
             {
               type: 'text',
-              text: 'A second blog used for testing purposes',
+              text: 'This is empty but published',
             },
           ],
         },
