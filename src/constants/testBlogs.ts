@@ -88,14 +88,45 @@ export const testBlogs = [
     image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
     published: true,
     tags: ['testing', 'screaming_internally', 'test'],
-    createdAt: new Date('2023-01-01T10:00:00Z'),
-    updatedAt: new Date('2023-01-02T10:00:00Z'),
+    createdAt: new Date('2025-10-01T10:00:00Z'),
+    updatedAt: new Date('2025-10-02T10:00:00Z'),
   },
   {
     title: 'A Second test blog',
     slug: 'a-second-test-blog',
     summary: 'This is empty but published',
-    contents: '',
+    contents: JSON.stringify({
+      type: 'doc',
+      content: [
+        {
+          type: 'blogTitle',
+          content: [
+            {
+              type: 'text',
+              text: 'A Second test blog',
+            },
+          ],
+        },
+        {
+          type: 'blogSummary',
+          content: [
+            {
+              type: 'text',
+              text: 'A second blog used for testing purposes',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: "Yes this is a blog which is used solely for testing the application's blog static renderer and the blog WYSIWYG editor. ",
+            },
+          ],
+        },
+      ],
+    }),
     image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
     published: true,
     tags: ['tag', 'tag-2', 'tag-3'],
@@ -106,7 +137,38 @@ export const testBlogs = [
     title: 'An unpublished blog',
     slug: 'a-blog-about-a-failed-publisher',
     summary: 'Today you will not see this',
-    contents: '',
+    contents: JSON.stringify({
+      type: 'doc',
+      content: [
+        {
+          type: 'blogTitle',
+          content: [
+            {
+              type: 'text',
+              text: 'An unpublished blog',
+            },
+          ],
+        },
+        {
+          type: 'blogSummary',
+          content: [
+            {
+              type: 'text',
+              text: 'An unpublished blog used for testing purposes',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: "Yes this is a blog which is used solely for testing the application's blog static renderer and the blog WYSIWYG editor. ",
+            },
+          ],
+        },
+      ],
+    }),
     image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
     published: false,
     tags: ['tag', 'tag-2', 'tag-3'],
