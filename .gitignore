@@ -140,7 +140,7 @@ dist
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-/playwright/.auth
+/tests/.auth
 
 certificates
 /src/generated/prisma
