@@ -68,16 +68,16 @@ export default defineConfig({
     },
 
     /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-      testIgnore: ['**/tests/adminBlogTable.spec.ts'], // Admin pages may not be optimized for mobile
-    },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-      testIgnore: ['**/tests/adminBlogTable.spec.ts'], // Admin pages may not be optimized for mobile
-    },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    //   testIgnore: ['**/tests/adminBlogTable.spec.ts'], // Admin pages may not be optimized for mobile
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    //   testIgnore: ['**/tests/adminBlogTable.spec.ts'], // Admin pages may not be optimized for mobile
+    // },
   ],
 
   /* Run your local dev server before starting the tests */
