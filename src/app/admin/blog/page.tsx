@@ -14,11 +14,11 @@ export default async function Blogs() {
       <ContentHeader>Admin_Blogs</ContentHeader>
       <Card width="w-full" height="h-auto" overrides="mx-auto">
         <div className="flex my-5">
-          <Button className="flex">
+          <Button className="flex" asChild>
             <Link href="/admin/blog/new">New Blog</Link>
           </Button>
         </div>
-        <DataTable columns={columns} data={blogs} />
+        <DataTable columns={columns} data={blogs} testId="blog-table" />
       </Card>
     </>
   );

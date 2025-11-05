@@ -21,11 +21,13 @@ import { cn } from '@/lib/utils';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  testId?: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  testId,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -35,7 +37,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border">
-      <Table className="table-fixed">
+      <Table className="table-fixed" data-testid={testId}>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} isHeader>
