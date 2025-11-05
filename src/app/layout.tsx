@@ -20,7 +20,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Richard O'Donoghue | QA Engineer",
-  description: "Personal website of Richard O'Donoghue | QA Engineer",
+  description:
+    "Personal website and Portfolio of Richard O'Donoghue | QA Engineer",
   keywords: [
     "Richard O'Donoghue",
     'QA Engineer',
@@ -38,6 +39,7 @@ export const metadata: Metadata = {
     'Node.js',
     'Blog',
     'ISTQB',
+    'AI Testing',
   ],
   authors: [{ name: "Richard O'Donoghue", url: 'https://theqaguy.co.nz' }],
   creator: "Richard O'Donoghue",
