@@ -104,6 +104,7 @@ export const Toolbar = ({
       await updateBlogBySlug(slug, blog);
     }
     // Redirect to the blog page after saving
+    console.info('Save complete, redirecting...');
     redirect(`/admin/blog/${blog.slug}`);
   };
 
