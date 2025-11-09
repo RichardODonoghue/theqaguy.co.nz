@@ -87,8 +87,6 @@ export const Toolbar = ({
           },
         })
         .run();
-      console.log('url: ', url);
-      console.log(editor.getJSON());
     },
     [editor]
   );
@@ -119,7 +117,10 @@ export const Toolbar = ({
   };
 
   return (
-    <div className="control-group bg-slate-700/50 rounded-t-2xl">
+    <div
+      className="control-group bg-slate-700/50 rounded-t-2xl"
+      data-testid="blog-toolbar"
+    >
       <div className="button-group p-2 min-w-full mx-auto flex gap-2 flex-wrap justify-baseline">
         <Button
           onClick={() => editor.chain().focus().toggleBold().run()}
