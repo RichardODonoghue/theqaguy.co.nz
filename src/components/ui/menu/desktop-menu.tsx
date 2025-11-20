@@ -11,7 +11,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col w-96 h-dvh p-4" data-testid="desktop-menu">
+    <div className="flex flex-col p-4" data-testid="desktop-menu">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
         <Link href="/" className="m-0 w-full p-0">
           <Image
@@ -54,10 +54,10 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
               alt="Github logo"
               width="50"
               height="50"
-              className="inline m-5"
+              className="inline my-5 mx-2"
             />
             <Typography variant="md/medium" className="inline">
-              Check Out My Profile
+              View My Projects
             </Typography>
           </Link>
           <Link
@@ -72,7 +72,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
                 alt="LinkedIn In logo"
                 width="50"
                 height="50"
-                className="inline m-5"
+                className="inline my-5 mx-2"
               />
               <Typography variant="md/medium" className="p-0 inline">
                 Network With Me
@@ -91,9 +91,12 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
                 alt="LinkedIn In logo"
                 width="50"
                 height="50"
-                className="inline m-5"
+                className="inline my-5 mx-2"
               />
-              <Typography variant="md/medium" className="p-0 inline">
+              <Typography
+                variant="md/medium"
+                className="p-0 inline text-center"
+              >
                 Get In Touch
               </Typography>
             </div>
