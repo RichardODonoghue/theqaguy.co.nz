@@ -77,6 +77,9 @@ export default function AboutMe() {
             <div
               key={item.name}
               className="flex flex-col items-center justify-center text-center"
+              data-testid={`tech-${item.name
+                .toLowerCase()
+                .replace(/\s+/g, '-')}`}
             >
               <div className="flex items-center justify-center h-16 w-16">
                 <Tooltip>

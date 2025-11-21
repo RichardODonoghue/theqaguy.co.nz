@@ -12,7 +12,7 @@ if (!process.env.CI) {
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './playwright',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -43,7 +43,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
-        storageState: path.join(__dirname, './tests/.auth/admin.json'),
+        storageState: path.join(__dirname, './playwright/.auth/admin.json'),
       },
       dependencies: ['setup'],
     },
@@ -52,7 +52,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Firefox'],
         viewport: { width: 1920, height: 1080 },
-        storageState: path.join(__dirname, './tests/.auth/admin.json'),
+        storageState: path.join(__dirname, './playwright/.auth/admin.json'),
       },
       dependencies: ['setup'],
     },
@@ -62,7 +62,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Safari'],
         viewport: { width: 1920, height: 1080 },
-        storageState: path.join(__dirname, './tests/.auth/admin.json'),
+        storageState: path.join(__dirname, './playwright/.auth/admin.json'),
       },
       dependencies: ['setup'],
     },
