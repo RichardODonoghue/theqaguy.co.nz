@@ -49,6 +49,7 @@ export default function Projects() {
             <section
               aria-labelledby={`${classification}-projects`}
               key={classification}
+              id={classification.toLowerCase() + '-projects'}
               className="mx-5"
             >
               <Typography

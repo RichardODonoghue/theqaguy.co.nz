@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 import config from '../playwright.config';
 import { projects } from '@/constants/projects';
+import { ProjectPage } from './pcoms/projects';
+import { ContentHeader } from './pcoms/contentHeader';
+import { Menu } from './pcoms/menu';
 import { AxeBuilder } from '@axe-core/playwright';
 
 const baseURL = config.use?.baseURL;
@@ -8,8 +11,11 @@ const baseURL = config.use?.baseURL;
 test.use({ baseURL: baseURL });
 
 test.describe(() => {
+  let projectPage: ProjectPage;
+
   test.beforeEach(async ({ page }) => {
-    await page.goto('/projects');
+    projectPage = new ProjectPage(page);
+    await projectPage.goto();
   });
 
   test('Verify Project Page Metadata', async ({ page }) => {
@@ -53,23 +59,26 @@ test.describe(() => {
   });
 
   test('Verify Projects Page Content', async ({ page }) => {
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      '<Projects/>'
-    );
+    const contentHeader = new ContentHeader(page);
+    const menu = new Menu(page);
+
+    await expect(contentHeader.headerText).toHaveText('<Projects/>');
+
+    await expect(menu.selectedMenuItem).toHaveText('Projects');
 
     for (const [category, items] of Object.entries(projects)) {
       await expect(page.getByRole('heading', { name: category })).toBeVisible();
       for (const project of items) {
-        const projectLocator = page.getByTestId(`project-${project.name}`);
+        const projectCard = await projectPage.projectCard(project.name);
         await expect(
-          projectLocator.getByRole('heading', {
+          projectCard.getByRole('heading', {
             name: project.name,
             exact: true,
           })
         ).toBeVisible();
 
         if (project.url) {
-          const visitLink = projectLocator.getByRole('link');
+          const visitLink = projectCard.getByRole('link');
           await expect(visitLink).toHaveAttribute('href', project.url);
           await expect(visitLink).toBeVisible();
         }
