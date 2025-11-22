@@ -1,14 +1,20 @@
 import { test, expect } from '@playwright/test';
 import config from '../playwright.config';
 import AxeBuilder from '@axe-core/playwright';
+import { Home } from './pcoms/home';
+import { Menu } from './pcoms/menu';
+import { ContentHeader } from './pcoms/contentHeader';
 
 const baseURL = config.use?.baseURL as string;
 
 test.use({ baseURL: baseURL });
 
 test.describe('Home Page', () => {
+  let home: Home;
+
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    home = new Home(page);
+    await home.goto();
   });
 
   test('Verify Home Page Metadata', async ({ page }) => {
@@ -44,15 +50,29 @@ test.describe('Home Page', () => {
   });
 
   test('Verify Home Page Content', async ({ page }) => {
-    await expect(page.getByText('<HelloWorld/>')).toBeVisible();
-    await expect(page.getByText("I'm Richard")).toBeVisible();
-    await expect(page.getByText('{ QA Engineer }')).toBeVisible();
+    const contentHeader = new ContentHeader(page);
+    const menu = new Menu(page);
+
+    await expect(contentHeader.headerText).toHaveText('<HelloWorld/>');
+
+    // Check that no menu item is selected on the home page
+    await expect(menu.selectedMenuItem).not.toBeVisible();
+
     await expect(
-      page.getByRole('button', { name: 'Click Here To Test My Website!' })
+      home.heroSection.getByRole('heading', { name: "I'm Richard", level: 2 })
     ).toBeVisible();
+    await expect(
+      home.heroSection.getByRole('heading', {
+        name: '{ QA Engineer }',
+        level: 3,
+      })
+    ).toBeVisible();
+
+    await expect(home.runTestsButton).toBeVisible();
   });
 
   test('Verify Test Run Behaviour', async ({ page }) => {
+    // Mock the API responses for adding a job and streaming test results
     await page.route('/api/add-job', async (route) => {
       route.fulfill({
         status: 200,
@@ -61,6 +81,7 @@ test.describe('Home Page', () => {
       });
     });
 
+    // Mock the SSE stream for test results
     await page.route('/api/test-stream?jobId=99999', async (route) => {
       route.fulfill({
         status: 200,
@@ -73,21 +94,18 @@ test.describe('Home Page', () => {
       });
     });
 
-    await page.goto('/');
+    await home.goto();
 
-    const testButton = page.getByRole('button', {
-      name: 'Click Here To Test My Website!',
-    });
-    await testButton.click();
+    await home.clickRunTestsButton();
 
-    await expect(
-      page.getByText('Test run has been queued... please wait')
-    ).toBeVisible();
+    await expect(home.testLog).toContainText(
+      'Test run has been queued... please wait'
+    );
 
-    await expect(page.getByText('Test one')).toBeVisible();
-    await expect(page.getByText('Test two')).toBeVisible();
+    await expect(home.testLog).toContainText('Test one');
+    await expect(home.testLog).toContainText('Test two');
 
-    await expect(page.getByTestId('confetti-canvas')).toBeVisible();
+    await expect(home.confettiCanvas).toBeVisible();
   });
 
   test('Accessibility Audit', async ({ page }) => {
