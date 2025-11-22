@@ -4,12 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Typography } from '../typography';
 import { Separator } from '../separator';
-import { usePathname } from 'next/navigation';
-import { MenuProps, MenuItem } from './Menu';
+import { MenuItemData, MenuProps } from './Menu';
+import { MenuItem } from './menuItem';
 
 export const DesktopMenu = ({ menuItems }: MenuProps) => {
-  const pathname = usePathname();
-
   return (
     <div className="flex flex-col p-4" data-testid="desktop-menu">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
@@ -25,21 +23,8 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
         <Separator className="my-10" />
         <div className="flex flex-col space-y-2">
           <ul>
-            {menuItems.map((item: MenuItem, index) => (
-              <li key={index} className="my-4 w-40">
-                <Link
-                  href={item.href}
-                  className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
-                  aria-label={`Navigate to ${item.label}`}
-                >
-                  <div className="inline-block">
-                    <Typography variant="2xl/medium">{item.label}</Typography>
-                    {pathname === item.href && (
-                      <div className="bg-accent h-1 mt-1" />
-                    )}
-                  </div>
-                </Link>
-              </li>
+            {menuItems.map((item: MenuItemData, index) => (
+              <MenuItem key={index} item={item} />
             ))}
           </ul>
           <Separator className="my-10" />

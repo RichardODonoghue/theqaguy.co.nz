@@ -13,6 +13,7 @@ import { Page, Locator } from '@playwright/test';
 export class Menu {
   readonly page: Page;
   readonly menuItems: Promise<Locator[]>;
+  selectedMenuItem: Locator | null = null;
   isMobile: boolean = false;
 
   constructor(page: Page) {
@@ -23,5 +24,10 @@ export class Menu {
   async navigateTo(menuItemName: string) {
     const menuItem = this.page.getByTestId(`menu-item-${menuItemName}`);
     await menuItem.click();
+  }
+
+  async getSelectedMenuItem() {
+    this.selectedMenuItem = this.page.getByTestId('selected-menu-item');
+    return this.selectedMenuItem;
   }
 }
