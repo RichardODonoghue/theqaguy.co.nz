@@ -47,7 +47,7 @@ test.describe('About Me Page', () => {
     const menu = new Menu(aboutMePage.page);
 
     await expect(contentHeader.headerText).toHaveText('<AboutMe/>');
-    await expect(menu.getSelectedMenuItem()).resolves.toHaveText('About Me');
+    await expect(menu.selectedMenuItem).toHaveText('About Me');
 
     await expect(
       aboutMePage.aboutMeSection.locator('h2', { hasText: 'Bio' })

@@ -13,21 +13,17 @@ import { Page, Locator } from '@playwright/test';
 export class Menu {
   readonly page: Page;
   readonly menuItems: Promise<Locator[]>;
-  selectedMenuItem: Locator | null = null;
+  readonly selectedMenuItem: Locator;
   isMobile: boolean = false;
 
   constructor(page: Page) {
     this.page = page;
     this.menuItems = page.getByTestId(/^menu-item-/).all();
+    this.selectedMenuItem = page.getByTestId('selected-menu-item');
   }
 
   async navigateTo(menuItemName: string) {
     const menuItem = this.page.getByTestId(`menu-item-${menuItemName}`);
     await menuItem.click();
-  }
-
-  async getSelectedMenuItem() {
-    this.selectedMenuItem = this.page.getByTestId('selected-menu-item');
-    return this.selectedMenuItem;
   }
 }
