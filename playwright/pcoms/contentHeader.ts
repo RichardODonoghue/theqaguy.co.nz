@@ -15,6 +15,7 @@ export class ContentHeader {
   readonly page: Page;
   readonly header: Locator;
   readonly mobileMenuButton: Locator;
+  readonly headerText: Locator;
   isMobile: boolean;
 
   constructor(page: Page) {
@@ -22,6 +23,7 @@ export class ContentHeader {
     this.header = page.getByTestId('content-header');
     this.isMobile = false;
     this.mobileMenuButton = page.getByTestId('mobile-menu-button');
+    this.headerText = this.header.locator('h1');
   }
 
   async openMobileMenu() {

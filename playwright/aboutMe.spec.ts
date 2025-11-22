@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 import config from '../playwright.config';
+import { AboutMe } from './pcoms/aboutMe';
+import { ContentHeader } from './pcoms/contentHeader';
+import { Menu } from './pcoms/menu';
 import { technologies } from '@/constants/technologies';
 import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
 import AxeBuilder from '@axe-core/playwright';
@@ -9,8 +12,11 @@ const baseURL = config.use?.baseURL as string;
 test.use({ baseURL: baseURL });
 
 test.describe('About Me Page', () => {
+  let aboutMePage: AboutMe;
+
   test.beforeEach(async ({ page }) => {
-    await page.goto('/about-me');
+    aboutMePage = new AboutMe(page);
+    await aboutMePage.goto();
   });
 
   test('Verify About me Page Metadata', async ({ page }) => {
@@ -37,13 +43,18 @@ test.describe('About Me Page', () => {
   });
 
   test('Verify AboutMe page content', async ({ page }) => {
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      '<AboutMe/>'
-    );
-    await expect(page.getByRole('heading', { name: 'Bio' })).toBeVisible();
-    await expect(page.getByTestId('about-me-blurb')).toHaveText(aboutMeBlurb);
+    const contentHeader = new ContentHeader(aboutMePage.page);
+    const menu = new Menu(aboutMePage.page);
 
-    await expect(page.getByTestId('about-me-hobbies')).toHaveText(
+    await expect(contentHeader.headerText).toHaveText('<AboutMe/>');
+    await expect(menu.getSelectedMenuItem()).resolves.toHaveText('About Me');
+
+    await expect(
+      aboutMePage.aboutMeSection.locator('h2', { hasText: 'Bio' })
+    ).toBeVisible();
+    await expect(aboutMePage.aboutMeBio).toHaveText(aboutMeBlurb);
+
+    await expect(aboutMePage.aboutMeHobbies).toHaveText(
       [
         'Building software and tools',
         'Contributing to testing of FOSS software',
@@ -54,19 +65,29 @@ test.describe('About Me Page', () => {
     );
 
     await expect(
-      page.getByRole('heading', {
+      aboutMePage.techSection.getByRole('heading', {
         name: 'Technologies I have experience with',
       })
     ).toBeVisible();
 
     for (const [category, items] of Object.entries(technologies)) {
-      await expect(page.getByRole('heading', { name: category })).toBeVisible();
+      await expect(
+        aboutMePage.techSection.getByRole('heading', { name: category })
+      ).toBeVisible();
       for (const item of items) {
         // Ensure that all technologies are rendered.
         await expect(
-          page.getByAltText(item.name, { exact: true })
+          aboutMePage.techSection.getByAltText(item.name, { exact: true })
         ).toBeVisible();
-        await expect(page.locator(`img[alt="${item.name}"]`)).toBeVisible();
+        await expect(
+          aboutMePage.techSection.locator(`img[alt="${item.name}"]`)
+        ).toBeVisible();
+
+        await aboutMePage.hoverOverTech(item.name);
+        // Ensure that hovering over the technology shows the tooltip.
+        await expect(
+          page.getByRole('tooltip', { name: item.name })
+        ).toBeVisible();
       }
     }
   });
