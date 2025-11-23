@@ -10,10 +10,10 @@ export interface MenuItemProps {
 
 export const MenuItem = ({ item }: MenuItemProps) => {
   const pathname = usePathname();
-  const [isSelected, setIsSelected] = useState(pathname === item.href);
+  const [isSelected, setIsSelected] = useState(pathname.includes(item.href));
 
   useEffect(() => {
-    setIsSelected(pathname === item.href);
+    setIsSelected(pathname.includes(item.href));
   }, [pathname, item.href]);
 
   return (
