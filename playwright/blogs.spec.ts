@@ -59,7 +59,7 @@ test.describe('Blogs Page Tests', () => {
 
     for (const blog of testBlogs) {
       if (!blog.published) {
-        expect(page.getByTestId(`blog-card-${blog.slug}`)).toHaveCount(0);
+        await expect(page.getByTestId(`blog-card-${blog.slug}`)).toHaveCount(0);
         continue;
       }
 
@@ -73,7 +73,7 @@ test.describe('Blogs Page Tests', () => {
         blog.title
       );
 
-      expect(blogCard.locator('#blog-summary')).toHaveText(blog.summary);
+      await expect(blogCard.locator('#blog-summary')).toHaveText(blog.summary);
 
       expect(
         await blogCard.locator('#blog-published-date').textContent()
