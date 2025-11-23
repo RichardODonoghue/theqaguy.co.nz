@@ -1,5 +1,4 @@
 import { Page, Locator } from '@playwright/test';
-import { ContentHeader } from './contentHeader';
 
 /**
  * @description: Page Component Object Model for Blog Page
@@ -10,9 +9,8 @@ import { ContentHeader } from './contentHeader';
  * @param {Locator} title - Locator for the blog title.
  * @param {Locator} summary - Locator for the blog summary.
  * @param {Locator} footer - Locator for the blog footer.
- * @param {Promise<Locator[]>} blogTags - Promise resolving to an array of Locators for blog tags.
+ * @param {Locator} blogTags - Locator for blog tags.
  * @param {Locator} lastUpdated - Locator for the last updated timestamp.
- * @param {ContentHeader} header - Instance of ContentHeader representing the blog header.
  * @returns {Blog} An instance of the Blog class.
  */
 
@@ -22,18 +20,20 @@ export class Blog {
   readonly title: Locator;
   readonly summary: Locator;
   readonly footer: Locator;
-  readonly blogTags: Promise<Locator[]>;
+  readonly blogTags: Locator;
   readonly lastUpdated: Locator;
-  readonly header: ContentHeader;
 
   constructor(page: Page) {
     this.page = page;
-    this.content = page.getByTestId('blog-content');
-    this.title = page.getByTestId('blog-title');
-    this.summary = page.getByTestId('blog-summary');
+    this.content = page.locator('#blog');
+    this.title = page.locator('#blog-title');
+    this.summary = page.locator('#blog-summary');
     this.footer = page.getByTestId('blog-footer');
-    this.blogTags = page.getByTestId('blog-tag').all();
+    this.blogTags = page.getByTestId('blog-tag');
     this.lastUpdated = page.getByTestId('blog-last-updated');
-    this.header = new ContentHeader(page);
+  }
+
+  async goto(slug: string) {
+    await this.page.goto(`/qa-blog/${slug}`);
   }
 }
