@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import config from '../playwright.config';
 import { BlogsPage } from './pcoms/blogs';
+import { Menu } from './pcoms/menu';
 import { testBlogs } from '../src/constants/testBlogs';
 import { AxeBuilder } from '@axe-core/playwright';
 import { ContentHeader } from './pcoms/contentHeader';
@@ -54,8 +55,10 @@ test.describe('Blogs Page Tests', () => {
 
   test('Verify Blogs Page Content', async ({ page }) => {
     const contentHeader = new ContentHeader(page);
+    const menu = new Menu(page);
 
     await expect(contentHeader.headerText).toHaveText('<QA_Blog/>');
+    await expect(menu.selectedMenuItem).toHaveText('QA Blog');
 
     for (const blog of testBlogs) {
       if (!blog.published) {
