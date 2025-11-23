@@ -1,15 +1,19 @@
 import { test, expect } from '@playwright/test';
 import config from '../playwright.config';
+import { BlogsPage } from './pcoms/blogs';
 import { testBlogs } from '../src/constants/testBlogs';
 import { AxeBuilder } from '@axe-core/playwright';
+import { ContentHeader } from './pcoms/contentHeader';
 
 const baseURL = config.use?.baseURL;
 
 test.use({ baseURL: baseURL });
 
 test.describe('Blogs Page Tests', () => {
+  let blogPage: BlogsPage;
   test.beforeEach(async ({ page }) => {
-    await page.goto('/qa-blog');
+    blogPage = new BlogsPage(page);
+    await blogPage.goto();
   });
 
   test('Verify Blogs Page Metadata', async ({ page }) => {
@@ -49,9 +53,9 @@ test.describe('Blogs Page Tests', () => {
   });
 
   test('Verify Blogs Page Content', async ({ page }) => {
-    await expect(
-      page.getByRole('heading', { name: '<QA_Blog/>' })
-    ).toBeVisible();
+    const contentHeader = new ContentHeader(page);
+
+    await expect(contentHeader.headerText).toHaveText('<QA_Blog/>');
 
     for (const blog of testBlogs) {
       if (!blog.published) {

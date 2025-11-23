@@ -6,16 +6,20 @@ import { Page, Locator } from '@playwright/test';
  * @constructor
  * @param {Page} Page - The Playwright Page object representing the browser page.
  * @param {Promise<Locator[]>} blogCards - Promise resolving to an array of Locators for blog cards.
- * @returns {Blogs} An instance of the Blogs class.
+ * @returns {BlogsPage} An instance of the BlogsPage class.
  */
 
-export class Blogs {
+export class BlogsPage {
   readonly page: Page;
   readonly blogCards: Promise<Locator[]>;
 
   constructor(page: Page) {
     this.page = page;
     this.blogCards = page.getByTestId(/^blog-card-/).all();
+  }
+
+  async goto() {
+    await this.page.goto('/qa-blog');
   }
 
   async goToBlogPost(slug: string) {
