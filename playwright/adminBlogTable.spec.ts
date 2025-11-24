@@ -37,7 +37,6 @@ test.describe('Admin Blog Table Page', () => {
         throw new Error(`Table row for blog with slug ${blog.slug} not found`);
       }
 
-      // await expect(blogSlugCol).toContainText(blog.slug);
       await expect(slug.getByRole('link')).toHaveAttribute(
         'href',
         `/admin/blog/${blog.slug}`
