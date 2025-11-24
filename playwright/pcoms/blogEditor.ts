@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { Blog } from './blog';
 
 /**
  * @description: Page Component Object Model for Blog Editor Page
@@ -12,19 +13,25 @@ import { Page, Locator, expect } from '@playwright/test';
  * @returns {BlogEditor} An instance of the BlogEditor class.
  */
 
-export class BlogEditor {
+export class BlogEditorPage {
   readonly page: Page;
   readonly title: Locator;
   readonly summary: Locator;
   readonly toolbar: Locator;
-  readonly content: Locator;
+  readonly editor: Locator;
+  readonly codeblock: Locator;
+  readonly paragraph: Locator;
+  readonly image?: Locator;
+  readonly separator?: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.editor = page.getByRole('textbox');
     this.title = page.locator('#blog-title');
     this.summary = page.locator('#blog-summary');
     this.toolbar = page.getByTestId('blog-toolbar');
-    this.content = page.getByRole('textbox');
+    this.codeblock = page.getByTestId('code-block');
+    this.paragraph = page.getByRole('paragraph');
   }
 
   /**
@@ -43,7 +50,7 @@ export class BlogEditor {
      * This is technically an anti-pattern as this is an assertion which should be
      * in the test file however this reduces boilerplate.
      */
-    await expect(this.content).toBeVisible();
+    await expect(this.editor).toBeVisible();
   }
 
   async updateTitle(newTitle: string) {
@@ -59,6 +66,6 @@ export class BlogEditor {
   }
 
   async editBlogParagraph(content: string, paragraphIndex = 0) {
-    await this.content.getByRole('paragraph').nth(paragraphIndex).fill(content);
+    await this.editor.getByRole('paragraph').nth(paragraphIndex).fill(content);
   }
 }
