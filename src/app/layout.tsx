@@ -7,6 +7,7 @@ import { Container } from '@/components/ui/container';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { getDeviceType } from '@/lib/getDeviceType';
 import { Menu } from '@/components/ui/menu/Menu';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -79,6 +80,7 @@ export default async function RootLayout({
             <Container>{children}</Container>
           </SidebarProvider>
         </main>
+        <Toaster />
       </body>
     </html>
   );

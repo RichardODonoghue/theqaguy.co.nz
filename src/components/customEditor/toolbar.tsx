@@ -7,6 +7,7 @@ import { createBlog, updateBlogBySlug } from '@/lib/blogs';
 import { redirect, useParams } from 'next/navigation';
 import { ImageUploader } from './imageUploader';
 import { TagDialog } from './tagDialog';
+import { toast } from 'sonner';
 
 export const Toolbar = ({
   editor,
@@ -98,13 +99,17 @@ export const Toolbar = ({
   const handleSave = async () => {
     const blog = buildBlogObject();
 
-    if (isNewBlog) {
-      await createBlog(blog);
-    } else {
-      await updateBlogBySlug(slug, blog);
+    try {
+      if (isNewBlog) {
+        await createBlog(blog);
+      } else {
+        await updateBlogBySlug(slug, blog);
+      }
+      toast.success('Blog saved successfully!');
+    } catch {
+      toast.error('Error saving blog. Please try again.');
     }
     // Redirect to the blog page after saving
-    console.info('Save complete, redirecting...');
     redirect(`/admin/blog/${blog.slug}`);
   };
 
@@ -112,7 +117,11 @@ export const Toolbar = ({
     try {
       await updateBlogBySlug(slug, { published: !published });
       setPublished(!published);
+      toast.success(
+        `Blog ${!published ? 'published' : 'unpublished'} successfully!`
+      );
     } catch (error) {
+      toast.error('Error updating blog publish status. Please try again.');
       console.error('Error updating blog:', error);
     }
   };
