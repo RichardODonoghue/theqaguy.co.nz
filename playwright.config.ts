@@ -4,7 +4,7 @@ import path from 'path';
 // If not running in CI, load environment variables from .env file
 if (!process.env.CI) {
   import('dotenv').then((dotenv) => {
-    dotenv.config({ path: path.resolve(__dirname, '.env') });
+    dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
   });
 }
 

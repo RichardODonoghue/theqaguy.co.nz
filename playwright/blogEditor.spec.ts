@@ -3,6 +3,7 @@ import { Blog } from './pcoms/blog';
 import { BlogEditorPage } from './pcoms/blogEditor';
 import { ContentHeader } from './pcoms/contentHeader';
 import config from '../playwright.config';
+import { seedDatabase } from './utils/seedDatabase';
 
 const baseURL = config.use?.baseURL;
 
@@ -57,6 +58,8 @@ test.describe('Blog Editor', () => {
     await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(
       'Additional content added here.'
     );
+
+    await seedDatabase();
   });
 
   test('Can Add Codeblock to Blog Post', async () => {
