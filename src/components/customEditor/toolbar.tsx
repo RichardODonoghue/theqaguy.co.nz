@@ -64,7 +64,7 @@ export const Toolbar = ({
       .trim()
       .toLowerCase()
       .replaceAll(/[^a-z0-9\s]/g, '')
-      .replaceAll(/\s+/g, '_');
+      .replaceAll(/\s+/g, '-');
 
     const content = JSON.stringify(editor.getJSON());
     return {
