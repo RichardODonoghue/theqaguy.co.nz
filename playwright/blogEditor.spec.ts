@@ -2,6 +2,11 @@ import { test, expect } from '@playwright/test';
 import { Blog } from './pcoms/blog';
 import { BlogEditorPage } from './pcoms/blogEditor';
 import { ContentHeader } from './pcoms/contentHeader';
+import config from '../playwright.config';
+
+const baseURL = config.use?.baseURL;
+
+test.use({ baseURL: baseURL });
 
 test.describe('Blog Editor', () => {
   let blogEditor: BlogEditorPage;
@@ -31,6 +36,10 @@ test.describe('Blog Editor', () => {
   });
 
   test('Can edit Blog Post', async ({ page }) => {
+    test.skip(
+      baseURL === 'https://theqaguy.co.nz',
+      'Skipping test on production'
+    );
     const blog = new Blog(blogEditor.page);
 
     await blogEditor.goToBlog('a-test-blog');
