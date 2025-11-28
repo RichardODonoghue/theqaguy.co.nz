@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { Blog } from './pcoms/blog';
 import { BlogEditorPage } from './pcoms/blogEditor';
 import { ContentHeader } from './pcoms/contentHeader';
 
@@ -29,7 +30,9 @@ test.describe('Blog Editor', () => {
     );
   });
 
-  test('Can edit Blog Post', async () => {
+  test('Can edit Blog Post', async ({ page }) => {
+    const blog = new Blog(blogEditor.page);
+
     await blogEditor.goToBlog('a-test-blog');
 
     await blogEditor.editBlogParagraph('Additional content added here.', 2);
@@ -37,13 +40,14 @@ test.describe('Blog Editor', () => {
       'Additional content added here.'
     );
 
-    // TODO: Re-enable once alert trigger is enabled
-    // await blogEditor.clickToolbarButton('Save');
-    // await blog.goto('a-test-blog');
+    await blogEditor.clickToolbarButton('Save');
 
-    // await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(
-    //   'Additional content added here.'
-    // );
+    await expect(page.getByText('Blog saved successfully!')).toBeVisible();
+    await blog.goto(`a-test-blog`);
+
+    await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(
+      'Additional content added here.'
+    );
   });
 
   test('Can Add Codeblock to Blog Post', async () => {

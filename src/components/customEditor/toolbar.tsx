@@ -4,7 +4,7 @@ import { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import { Button } from '../ui/button';
 import { createBlog, updateBlogBySlug } from '@/lib/blogs';
-import { redirect, useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { ImageUploader } from './imageUploader';
 import { TagDialog } from './tagDialog';
 import { toast } from 'sonner';
@@ -49,6 +49,8 @@ export const Toolbar = ({
   });
 
   const [published, setPublished] = useState(isPublished);
+
+  const router = useRouter();
 
   const { slug } = useParams<{ slug: string }>();
   const isNewBlog = !slug;
@@ -109,8 +111,8 @@ export const Toolbar = ({
     } catch {
       toast.error('Error saving blog. Please try again.');
     }
-    // Redirect to the blog page after saving
-    redirect(`/admin/blog/${blog.slug}`);
+    // Redirect to the blog page after saving if slug has changed
+    if (blog.slug !== slug) router.push(`/admin/blog/${blog.slug}`);
   };
 
   const handlePublish = async () => {
