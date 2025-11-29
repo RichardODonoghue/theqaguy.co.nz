@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Blog } from './blog';
 
 /**
  * @description: Page Component Object Model for Blog Editor Page

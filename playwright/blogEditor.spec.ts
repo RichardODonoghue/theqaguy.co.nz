@@ -9,6 +9,10 @@ const baseURL = config.use?.baseURL;
 
 test.use({ baseURL: baseURL });
 
+// Ensure tests run in serial mode as these tests modify blog data
+// and should not run in parallel to avoid conflicts.
+test.describe.configure({ mode: 'serial' });
+
 test.describe('Blog Editor', () => {
   let blogEditor: BlogEditorPage;
 
@@ -53,7 +57,8 @@ test.describe('Blog Editor', () => {
     await blogEditor.clickToolbarButton('Save');
 
     await expect(page.getByText('Blog saved successfully!')).toBeVisible();
-    await blog.goto(`a-test-blog`);
+    await expect(page.getByText('Blog saved successfully!')).toBeHidden();
+    await page.goto('/qa-blog/a-test-blog');
 
     await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(
       'Additional content added here.'
