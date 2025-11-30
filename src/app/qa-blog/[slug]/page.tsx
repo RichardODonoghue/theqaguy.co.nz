@@ -37,7 +37,7 @@ export async function generateMetadata({
     : `${cloudinaryURL}/theqaguy.co.nz/blog/fallback_wdpalc`;
 
   return {
-    title: blog.title,
+    title: blog.title || 'The QA Blog',
     description: blog.summary || 'Read this blog post on theqaguy.co.nz.',
     keywords: blog.tags.join(', '),
     openGraph: {
@@ -58,7 +58,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: blog.title,
+      title: `${blog.title} | The QA Blog`,
       description: blog.summary || 'Read this blog post on TheQAGuy.',
       images: [blogImage],
     },
@@ -83,6 +83,7 @@ export default async function Blog({ params }: BlogPageProps) {
                 as="span"
                 key={tag}
                 className="mr-1 py-0"
+                data-testid="blog-tag"
               >
                 #{tag}
               </Typography>

@@ -4,9 +4,10 @@ import { Editor } from '@tiptap/core';
 import { useEditorState } from '@tiptap/react';
 import { Button } from '../ui/button';
 import { createBlog, updateBlogBySlug } from '@/lib/blogs';
-import { redirect, useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { ImageUploader } from './imageUploader';
 import { TagDialog } from './tagDialog';
+import { toast } from 'sonner';
 
 export const Toolbar = ({
   editor,
@@ -49,6 +50,8 @@ export const Toolbar = ({
 
   const [published, setPublished] = useState(isPublished);
 
+  const router = useRouter();
+
   const { slug } = useParams<{ slug: string }>();
   const isNewBlog = !slug;
 
@@ -63,7 +66,7 @@ export const Toolbar = ({
       .trim()
       .toLowerCase()
       .replaceAll(/[^a-z0-9\s]/g, '')
-      .replaceAll(/\s+/g, '_');
+      .replaceAll(/\s+/g, '-');
 
     const content = JSON.stringify(editor.getJSON());
     return {
@@ -87,8 +90,6 @@ export const Toolbar = ({
           },
         })
         .run();
-      console.log('url: ', url);
-      console.log(editor.getJSON());
     },
     [editor]
   );
@@ -100,26 +101,38 @@ export const Toolbar = ({
   const handleSave = async () => {
     const blog = buildBlogObject();
 
-    if (isNewBlog) {
-      await createBlog(blog);
-    } else {
-      await updateBlogBySlug(slug, blog);
+    try {
+      if (isNewBlog) {
+        await createBlog(blog);
+      } else {
+        await updateBlogBySlug(slug, blog);
+      }
+      toast.success('Blog saved successfully!');
+    } catch {
+      toast.error('Error saving blog. Please try again.');
     }
-    // Redirect to the blog page after saving
-    redirect(`/admin/blog/${blog.slug}`);
+    // Redirect to the blog page after saving if slug has changed
+    if (blog.slug !== slug) router.push(`/admin/blog/${blog.slug}`);
   };
 
   const handlePublish = async () => {
     try {
       await updateBlogBySlug(slug, { published: !published });
       setPublished(!published);
+      toast.success(
+        `Blog ${!published ? 'published' : 'unpublished'} successfully!`
+      );
     } catch (error) {
+      toast.error('Error updating blog publish status. Please try again.');
       console.error('Error updating blog:', error);
     }
   };
 
   return (
-    <div className="control-group bg-slate-700/50 rounded-t-2xl">
+    <div
+      className="control-group bg-slate-700/50 rounded-t-2xl"
+      data-testid="blog-toolbar"
+    >
       <div className="button-group p-2 min-w-full mx-auto flex gap-2 flex-wrap justify-baseline">
         <Button
           onClick={() => editor.chain().focus().toggleBold().run()}

@@ -10,10 +10,10 @@ export default function Home() {
         id="hero"
         className="flex flex-col items-center justify-center text-center min-h-[60vh] md:min-h-0 md:block md:p-60 fade-in"
       >
-        <Typography variant="7xl/extrabold" as="h1">
+        <Typography variant="7xl/extrabold" as="h2">
           I&apos;m <span className="text-accent">Richard</span>
         </Typography>
-        <Typography variant="5xl/extrabold" as="h2">
+        <Typography variant="5xl/extrabold" as="h3">
           <span className="text-secondary">{'{ '}</span>
           {'QA Engineer'}
           <span className="text-secondary">{' }'}</span>

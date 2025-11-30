@@ -5,11 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Sidebar, SidebarContent, useSidebar } from '../sidebar';
 import { Typography } from '../typography';
-import { MenuItem, MenuProps } from './Menu';
-import { usePathname } from 'next/navigation';
+import { MenuItemData, MenuProps } from './Menu';
+import { MenuItem } from './menuItem';
 
 export const MobileMenu = ({ menuItems }: MenuProps) => {
-  const pathname = usePathname();
   const { setOpenMobile } = useSidebar();
 
   const handleClick = () => {
@@ -30,24 +29,12 @@ export const MobileMenu = ({ menuItems }: MenuProps) => {
             />
           </Link>
           <Separator className="my-5" />
-          <ul className="flex flex-col space-y-2">
-            {menuItems.map((item: MenuItem, index) => (
-              <li key={index} className="my-4 w-40">
-                <Link
-                  href={item.href}
-                  className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
-                  aria-label={`Navigate to ${item.label}`}
-                  onClick={handleClick}
-                >
-                  <div className="inline-block">
-                    <Typography variant="2xl/medium">{item.label}</Typography>
-                    {pathname === item.href && (
-                      <div className="bg-accent h-1 mt-1" />
-                    )}
-                  </div>
-                </Link>
-              </li>
-            ))}
+          <div className="flex flex-col space-y-2">
+            <ul>
+              {menuItems.map((item: MenuItemData, index) => (
+                <MenuItem key={index} item={item} />
+              ))}
+            </ul>
             <Separator className="my-5" />
             <Link
               href="https://github.com/RichardODonoghue"
@@ -107,7 +94,7 @@ export const MobileMenu = ({ menuItems }: MenuProps) => {
                 </Typography>
               </div>
             </Link>
-          </ul>
+          </div>
         </nav>
       </SidebarContent>
     </Sidebar>

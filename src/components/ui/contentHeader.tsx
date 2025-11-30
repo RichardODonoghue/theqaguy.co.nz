@@ -18,7 +18,10 @@ export const ContentHeader = ({ children }: ContentHeaderProps) => {
   };
 
   return (
-    <div className="text-right relative right-2 w-full mb-5">
+    <div
+      className="text-right relative right-2 w-full mb-5"
+      data-testid="content-header"
+    >
       {isMobile && (
         <>
           <button

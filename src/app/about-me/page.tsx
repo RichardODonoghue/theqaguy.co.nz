@@ -3,12 +3,31 @@ import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
 import { technologies } from '@/constants/technologies';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+
+export async function generateMetadata() {
+  return {
+    title: 'TheQAGuy | About Me',
+    description:
+      "Learn about me - Richard O'Donoghue, QA Engineer based in New Zealand.",
+    keywords: [
+      "Richard O'Donoghue",
+      'About',
+      'The QA Guy',
+      'Quality Assurance',
+      'Software Testing',
+      'Bio',
+      'Professional Profile',
+      'Manawatu',
+    ],
+  };
+}
 
 export default function AboutMe() {
   const bioContent = (
@@ -21,25 +40,19 @@ export default function AboutMe() {
         variant="lg/normal"
         as="p"
         className="whitespace-pre-line mt-0 mb-4"
+        data-testid="about-me-blurb"
       >
-        {`
-        I am an experienced QA Engineer living in the beautiful Manawatu region of New Zealand with my wife, son, two cats, and dog.
-
-        Most of my QA career has been in testing web applications; however, I also have experience testing hardware from previous roles and hobbies. When time allows, I contribute to testing my favourite Linux distribution (Fedora), video games, and mobile applications.
-
-        I am a firm believer that software quality is not just a phase in the software development lifecycle or an automated test suite, but a value that should be integrated into every aspect of a business delivering software.
-
-        We are living in a world where software is more complex than ever. We are delivering software faster than ever, and AI is changing the way we build software. These challenges make having a solid quality assurance framework more critical than ever. It has never been a more important and exciting time to be a QA Engineer.
-
-        My goal with this website is to share my experiences, insights, and knowledge about software testing with others, and to further my own knowledge while doing so.
-
-        As an added bonus, I will also share some of my personal projects.
-        `}
+        {aboutMeBlurb}
       </Typography>
       <Typography variant="lg/normal" as="p">
         Outside of work I enjoy:
       </Typography>
-      <Typography variant="lg/normal" as="ul" className="list-disc">
+      <Typography
+        variant="lg/normal"
+        as="ul"
+        className="list-disc"
+        data-testid="about-me-hobbies"
+      >
         <li className="ml-4">Building software and tools</li>
         <li className="ml-4">Contributing to testing of FOSS software</li>
         <li className="ml-4">Attending my local linux user group</li>
@@ -64,6 +77,9 @@ export default function AboutMe() {
             <div
               key={item.name}
               className="flex flex-col items-center justify-center text-center"
+              data-testid={`tech-${item.name
+                .toLowerCase()
+                .replace(/\s+/g, '-')}`}
             >
               <div className="flex items-center justify-center h-16 w-16">
                 <Tooltip>
@@ -91,14 +107,22 @@ export default function AboutMe() {
       <ContentHeader>AboutMe</ContentHeader>
       <ScrollArea className="h-full">
         <div className="pr-4 mb-20">
-          <section className=" mx-5 ">
+          <section
+            id="about-me-bio"
+            aria-labelledby="about-me-bio"
+            className="mx-5"
+          >
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
             {bioContent}
           </section>
           <Separator className="my-10" />
-          <section className="mx-5">
+          <section
+            id="about-me-technologies"
+            aria-labelledby="about-me-technologies"
+            className="mx-5"
+          >
             <div className="">
               <Typography variant="3xl/extrabold" className="my-8" as="h3">
                 Technologies I have experience with
