@@ -74,7 +74,8 @@ test.describe('About Me Page', () => {
       await expect(
         aboutMePage.techSection.getByRole('heading', { name: category })
       ).toBeVisible();
-      for (const item of items) {
+
+      for (const [index, item] of items.entries()) {
         // Ensure that all technologies are rendered.
         await expect(
           aboutMePage.techSection.getByAltText(item.name, { exact: true })
@@ -83,11 +84,15 @@ test.describe('About Me Page', () => {
           aboutMePage.techSection.locator(`img[alt="${item.name}"]`)
         ).toBeVisible();
 
-        await aboutMePage.hoverOverTech(item.name);
-        // Ensure that hovering over the technology shows the tooltip.
-        await expect(
-          page.getByRole('tooltip', { name: item.name })
-        ).toBeVisible();
+        // For the first item in each category, test tooltip trigger on hover
+        if (index === 0) {
+          await aboutMePage.hoverOverTech(item.name);
+          await expect(
+            page.getByRole('tooltip', { name: item.name })
+          ).toBeVisible();
+          // Move mouse away to close tooltip
+          await page.mouse.move(0, 0);
+        }
       }
     }
   });

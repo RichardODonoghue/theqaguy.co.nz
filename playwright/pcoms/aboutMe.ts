@@ -6,7 +6,6 @@ export class AboutMe {
   readonly aboutMeBio: Locator;
   readonly aboutMeHobbies: Locator;
   readonly techSection: Locator;
-  readonly technologies: Promise<Locator[]>;
 
   constructor(page: Page) {
     this.page = page;
@@ -14,7 +13,6 @@ export class AboutMe {
     this.aboutMeBio = page.getByTestId('about-me-blurb');
     this.aboutMeHobbies = page.getByTestId('about-me-hobbies');
     this.techSection = page.locator('#about-me-technologies');
-    this.technologies = page.getByTestId(/^tech-/).all();
   }
 
   async goto(): Promise<void> {
@@ -24,6 +22,7 @@ export class AboutMe {
   async hoverOverTech(techName: string): Promise<void> {
     await this.page
       .getByTestId(`tech-${techName.toLowerCase().replace(/\s+/g, '-')}`)
+      .getByRole('img')
       .hover();
   }
 }

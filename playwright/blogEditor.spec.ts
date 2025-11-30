@@ -23,9 +23,7 @@ test.describe('Blog Editor', () => {
   test('Verify Blog Editor Page Metadata', async ({ page }) => {
     await blogEditor.goToBlog('a-test-blog');
 
-    expect(
-      await page.getAttribute('title', 'TheQAGuy | Blog Editor')
-    ).toBeDefined();
+    await expect(page).toHaveTitle('TheQAGuy | Blog Editor');
   });
 
   test('Verify Blog Content For Existing Blog Post', async ({ page }) => {
@@ -45,6 +43,7 @@ test.describe('Blog Editor', () => {
       baseURL === 'https://theqaguy.co.nz',
       'Skipping test on production'
     );
+
     const blog = new Blog(blogEditor.page);
 
     await blogEditor.goToBlog('a-test-blog');
@@ -73,7 +72,9 @@ test.describe('Blog Editor', () => {
     await blogEditor.clickToolbarButton('Code Block');
     await expect(blogEditor.codeblock).toBeVisible();
     await blogEditor.codeblock.fill('console.log("Hello, World!");');
-    expect(blogEditor.codeblock).toContainText('console.log("Hello, World!");');
+    await expect(blogEditor.codeblock).toContainText(
+      'console.log("Hello, World!");'
+    );
   });
 
   test('Can set codeblock language', async () => {
@@ -91,7 +92,7 @@ test.describe('Blog Editor', () => {
     await blogEditor.goToBlog();
 
     const contentHeader = new ContentHeader(page);
-    expect(contentHeader.headerText).toHaveText('<New_Blog/>');
+    await expect(contentHeader.headerText).toHaveText('<New_Blog/>');
 
     await expect(blogEditor.editor.getByRole('paragraph')).toBeEmpty();
   });
