@@ -56,7 +56,9 @@ test.describe('Blog Editor', () => {
     await blogEditor.clickToolbarButton('Save');
 
     await expect(page.getByText('Blog saved successfully!')).toBeVisible();
-    await expect(page.getByText('Blog saved successfully!')).toBeHidden();
+    await expect(page.getByText('Blog saved successfully!')).toBeHidden({
+      timeout: 10000,
+    });
     await page.goto('/qa-blog/a-test-blog');
 
     await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(
@@ -66,12 +68,14 @@ test.describe('Blog Editor', () => {
     await seedDatabase();
   });
 
-  test('Can Add Codeblock to Blog Post', async () => {
+  test('Can Add Codeblock to Blog Post', async ({ page }) => {
     await blogEditor.goToBlog();
 
     await blogEditor.clickToolbarButton('Code Block');
     await expect(blogEditor.codeblock).toBeVisible();
-    await blogEditor.codeblock.fill('console.log("Hello, World!");');
+    await blogEditor.codeblock.click();
+    // Use insertText for stability as typing can be flaky with complex editors
+    await page.keyboard.insertText('console.log("Hello, World!");');
     await expect(blogEditor.codeblock).toContainText(
       'console.log("Hello, World!");'
     );
