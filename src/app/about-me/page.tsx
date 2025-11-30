@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
 import { technologies } from '@/constants/technologies';
 import {
   Tooltip,
@@ -10,42 +11,48 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
+export async function generateMetadata() {
+  return {
+    title: 'TheQAGuy | About Me',
+    description:
+      "Learn about me - Richard O'Donoghue, QA Engineer based in New Zealand.",
+    keywords: [
+      "Richard O'Donoghue",
+      'About',
+      'The QA Guy',
+      'Quality Assurance',
+      'Software Testing',
+      'Bio',
+      'Professional Profile',
+      'Manawatu',
+    ],
+  };
+}
+
 export default function AboutMe() {
   const bioContent = (
-    <div className="">
-      <Typography variant="xl/normal" as="h3">
+    <div className="w-full md:w-2/3">
+      <Typography variant="xl/normal" as="h3" className="mb-0">
         Hello Internet,{' '}
         <strong className="text-accent">I&apos;m Richard</strong>
       </Typography>
-      <Typography variant="lg/normal" as="p">
-        I am an experienced QA Engineer. I live in the beautiful Manawatu region
-        of New Zealand with my wife, son, two cats and dog. <br />
-        <br />I have a fiery passion for Software Quality. I am a firm believer
-        that software quality is not just a phase in the software development
-        lifecycle or an automated test suite, but a value that should be
-        integrated into every aspect of a business delivering software.
-        <br />
-        <br />
-        We are living in a world where software is more complex than ever. We
-        are delivering faster than ever and AI is changing the way we build
-        software. These challenges make quality assurance and testing more
-        critical than ever. It has never been a more important and exciting time
-        to be a QA Engineer.
-        <br />
-        <br />
-        My goal with this website is to share my experiences, insights, and
-        knowledge about software testing with others, and further my own
-        knowledge while doing so. <br />
-        <br />
-        As an added bonus, I will also share some of my personal projects as
-        well.
-        <br />
-        <br />
+      <Typography
+        variant="lg/normal"
+        as="p"
+        className="whitespace-pre-line mt-0 mb-4"
+        data-testid="about-me-blurb"
+      >
+        {aboutMeBlurb}
       </Typography>
       <Typography variant="lg/normal" as="p">
         Outside of work I enjoy:
       </Typography>
-      <Typography variant="lg/normal" as="ul" className="list-disc">
+      <Typography
+        variant="lg/normal"
+        as="ul"
+        className="list-disc"
+        data-testid="about-me-hobbies"
+      >
         <li className="ml-4">Building software and tools</li>
         <li className="ml-4">Contributing to testing of FOSS software</li>
         <li className="ml-4">Attending my local linux user group</li>
@@ -57,7 +64,7 @@ export default function AboutMe() {
 
   const technologyExperience = Object.entries(technologies).map(
     ([category, tech]) => (
-      <div key={category} className="">
+      <div key={category}>
         <Typography
           variant="xl/normal"
           as="h2"
@@ -65,11 +72,14 @@ export default function AboutMe() {
         >
           {category}
         </Typography>
-        <div className="grid grid-cols-3 gap-x-0 gap-y-2 w-48 mx-auto my-5">
+        <div className="grid grid-cols-3 gap-x-1 md:gap-x-0 gap-y-2 w-48 mx-auto my-5">
           {tech.map((item) => (
             <div
               key={item.name}
               className="flex flex-col items-center justify-center text-center"
+              data-testid={`tech-${item.name
+                .toLowerCase()
+                .replace(/\s+/g, '-')}`}
             >
               <div className="flex items-center justify-center h-16 w-16">
                 <Tooltip>
@@ -97,14 +107,22 @@ export default function AboutMe() {
       <ContentHeader>AboutMe</ContentHeader>
       <ScrollArea className="h-full">
         <div className="pr-4 mb-20">
-          <section className=" mx-5 ">
+          <section
+            id="about-me-bio"
+            aria-labelledby="about-me-bio"
+            className="mx-5"
+          >
             <Typography variant="3xl/extrabold" className="my-2" as="h2">
               Bio
             </Typography>
             {bioContent}
           </section>
           <Separator className="my-10" />
-          <section className="mx-5">
+          <section
+            id="about-me-technologies"
+            aria-labelledby="about-me-technologies"
+            className="mx-5"
+          >
             <div className="">
               <Typography variant="3xl/extrabold" className="my-8" as="h3">
                 Technologies I have experience with

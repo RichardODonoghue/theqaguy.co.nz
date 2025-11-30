@@ -1,6 +1,11 @@
 import { ContentHeader } from '@/components/ui/contentHeader';
 import { CustomEditor } from '@/components/customEditor/customEditor';
 import { getBlogBySlug } from '@/lib/blogs';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'TheQAGuy | Blog Editor',
+};
 
 export default async function EditBlog({
   params,

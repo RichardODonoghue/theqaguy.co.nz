@@ -18,14 +18,17 @@ export const ContentHeader = ({ children }: ContentHeaderProps) => {
   };
 
   return (
-    <div className="text-right relative right-2 w-full mb-5">
+    <div
+      className="text-right relative right-2 w-full mb-5"
+      data-testid="content-header"
+    >
       {isMobile && (
         <>
           <button
             className="absolute left-2 text-left z-10"
             data-testid="mobile-menu-button"
           >
-            <MenuIcon className="w-10 h-10" onClick={handleShowMenu} />
+            <MenuIcon className="w-10 h-10 pl-2" onClick={handleShowMenu} />
           </button>
         </>
       )}

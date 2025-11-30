@@ -1,12 +1,12 @@
 'use client';
-import { MobileMenu } from './mobile-menu';
-import { DesktopMenu } from './desktop-menu';
+import { MobileMenu } from './mobileMenu';
+import { DesktopMenu } from './desktopMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-export type MenuItem = { label: string; href: string };
+export type MenuItemData = { label: string; href: string };
 
 export interface MenuProps {
-  menuItems: MenuItem[];
+  menuItems: MenuItemData[];
 }
 
 const menuItems = [

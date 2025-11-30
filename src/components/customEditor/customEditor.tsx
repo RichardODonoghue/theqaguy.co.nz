@@ -29,7 +29,7 @@ export const CustomEditor = ({
         <Toolbar editor={editor} isPublished={isPublished} tags={tags} />
       )}
       <ScrollArea className="h-full">
-        <div className="mb-20">
+        <div className="mb-20" data-testid="custom-editor">
           <EditorContent
             editor={editor}
             className="bg-slate-700/50 px-2 pb-20 flow-root mb-40 rounded-b-lg"

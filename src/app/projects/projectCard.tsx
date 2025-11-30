@@ -70,7 +70,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       height="h-auto"
       overrides="mx-auto my-5"
       key={project.name}
-      data-testid={project.name}
+      data-testid={`project-${project.name}`}
     >
       <div className="mb-4">
         <Typography variant="2xl/bold" as="h3" className="inline my-2">
@@ -82,7 +82,10 @@ export const ProjectCard = ({ project }: { project: Project }) => {
             className="bg-secondary mx-2 px-2 py-0 rounded-lg inline"
             target="_blank"
           >
-            <Typography variant="sm/normal" className="inline">
+            <Typography
+              variant="sm/normal"
+              className="inline text-secondary-foreground"
+            >
               Visit
             </Typography>
           </Link>

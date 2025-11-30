@@ -7,6 +7,7 @@ import { Container } from '@/components/ui/container';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { getDeviceType } from '@/lib/getDeviceType';
 import { Menu } from '@/components/ui/menu/Menu';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,7 +21,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Richard O'Donoghue | QA Engineer",
-  description: "Personal website of Richard O'Donoghue | QA Engineer",
+  description:
+    "Personal website and Portfolio of Richard O'Donoghue | QA Engineer",
   keywords: [
     "Richard O'Donoghue",
     'QA Engineer',
@@ -38,6 +40,7 @@ export const metadata: Metadata = {
     'Node.js',
     'Blog',
     'ISTQB',
+    'AI Testing',
   ],
   authors: [{ name: "Richard O'Donoghue", url: 'https://theqaguy.co.nz' }],
   creator: "Richard O'Donoghue",
@@ -66,13 +69,18 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Skip link for keyboard users */}
+        <a href="#main-content" className="sr-only focus:not-sr-only">
+          Skip to content
+        </a>
         <Background />
-        <div className="flex">
+        <main id="main-content" role="main" className="flex">
           <SidebarProvider defaultOpen={false}>
             <Menu isMobile={isMobile} />
             <Container>{children}</Container>
           </SidebarProvider>
-        </div>
+        </main>
+        <Toaster />
       </body>
     </html>
   );

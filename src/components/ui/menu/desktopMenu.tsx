@@ -4,14 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Typography } from '../typography';
 import { Separator } from '../separator';
-import { usePathname } from 'next/navigation';
-import { MenuProps, MenuItem } from './Menu';
+import { MenuItemData, MenuProps } from './Menu';
+import { MenuItem } from './menuItem';
 
 export const DesktopMenu = ({ menuItems }: MenuProps) => {
-  const pathname = usePathname();
-
   return (
-    <div className="flex flex-col w-96 h-dvh p-4" data-testid="desktop-menu">
+    <div className="flex flex-col p-4" data-testid="desktop-menu">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
         <Link href="/" className="m-0 w-full p-0">
           <Image
@@ -23,23 +21,12 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
           />
         </Link>
         <Separator className="my-10" />
-        <ul className="flex flex-col space-y-2">
-          {menuItems.map((item: MenuItem, index) => (
-            <li key={index} className="my-4 w-40">
-              <Link
-                href={item.href}
-                className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
-                aria-label={`Navigate to ${item.label}`}
-              >
-                <div className="inline-block">
-                  <Typography variant="2xl/medium">{item.label}</Typography>
-                  {pathname === item.href && (
-                    <div className="bg-accent h-1 mt-1" />
-                  )}
-                </div>
-              </Link>
-            </li>
-          ))}
+        <div className="flex flex-col space-y-2">
+          <ul>
+            {menuItems.map((item: MenuItemData, index) => (
+              <MenuItem key={index} item={item} />
+            ))}
+          </ul>
           <Separator className="my-10" />
           <Link
             href="https://github.com/RichardODonoghue"
@@ -52,10 +39,10 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
               alt="Github logo"
               width="50"
               height="50"
-              className="inline m-5"
+              className="inline my-5 mx-2"
             />
             <Typography variant="md/medium" className="inline">
-              Check Out My Profile
+              View My Projects
             </Typography>
           </Link>
           <Link
@@ -70,7 +57,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
                 alt="LinkedIn In logo"
                 width="50"
                 height="50"
-                className="inline m-5"
+                className="inline my-5 mx-2"
               />
               <Typography variant="md/medium" className="p-0 inline">
                 Network With Me
@@ -89,14 +76,17 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
                 alt="LinkedIn In logo"
                 width="50"
                 height="50"
-                className="inline m-5"
+                className="inline my-5 mx-2"
               />
-              <Typography variant="md/medium" className="p-0 inline">
+              <Typography
+                variant="md/medium"
+                className="p-0 inline text-center"
+              >
                 Get In Touch
               </Typography>
             </div>
           </Link>
-        </ul>
+        </div>
       </nav>
     </div>
   );

@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from './prisma';
+import { revalidateTag } from 'next/cache';
 
 export type Blog = {
   slug: string;
@@ -53,6 +54,7 @@ const createBlog = async (blog: Blog) => {
     data: blog,
   });
 
+  revalidateTag('blog');
   return newBlog;
 };
 
@@ -64,6 +66,7 @@ const updateBlogBySlug = async (slug: string, blog: Partial<Blog>) => {
     data: { ...blog, updatedAt: new Date() },
   });
 
+  revalidateTag('blog');
   return updatedBlog;
 };
 
@@ -74,6 +77,7 @@ const deleteBlogBySlug = async (slug: string) => {
     },
   });
 
+  revalidateTag('blog');
   return deletedBlog;
 };
 

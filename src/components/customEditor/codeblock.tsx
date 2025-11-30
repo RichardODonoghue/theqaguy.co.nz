@@ -14,6 +14,7 @@ const CodeBlockComponent: React.FC<NodeViewProps> = ({
       // Ensure it cannot exceed container width, only scroll horizontally.
       className="relative w-full max-w-full min-w-0 overflow-x-auto overflow-y-hidden p-4 md:p-5 rounded-lg font-mono bg-slate-800 text-xs md:text-sm leading-relaxed scrollbar-thin"
       data-code-block
+      data-testid="code-block"
     >
       <select
         contentEditable={false}

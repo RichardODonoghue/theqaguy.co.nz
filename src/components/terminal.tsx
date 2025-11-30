@@ -71,12 +71,12 @@ export const Terminal = () => {
         {/* Always render the buffer div, but control its visibility and height */}
         <div
           ref={bufferRef}
+          role="log"
           className={`transition-all duration-500 ease-in-out overflow-scroll text-left border-2 border-slate-700 w-full max-w-4xl bg-slate-700/30 rounded-lg ${
             buffer.length > 0
               ? 'h-[30vh] p-4 mb-5 opacity-100'
               : 'h-0 p-0 mb-0 opacity-0'
           }`}
-          aria-readonly
           aria-label="Console output from test run"
           dangerouslySetInnerHTML={{ __html: buffer }}
         />
