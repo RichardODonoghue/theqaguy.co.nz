@@ -6,9 +6,10 @@ import { usePathname } from 'next/navigation';
 
 export interface MenuItemProps {
   item: MenuItemData;
+  onClick?: () => void;
 }
 
-export const MenuItem = ({ item }: MenuItemProps) => {
+export const MenuItem = ({ item, onClick }: MenuItemProps) => {
   const pathname = usePathname();
   const [isSelected, setIsSelected] = useState(pathname.includes(item.href));
 
@@ -25,6 +26,7 @@ export const MenuItem = ({ item }: MenuItemProps) => {
         href={item.href}
         className="block px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
         aria-label={`Navigate to ${item.label}`}
+        onClick={onClick}
       >
         <div className="inline-block">
           <Typography variant="2xl/medium">{item.label}</Typography>

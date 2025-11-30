@@ -32,7 +32,7 @@ export const MobileMenu = ({ menuItems }: MenuProps) => {
           <div className="flex flex-col space-y-2">
             <ul>
               {menuItems.map((item: MenuItemData, index) => (
-                <MenuItem key={index} item={item} />
+                <MenuItem key={index} item={item} onClick={handleClick} />
               ))}
             </ul>
             <Separator className="my-5" />
