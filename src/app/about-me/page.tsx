@@ -31,7 +31,7 @@ export async function generateMetadata() {
 
 export default function AboutMe() {
   const bioContent = (
-    <div className="w-full md:w-2/3">
+    <div className="w-full md:w-2/3 text-center mx-auto">
       <Typography variant="xl/normal" as="h3" className="mb-0">
         Hello Internet,{' '}
         <strong className="text-accent">I&apos;m Richard</strong>
@@ -50,7 +50,7 @@ export default function AboutMe() {
       <Typography
         variant="lg/normal"
         as="ul"
-        className="list-disc"
+        className="list-inside"
         data-testid="about-me-hobbies"
       >
         <li className="ml-4">Building software and tools</li>
@@ -112,7 +112,11 @@ export default function AboutMe() {
             aria-labelledby="about-me-bio"
             className="mx-5"
           >
-            <Typography variant="3xl/extrabold" className="my-2" as="h2">
+            <Typography
+              variant="3xl/extrabold"
+              className="my-2 text-center"
+              as="h2"
+            >
               Bio
             </Typography>
             {bioContent}
@@ -124,7 +128,11 @@ export default function AboutMe() {
             className="mx-5"
           >
             <div className="">
-              <Typography variant="3xl/extrabold" className="my-8" as="h3">
+              <Typography
+                variant="3xl/extrabold"
+                className="my-8 text-center"
+                as="h3"
+              >
                 Technologies I have experience with
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
