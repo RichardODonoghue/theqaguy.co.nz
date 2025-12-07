@@ -7,10 +7,10 @@ export type Blog = {
   slug: string;
   title: string;
   image?: string;
-  summary?: string;
+  summary: string;
   contents: string;
-  published?: boolean;
-  tags?: string[];
+  published: boolean;
+  tags: string[];
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -54,7 +54,7 @@ const createBlog = async (blog: Blog) => {
     data: blog,
   });
 
-  revalidateTag('blog');
+  revalidateTag('blog', 'max');
   return newBlog;
 };
 
@@ -66,7 +66,7 @@ const updateBlogBySlug = async (slug: string, blog: Partial<Blog>) => {
     data: { ...blog, updatedAt: new Date() },
   });
 
-  revalidateTag('blog');
+  revalidateTag('blog', 'max');
   return updatedBlog;
 };
 
@@ -77,7 +77,7 @@ const deleteBlogBySlug = async (slug: string) => {
     },
   });
 
-  revalidateTag('blog');
+  revalidateTag('blog', 'max');
   return deletedBlog;
 };
 

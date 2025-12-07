@@ -13,7 +13,7 @@ const EXCLUDED_PREFIXES = [
 const EXCLUDED_EXT =
   /\.(png|jpg|jpeg|gif|webp|svg|ico|css|js|map|txt|woff2?)$/i;
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const host = request.headers.get('host') ?? '';
   const isProd = host === 'theqaguy.co.nz' || host === 'www.theqaguy.co.nz';
   const path = request.nextUrl.pathname;
@@ -51,6 +51,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  runtime: 'nodejs',
-  matcher: ['/:path*'],
+  matcher: ['/:path*']
 };
