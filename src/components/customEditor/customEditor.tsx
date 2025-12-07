@@ -34,13 +34,13 @@ export const CustomEditor = ({ blog = null }: EditorProps) => {
 
   return (
     <>
-      {editor && blog && (
+      {editor && (
         <Toolbar
           title={title}
           summary={summary}
           editor={editor}
-          isPublished={blog.published}
-          tags={blog.tags}
+          isPublished={blog?.published || false}
+          tags={blog?.tags || []}
         />
       )}
       <ScrollArea className="h-full">

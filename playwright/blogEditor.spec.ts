@@ -32,8 +32,8 @@ test.describe('Blog Editor', () => {
     const contentHeader = new ContentHeader(page);
     await expect(contentHeader.headerText).toHaveText('<Edit_Blog/>');
 
-    await expect(blogEditor.title).toContainText('A Test Blog');
-    await expect(blogEditor.summary).toContainText(
+    await expect(blogEditor.title).toHaveValue('A Test Blog');
+    await expect(blogEditor.summary).toHaveValue(
       'A blog used for testing purposes'
     );
   });
@@ -59,6 +59,7 @@ test.describe('Blog Editor', () => {
     await expect(page.getByText('Blog saved successfully!')).toBeHidden({
       timeout: 10000,
     });
+
     await page.goto('/qa-blog/a-test-blog');
 
     await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(

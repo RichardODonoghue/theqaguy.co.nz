@@ -25,7 +25,7 @@ export class BlogEditorPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.editor = page.getByRole('textbox');
+    this.editor = page.getByTestId('editor');
     this.title = page.locator('#blog-title');
     this.summary = page.locator('#blog-summary');
     this.toolbar = page.getByTestId('blog-toolbar');
