@@ -126,13 +126,14 @@ h5 {
 }
 
 .ProseMirror {
-  @apply p-5;
+  @apply px-5;
 }
 
 .ProseMirror,
 .tiptap {
   min-width: 0;
   max-width: 100%;
+  margin-top: 0;
 }
 
 .tiptap .hljs-comment,

@@ -18,13 +18,7 @@ export default async function EditBlog({
   return (
     <>
       <ContentHeader>Edit_Blog</ContentHeader>
-      {blog && (
-        <CustomEditor
-          content={JSON.parse(blog.contents)}
-          isPublished={blog.published}
-          tags={blog.tags}
-        />
-      )}
+      {blog && <CustomEditor blog={blog} />}
     </>
   );
 }

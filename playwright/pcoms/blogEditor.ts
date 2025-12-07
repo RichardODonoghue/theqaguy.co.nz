@@ -18,18 +18,26 @@ export class BlogEditorPage {
   readonly summary: Locator;
   readonly toolbar: Locator;
   readonly editor: Locator;
-  readonly codeblock: Locator;
+  readonly codeblock: {
+    element: Locator;
+    languageDropdown: Locator;
+    content: Locator;
+  };
   readonly paragraph: Locator;
   readonly image?: Locator;
   readonly separator?: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.editor = page.getByRole('textbox');
+    this.editor = page.getByTestId('editor');
     this.title = page.locator('#blog-title');
     this.summary = page.locator('#blog-summary');
     this.toolbar = page.getByTestId('blog-toolbar');
-    this.codeblock = page.getByTestId('code-block');
+    this.codeblock = {
+      element: page.getByTestId('code-block'),
+      languageDropdown: page.getByRole('combobox'),
+      content: page.getByTestId('code-block-content'),
+    };
     this.paragraph = page.getByRole('paragraph');
   }
 

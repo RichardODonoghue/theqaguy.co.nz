@@ -6,6 +6,7 @@ type BlogTitleStorage = {
   hasCheckedInitialBlogTitle: boolean;
 };
 
+/** @deprecated Use BlogHeader component instead */
 export const BlogTitle = Node.create<{
   Storage: BlogTitleStorage;
 }>({
