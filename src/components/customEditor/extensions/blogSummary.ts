@@ -3,6 +3,7 @@ import { Node, mergeAttributes } from '@tiptap/core';
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { Node as ProseMirrorNode } from 'prosemirror-model';
 
+/** @deprecated Use BlogHeader component instead */
 export const BlogSummary = Node.create({
   name: 'blogSummary',
   group: 'block',
