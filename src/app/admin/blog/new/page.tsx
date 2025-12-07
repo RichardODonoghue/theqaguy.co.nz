@@ -10,7 +10,7 @@ export default function NewBlog() {
   return (
     <>
       <ContentHeader>New_Blog</ContentHeader>
-      <CustomEditor content={null} />
+      <CustomEditor blog={null} />
     </>
   );
 }

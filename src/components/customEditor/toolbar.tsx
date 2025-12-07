@@ -9,15 +9,21 @@ import { ImageUploader } from './imageUploader';
 import { TagDialog } from './tagDialog';
 import { toast } from 'sonner';
 
+interface ToolbarProps {
+  editor: Editor;
+  isPublished: boolean;
+  tags: string[];
+  title: string;
+  summary: string;
+}
+
 export const Toolbar = ({
   editor,
   isPublished,
   tags,
-}: {
-  editor: Editor;
-  isPublished: boolean;
-  tags: string[];
-}) => {
+  title,
+  summary,
+}: ToolbarProps) => {
   // Read the current editor's state, and re-render the component when it changes
   const editorState = useEditorState({
     editor,
@@ -56,10 +62,6 @@ export const Toolbar = ({
   const isNewBlog = !slug;
 
   const buildBlogObject = () => {
-    // While it may not be the "react way", this is the easiest way I found to grab the title from the editor.
-    const title = document.getElementById('blog-title')?.innerText;
-    const summary = document.getElementById('blog-summary')?.innerText;
-
     if (!title || title.length === 0) throw new Error('No blog title');
 
     const newSlug = title
@@ -74,6 +76,9 @@ export const Toolbar = ({
       title: title,
       summary: summary,
       slug: newSlug,
+      published: published,
+      publishedAt: published ? new Date() : null,
+      tags: tags,
     };
   };
 
@@ -117,7 +122,10 @@ export const Toolbar = ({
 
   const handlePublish = async () => {
     try {
-      await updateBlogBySlug(slug, { published: !published });
+      await updateBlogBySlug(slug, {
+        published: !published,
+        publishedAt: !published ? new Date() : undefined,
+      });
       setPublished(!published);
       toast.success(
         `Blog ${!published ? 'published' : 'unpublished'} successfully!`

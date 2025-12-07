@@ -3,6 +3,7 @@ import { unstable_cache } from 'next/cache';
 import { cloudinaryURL } from '@/constants/constants';
 import { getBlogBySlug } from '@/lib/blogs';
 import { ContentHeader } from '@/components/ui/contentHeader';
+import { BlogHeader } from '@/components/blogHeader/blogHeader';
 import { StaticRenderer } from '@/components/customEditor/staticRenderer';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
@@ -74,6 +75,13 @@ export default async function Blog({ params }: BlogPageProps) {
       <>
         <ContentHeader>QA_Blog</ContentHeader>
         <ScrollArea className="h-full md:pr-2.5">
+          <BlogHeader
+            enableEditing={false}
+            title={blog.title}
+            summary={blog.summary}
+            published={blog.publishedAt}
+            lastUpdated={blog.updatedAt}
+          />
           <StaticRenderer content={JSON.parse(blog.contents)} />
           <Separator className="mt-4" />
           <div className="flex flex-wrap w-full items-center gap-y-1 py-1 mb-15 px-2">
