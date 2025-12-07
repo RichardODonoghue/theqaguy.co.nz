@@ -7,24 +7,6 @@ export const testBlogs = [
       type: 'doc',
       content: [
         {
-          type: 'blogTitle',
-          content: [
-            {
-              type: 'text',
-              text: 'A Test Blog',
-            },
-          ],
-        },
-        {
-          type: 'blogSummary',
-          content: [
-            {
-              type: 'text',
-              text: 'A blog used for testing purposes',
-            },
-          ],
-        },
-        {
           type: 'paragraph',
           content: [
             {
@@ -87,6 +69,7 @@ export const testBlogs = [
     }),
     image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
     published: true,
+    publishedAt: new Date('2025-10-03T10:00:00Z'),
     tags: ['testing', 'screaming_internally', 'test'],
     createdAt: new Date('2025-10-01T10:00:00Z'),
     updatedAt: new Date('2025-10-02T10:00:00Z'),
@@ -98,24 +81,6 @@ export const testBlogs = [
     contents: JSON.stringify({
       type: 'doc',
       content: [
-        {
-          type: 'blogTitle',
-          content: [
-            {
-              type: 'text',
-              text: 'A Second test blog',
-            },
-          ],
-        },
-        {
-          type: 'blogSummary',
-          content: [
-            {
-              type: 'text',
-              text: 'This is empty but published',
-            },
-          ],
-        },
         {
           type: 'paragraph',
           content: [
@@ -129,6 +94,7 @@ export const testBlogs = [
     }),
     image: 'theqaguy.co.nz/blog/pthvo9xfwr7zxl6ibthy',
     published: true,
+    publishedAt: new Date('2025-02-03T10:00:00Z'),
     tags: ['tag', 'tag-2', 'tag-3'],
     createdAt: new Date('2025-02-01T10:00:00Z'),
     updatedAt: new Date('2025-02-02T10:00:00Z'),
@@ -140,24 +106,6 @@ export const testBlogs = [
     contents: JSON.stringify({
       type: 'doc',
       content: [
-        {
-          type: 'blogTitle',
-          content: [
-            {
-              type: 'text',
-              text: 'An unpublished blog',
-            },
-          ],
-        },
-        {
-          type: 'blogSummary',
-          content: [
-            {
-              type: 'text',
-              text: 'An unpublished blog used for testing purposes',
-            },
-          ],
-        },
         {
           type: 'paragraph',
           content: [

@@ -10,6 +10,7 @@ export type Blog = {
   summary: string;
   contents: string;
   published: boolean;
+  publishedAt: Date | null;
   tags: string[];
   createdAt?: Date;
   updatedAt?: Date;
