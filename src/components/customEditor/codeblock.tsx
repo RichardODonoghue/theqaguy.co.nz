@@ -32,7 +32,10 @@ const CodeBlockComponent: React.FC<NodeViewProps> = ({
             </option>
           ))}
       </select>
-      <NodeViewContent className="block min-w-full text-white whitespace-pre break-normal bg-slate-800" />
+      <NodeViewContent
+        className="block min-w-full text-white whitespace-pre break-normal bg-slate-800"
+        data-testid="code-block-content"
+      />
     </NodeViewWrapper>
   );
 };

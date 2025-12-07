@@ -73,11 +73,11 @@ test.describe('Blog Editor', () => {
     await blogEditor.goToBlog();
 
     await blogEditor.clickToolbarButton('Code Block');
-    await expect(blogEditor.codeblock).toBeVisible();
-    await blogEditor.codeblock.click();
+    await expect(blogEditor.codeblock.element).toBeVisible();
+    await blogEditor.codeblock.content.click();
     // Use insertText for stability as typing can be flaky with complex editors
     await page.keyboard.insertText('console.log("Hello, World!");');
-    await expect(blogEditor.codeblock).toContainText(
+    await expect(blogEditor.codeblock.content).toContainText(
       'console.log("Hello, World!");'
     );
   });
@@ -87,10 +87,11 @@ test.describe('Blog Editor', () => {
 
     await blogEditor.clickToolbarButton('Code Block');
 
-    const languageSelect = blogEditor.codeblock.getByRole('combobox');
-    await languageSelect.selectOption('typescript');
+    await blogEditor.codeblock.languageDropdown.selectOption('typescript');
 
-    await expect(languageSelect).toHaveValue('typescript');
+    await expect(blogEditor.codeblock.languageDropdown).toHaveValue(
+      'typescript'
+    );
   });
 
   test('Verify Blog Editor Content For New Blog Post', async ({ page }) => {
