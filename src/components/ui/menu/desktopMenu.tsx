@@ -6,12 +6,8 @@ import { Typography } from '../typography';
 import { Separator } from '../separator';
 import { MenuItemData, MenuProps } from './Menu';
 import { MenuItem } from './menuItem';
-import { authClient } from '@/lib/auth/auth-client';
-import { Activity } from 'react';
 
 export const DesktopMenu = ({ menuItems }: MenuProps) => {
-  const { data: session } = authClient.useSession();
-
   return (
     <div className="flex flex-col p-4" data-testid="desktop-menu">
       <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
@@ -30,9 +26,6 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
             {menuItems.map((item: MenuItemData, index) => (
               <MenuItem key={index} item={item} />
             ))}
-            <Activity mode={session?.user ? 'visible' : 'hidden'}>
-              <MenuItem item={{ href: '/admin/blog', label: 'Admin' }} />
-            </Activity>
           </ul>
           <Separator className="my-10" />
           <Link
