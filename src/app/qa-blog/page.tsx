@@ -85,12 +85,12 @@ export default async function BlogsPage() {
       <ContentHeader>QA_Blog</ContentHeader>
       <ScrollArea className="h-full">
         <div className="w-full mx-auto text-center p-4">
-          <Typography variant="6xl/bold" className="my-4">
+          <Typography variant="5xl/bold" className="my-4">
             Welcome to the QA_Blog!
           </Typography>
           <Typography
-            variant="2xl/normal"
-            className="bg-slate-700/30 rounded-lg py-4 w-auto"
+            variant="lg/normal"
+            className="bg-slate-700/30 rounded-lg py-4 px-2 w-2/3 mx-auto"
           >
             Here I will regularly share my experiences, thoughts, tips and
             tricks related to software testing and quality assurance.
