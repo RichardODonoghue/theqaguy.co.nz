@@ -137,7 +137,7 @@ export default function AboutMe() {
           <section
             id="about-me-bio"
             aria-labelledby="about-me-bio"
-            className="grid grid-cols-2 gap-x-2 w-2/3 mx-auto "
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-2 w-2/3 mx-auto "
           >
             <ProfileCard />
             <HobbyCard />
