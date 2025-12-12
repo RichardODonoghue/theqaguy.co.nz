@@ -39,7 +39,7 @@ const profileDetails = {
 };
 
 const ProfileCard = () => (
-  <Card width="w-100" overrides="p-4" data-testid="profile-card">
+  <Card width="w-100" overrides="p-4 mb-4 md:mb-0" data-testid="profile-card">
     <Typography variant="3xl/extrabold" className="mb-8 text-center" as="h2">
       Profile
     </Typography>
