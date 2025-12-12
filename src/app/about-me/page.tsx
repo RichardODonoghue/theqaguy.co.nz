@@ -3,13 +3,13 @@ import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
 import { technologies } from '@/constants/technologies';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Card } from '@/components/ui/card';
 
 export async function generateMetadata() {
   return {
@@ -29,39 +29,62 @@ export async function generateMetadata() {
   };
 }
 
-export default function AboutMe() {
-  const bioContent = (
-    <div className="w-full md:w-2/3 text-center mx-auto">
-      <Typography variant="xl/normal" as="h3" className="mb-0">
-        Hello Internet,{' '}
-        <strong className="text-accent">I&apos;m Richard</strong>
-      </Typography>
-      <Typography
-        variant="lg/normal"
-        as="p"
-        className="whitespace-pre-line mt-0 mb-4"
-        data-testid="about-me-blurb"
-      >
-        {aboutMeBlurb}
-      </Typography>
-      <Typography variant="lg/normal" as="p">
-        Outside of work I enjoy:
-      </Typography>
+const profileDetails = {
+  Occupation: 'QA Engineer',
+  Location: 'Manawatu, New Zealand',
+  Pets: '1 Dog and 2 Cats',
+  'Favourite Food': 'Burgers',
+  'Favourite Game': 'Final Fantasy VII',
+  'Favourite Band': 'Linkin Park',
+};
+
+const ProfileCard = () => (
+  <Card width="w-100" overrides="p-4" data-testid="profile-card">
+    <Typography variant="3xl/extrabold" className="mb-8 text-center" as="h2">
+      Profile
+    </Typography>
+    <Separator className="mb-4" />
+    <div className="w-full mx-auto" data-testid="profile-details">
+      {Object.entries(profileDetails).map(([key, value]) => (
+        <Typography
+          key={key}
+          variant="lg/normal"
+          className="text-left mx-auto w-full"
+        >
+          {`${key}: `}
+          <Typography variant="lg/normal" className="text-accent" as="span">
+            {value}
+          </Typography>
+        </Typography>
+      ))}
+    </div>
+  </Card>
+);
+
+const HobbyCard = () => (
+  <Card width="w-100" data-testid="hobby-card">
+    <Typography variant="3xl/extrabold" className=" text-center" as="h2">
+      Hobbies and Interests
+    </Typography>
+    <Separator className="" />
+    <div className="text-left text-nowrap p-4" data-testid="hobbies-list">
       <Typography
         variant="lg/normal"
         as="ul"
         className="list-inside"
         data-testid="about-me-hobbies"
       >
-        <li className="ml-4">Building software and tools</li>
-        <li className="ml-4">Contributing to testing of FOSS software</li>
-        <li className="ml-4">Attending my local linux user group</li>
-        <li className="ml-4">Playing video games</li>
-        <li className="ml-4">Spending time with my family</li>
+        <li className=" list-disc">Building software and tools</li>
+        <li className=" list-disc">Contributing to FOSS software</li>
+        <li className=" list-disc">Attending my local Linux user group</li>
+        <li className=" list-disc">Playing and building video games</li>
+        <li className=" list-disc">Spending time with my family</li>
       </Typography>
     </div>
-  );
+  </Card>
+);
 
+export default function AboutMe() {
   const technologyExperience = Object.entries(technologies).map(
     ([category, tech]) => (
       <div key={category}>
@@ -106,20 +129,18 @@ export default function AboutMe() {
     <>
       <ContentHeader>AboutMe</ContentHeader>
       <ScrollArea className="h-full">
-        <div className="pr-4 mb-20">
+        <div className="w-full mb-20 text-center mx-auto">
+          <Typography variant="3xl/normal" as="h2" className="mb-4 mx-auto">
+            Hello Internet,{' '}
+            <strong className="text-accent">I&apos;m Richard</strong>
+          </Typography>
           <section
             id="about-me-bio"
             aria-labelledby="about-me-bio"
-            className="mx-5"
+            className="grid grid-cols-2 gap-x-2 w-2/3 mx-auto "
           >
-            <Typography
-              variant="3xl/extrabold"
-              className="my-2 text-center"
-              as="h2"
-            >
-              Bio
-            </Typography>
-            {bioContent}
+            <ProfileCard />
+            <HobbyCard />
           </section>
           <Separator className="my-10" />
           <section
@@ -133,7 +154,7 @@ export default function AboutMe() {
                 className="my-8 text-center"
                 as="h3"
               >
-                Technologies I have experience with
+                Technologies I have professional experience with
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
                 {technologyExperience}

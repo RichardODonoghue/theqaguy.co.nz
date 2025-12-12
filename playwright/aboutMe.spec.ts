@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
 import config from '../playwright.config';
-import { AboutMe } from './pcoms/aboutMe';
+import { AboutMePage } from './pcoms/aboutMe';
 import { ContentHeader } from './pcoms/contentHeader';
 import { Menu } from './pcoms/menu';
 import { technologies } from '@/constants/technologies';
-import { aboutMeBlurb } from '@/constants/aboutMeBlurb';
 import AxeBuilder from '@axe-core/playwright';
 
 const baseURL = config.use?.baseURL as string;
@@ -12,10 +11,10 @@ const baseURL = config.use?.baseURL as string;
 test.use({ baseURL: baseURL });
 
 test.describe('About Me Page', () => {
-  let aboutMePage: AboutMe;
+  let aboutMePage: AboutMePage;
 
   test.beforeEach(async ({ page }) => {
-    aboutMePage = new AboutMe(page);
+    aboutMePage = new AboutMePage(page);
     await aboutMePage.goto();
   });
 
@@ -50,23 +49,37 @@ test.describe('About Me Page', () => {
     await expect(menu.selectedMenuItem).toHaveText('About Me');
 
     await expect(
-      aboutMePage.aboutMeSection.locator('h2', { hasText: 'Bio' })
+      aboutMePage.profileCard.locator('h2', { hasText: 'Profile' })
     ).toBeVisible();
-    await expect(aboutMePage.aboutMeBio).toHaveText(aboutMeBlurb);
+    await expect(aboutMePage.profileDetails).toHaveText(
+      [
+        'Occupation: QA Engineer',
+        'Location: Manawatu, New Zealand',
+        'Pets: 1 Dog and 2 Cats',
+        'Favourite Food: Burgers',
+        'Favourite Game: Final Fantasy VII',
+        'Favourite Band: Linkin Park',
+      ].join('')
+    );
 
-    await expect(aboutMePage.aboutMeHobbies).toHaveText(
+    await expect(
+      aboutMePage.hobbiesCard.locator('h2', {
+        hasText: 'Hobbies and Interests',
+      })
+    ).toBeVisible();
+    await expect(aboutMePage.hobbiesList).toHaveText(
       [
         'Building software and tools',
-        'Contributing to testing of FOSS software',
-        'Attending my local linux user group',
-        'Playing video games',
+        'Contributing to FOSS software',
+        'Attending my local Linux user group',
+        'Playing and building video games',
         'Spending time with my family',
       ].join('')
     );
 
     await expect(
       aboutMePage.techSection.getByRole('heading', {
-        name: 'Technologies I have experience with',
+        name: 'Technologies I have professional experience with',
       })
     ).toBeVisible();
 
