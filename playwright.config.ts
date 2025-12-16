@@ -12,7 +12,7 @@ if (!process.env.CI) {
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './playwright',
+  testDir: './playwright/tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -37,7 +37,11 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+    {
+      name: 'setup',
+      testDir: './playwright/config',
+      testMatch: /.*\.setup\.ts/,
+    },
     {
       name: 'chromium',
       use: {

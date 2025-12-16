@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import config from '../playwright.config';
-import { BlogsPage } from './pcoms/blogs';
-import { Menu } from './pcoms/menu';
-import { testBlogs } from '../src/constants/testBlogs';
+import config from '../../playwright.config';
+import { BlogsPage } from '../models/blogs';
+import { Menu } from '../models/menu';
+import { testBlogs } from '../../src/constants/testBlogs';
 import { AxeBuilder } from '@axe-core/playwright';
-import { ContentHeader } from './pcoms/contentHeader';
+import { ContentHeader } from '../models/contentHeader';
 
 const baseURL = config.use?.baseURL;
 

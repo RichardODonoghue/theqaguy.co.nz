@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { Blog } from './pcoms/blog';
-import { BlogEditorPage } from './pcoms/blogEditor';
-import { ContentHeader } from './pcoms/contentHeader';
-import config from '../playwright.config';
-import { seedDatabase } from './utils/seedDatabase';
+import { Blog } from '../models/blog';
+import { BlogEditorPage } from '../models/blogEditor';
+import { ContentHeader } from '../models/contentHeader';
+import config from '../../playwright.config';
+import { seedDatabase } from '../config/seedDatabase';
 
 const baseURL = config.use?.baseURL;
 

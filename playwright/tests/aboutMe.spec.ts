@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import config from '../playwright.config';
-import { AboutMePage } from './pcoms/aboutMe';
-import { ContentHeader } from './pcoms/contentHeader';
-import { Menu } from './pcoms/menu';
+import config from '../../playwright.config';
+import { AboutMePage } from '../models/aboutMe';
+import { ContentHeader } from '../models/contentHeader';
+import { Menu } from '../models/menu';
 import { technologies } from '@/constants/technologies';
 import AxeBuilder from '@axe-core/playwright';
 

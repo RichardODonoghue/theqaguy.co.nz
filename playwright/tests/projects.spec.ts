@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import config from '../playwright.config';
+import config from '../../playwright.config';
 import { projects } from '@/constants/projects';
-import { ProjectPage } from './pcoms/projects';
-import { ContentHeader } from './pcoms/contentHeader';
-import { Menu } from './pcoms/menu';
+import { ProjectPage } from '../models/projects';
+import { ContentHeader } from '../models/contentHeader';
+import { Menu } from '../models/menu';
 import { AxeBuilder } from '@axe-core/playwright';
 
 const baseURL = config.use?.baseURL;

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import config from '../playwright.config';
-import { AdminBlogPage } from './pcoms/adminBlogs';
+import config from '../../playwright.config';
+import { AdminBlogPage } from '../models/adminBlogs';
 import AxeBuilder from '@axe-core/playwright';
 import { testBlogs } from '@/constants/testBlogs';
 
