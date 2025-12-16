@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.56.1-noble AS builder
+FROM mcr.microsoft.com/playwright:v1.57.0-noble AS builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY . .
 RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npm run build
 
-FROM mcr.microsoft.com/playwright:v1.56.1-noble AS runner
+FROM mcr.microsoft.com/playwright:v1.57.0-noble AS runner
 
 WORKDIR /app
 ENV NODE_ENV=production
