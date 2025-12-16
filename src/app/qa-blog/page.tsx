@@ -57,17 +57,18 @@ const fetchPublishedBlogs = unstable_cache(
 );
 
 export default async function BlogsPage() {
-  const blogsJSON = await fetchPublishedBlogs();
+  const blogsData = await fetchPublishedBlogs();
 
-  // Because of how unstable_cache works, the dates are mutated into strings,
-  //  so we need to convert them back to date objects
-  const blogsData = blogsJSON.map((blog) => ({
+  // Because of how Next.js unstable_cache works, the dates are mutated into strings,
+  // so we need to convert them back to date objects
+  const formattedBlogs = blogsData.map((blog) => ({
     ...blog,
     createdAt: blog.createdAt ? new Date(blog.createdAt) : undefined,
     updatedAt: blog.updatedAt ? new Date(blog.updatedAt) : undefined,
+    publishedAt: blog.publishedAt ? new Date(blog.publishedAt) : undefined,
   }));
 
-  const blogs = blogsData.map((blog) => (
+  const blogs = formattedBlogs.map((blog) => (
     <BlogCard key={blog.slug} blog={blog} />
   ));
 
@@ -85,12 +86,12 @@ export default async function BlogsPage() {
       <ContentHeader>QA_Blog</ContentHeader>
       <ScrollArea className="h-full">
         <div className="w-full mx-auto text-center p-4">
-          <Typography variant="6xl/bold" className="my-4">
+          <Typography variant="5xl/bold" className="my-4">
             Welcome to the QA_Blog!
           </Typography>
           <Typography
-            variant="2xl/normal"
-            className="bg-slate-700/30 rounded-lg py-4 w-auto"
+            variant="lg/normal"
+            className="bg-slate-700/30 rounded-lg py-4 px-2 w-2/3 mx-auto"
           >
             Here I will regularly share my experiences, thoughts, tips and
             tricks related to software testing and quality assurance.

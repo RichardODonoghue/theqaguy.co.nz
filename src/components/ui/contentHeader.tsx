@@ -32,7 +32,7 @@ export const ContentHeader = ({ children }: ContentHeaderProps) => {
           </button>
         </>
       )}
-      <Typography variant="5xl/extrabold" as="h1" className="inline-block">
+      <Typography variant="4xl/extrabold" as="h1" className="inline-block">
         <span className="text-accent">{'<'}</span>
         {children}
         <span className="text-accent">{'/>'}</span>

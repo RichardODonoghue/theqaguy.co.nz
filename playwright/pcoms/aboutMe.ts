@@ -1,17 +1,19 @@
 import { Page, Locator } from '@playwright/test';
 
-export class AboutMe {
+export class AboutMePage {
   readonly page: Page;
-  readonly aboutMeSection: Locator;
-  readonly aboutMeBio: Locator;
-  readonly aboutMeHobbies: Locator;
+  readonly profileCard: Locator;
+  readonly profileDetails: Locator;
+  readonly hobbiesCard: Locator;
+  readonly hobbiesList: Locator;
   readonly techSection: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.aboutMeSection = page.locator('#about-me-bio');
-    this.aboutMeBio = page.getByTestId('about-me-blurb');
-    this.aboutMeHobbies = page.getByTestId('about-me-hobbies');
+    this.profileCard = page.getByTestId('profile-card');
+    this.profileDetails = page.getByTestId('profile-details');
+    this.hobbiesCard = page.getByTestId('hobby-card');
+    this.hobbiesList = page.getByTestId('hobbies-list');
     this.techSection = page.locator('#about-me-technologies');
   }
 

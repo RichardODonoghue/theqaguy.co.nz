@@ -19,7 +19,7 @@ export const MenuItem = ({ item, onClick }: MenuItemProps) => {
 
   return (
     <li
-      className="my-4 w-40"
+      className="my-4 w-40 h-12"
       data-testid={isSelected ? 'selected-menu-item' : undefined}
     >
       <Link
@@ -30,7 +30,7 @@ export const MenuItem = ({ item, onClick }: MenuItemProps) => {
       >
         <div className="inline-block">
           <Typography variant="2xl/medium">{item.label}</Typography>
-          {isSelected && <div className="bg-accent h-1 mt-1" />}
+          {isSelected && <div className="bg-accent h-1" />}
         </div>
       </Link>
     </li>

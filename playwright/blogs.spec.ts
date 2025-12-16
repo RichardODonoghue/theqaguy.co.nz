@@ -80,7 +80,7 @@ test.describe('Blogs Page Tests', () => {
 
       expect(
         await blogCard.locator('#blog-published-date').textContent()
-      ).toContain(`Posted ${blog.createdAt?.toDateString()}`);
+      ).toContain(`Posted ${blog.publishedAt?.toDateString()}`);
     }
   });
 
