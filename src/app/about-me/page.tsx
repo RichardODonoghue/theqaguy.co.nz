@@ -39,12 +39,12 @@ const profileDetails = {
 };
 
 const ProfileCard = () => (
-  <Card width="w-100" overrides="p-4 mb-4 md:mb-0" data-testid="profile-card">
+  <Card width="w-full max-w-md" overrides="md:p-4" data-testid="profile-card">
     <Typography variant="3xl/extrabold" className="mb-8 text-center" as="h2">
       Profile
     </Typography>
     <Separator className="mb-4" />
-    <div className="w-full mx-auto" data-testid="profile-details">
+    <div className="w-full mx-auto px-4" data-testid="profile-details">
       {Object.entries(profileDetails).map(([key, value]) => (
         <Typography
           key={key}
@@ -62,7 +62,7 @@ const ProfileCard = () => (
 );
 
 const HobbyCard = () => (
-  <Card width="w-100" data-testid="hobby-card">
+  <Card width="w-full max-w-md" data-testid="hobby-card" overrides="md:p-4">
     <Typography variant="3xl/extrabold" className=" text-center" as="h2">
       Hobbies and Interests
     </Typography>
@@ -84,9 +84,9 @@ const HobbyCard = () => (
   </Card>
 );
 
-export default function AboutMe() {
-  const technologyExperience = Object.entries(technologies).map(
-    ([category, tech]) => (
+const Technologies = () => (
+  <>
+    {Object.entries(technologies).map(([category, tech]) => (
       <div key={category}>
         <Typography
           variant="xl/normal"
@@ -122,9 +122,11 @@ export default function AboutMe() {
           ))}
         </div>
       </div>
-    )
-  );
+    ))}
+  </>
+);
 
+export default function AboutMe() {
   return (
     <>
       <ContentHeader>AboutMe</ContentHeader>
@@ -137,7 +139,7 @@ export default function AboutMe() {
           <section
             id="about-me-bio"
             aria-labelledby="about-me-bio"
-            className="grid grid-cols-1 md:grid-cols-2 gap-x-2 w-2/3 mx-auto "
+            className="flex flex-col items-center justify-center gap-10 my-5 md:flex-row md:items-stretch"
           >
             <ProfileCard />
             <HobbyCard />
@@ -157,7 +159,7 @@ export default function AboutMe() {
                 Technologies I have professional experience with
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
-                {technologyExperience}
+                <Technologies />
               </div>
             </div>
           </section>
