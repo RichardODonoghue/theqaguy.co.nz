@@ -11,42 +11,34 @@ import {
 import { Blog } from '@/lib/blogs';
 import Link from 'next/link';
 import { CldImage } from 'next-cloudinary';
+import { truncateString } from '@/lib/truncateString';
 
 interface BlogCardProps {
   blog: Blog;
 }
 
 const BlogCardTitle = ({ title }: { title: string }) => {
-  const shouldTruncateTitle = title.length > 20;
-
-  if (shouldTruncateTitle)
-    return (
-      <Tooltip disableHoverableContent={!shouldTruncateTitle}>
-        <TooltipTrigger asChild>
-          <div className="min-w-0 w-full">
-            <h2 className="block text-left w-full truncate text-lg font-bold sm:text-xl md:text-2xl">
-              {title}
-            </h2>
-          </div>
-        </TooltipTrigger>
-        <TooltipContent className="m-0">{title}</TooltipContent>
-      </Tooltip>
-    );
+  const formattedTitle = truncateString(title, 24);
 
   return (
-    <Typography
-      variant="2xl/bold"
-      as="h2"
-      className="text-left text-lg font-bold sm:text-xl md:text-2xl"
-    >
-      {title}
-    </Typography>
+    <Tooltip disableHoverableContent={!formattedTitle.isTruncated}>
+      <TooltipTrigger asChild>
+        <div className="min-w-0 w-full">
+          <h2 className="block text-left w-full text-lg font-bold sm:text-xl md:text-2xl">
+            {formattedTitle.text}
+          </h2>
+        </div>
+      </TooltipTrigger>
+      <TooltipContent className="m-0">{title}</TooltipContent>
+    </Tooltip>
   );
 };
 
 export const BlogCard = ({ blog }: BlogCardProps) => {
-  // TODO: Implement published date instead.
-  const formattedDate = blog.createdAt?.toDateString();
+  const formattedPublishedAt = blog.publishedAt
+    ? blog.publishedAt.toDateString()
+    : 'Unpublished';
+  const formattedSummary = truncateString(blog.summary, 100);
 
   return (
     <Card
@@ -70,16 +62,16 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
             id="blog-summary"
             variant="md/normal"
             as="p"
-            className="text-left p-0 my-0"
+            className="text-left p-0 my-0 h-10"
           >
-            {blog.summary}
+            {formattedSummary.text}
           </Typography>
         </div>
         <div className="mt-auto">
           <Separator className="my-2" />
           <div className="flex justify-between">
             <Typography id="blog-published-date" variant="sm/normal" as="span">
-              Posted {formattedDate}
+              Posted {formattedPublishedAt}
             </Typography>
           </div>
         </div>
