@@ -1,7 +1,7 @@
 import { test as setup, expect } from '@playwright/test';
 import path from 'path';
 
-const authFile = path.join(__dirname, './.auth/admin.json');
+const authFile = path.join(__dirname, '../.auth/admin.json');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || '';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';

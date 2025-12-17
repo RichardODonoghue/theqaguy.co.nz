@@ -48,6 +48,8 @@ test.describe('Blog Editor', () => {
 
     await blogEditor.goToBlog('a-test-blog');
 
+    await expect(blogEditor.editor.getByRole('paragraph').nth(2)).toBeVisible();
+
     await blogEditor.editBlogParagraph('Additional content added here.', 2);
     await expect(blogEditor.editor).toContainText(
       'Additional content added here.'
@@ -73,10 +75,12 @@ test.describe('Blog Editor', () => {
     await blogEditor.goToBlog();
 
     await blogEditor.clickToolbarButton('Code Block');
-    await expect(blogEditor.codeblock.element).toBeVisible();
-    await blogEditor.codeblock.content.click();
-    // Use insertText for stability as typing can be flaky with complex editors
-    await page.keyboard.insertText('console.log("Hello, World!");');
+    await Promise.all([
+      await expect(blogEditor.codeblock.element).toBeVisible(),
+      await expect(blogEditor.codeblock.content).toBeVisible(),
+    ]);
+
+    await blogEditor.codeblock.content.fill('console.log("Hello, World!");');
     await expect(blogEditor.codeblock.content).toContainText(
       'console.log("Hello, World!");'
     );
