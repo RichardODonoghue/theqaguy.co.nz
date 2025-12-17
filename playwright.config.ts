@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, ReporterDescription } from '@playwright/test';
 import path from 'path';
 
 // If not running in CI, load environment variables from .env file
@@ -6,6 +6,16 @@ if (!process.env.CI) {
   import('dotenv').then((dotenv) => {
     dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
   });
+}
+
+const reporters: ReporterDescription[] = [
+  ['list'],
+  ['html', { open: 'never', outputFolder: 'playwright-report' }],
+  ['junit', { outputFile: './test-results/results.xml' }],
+];
+
+if (process.env.CI) {
+  reporters.push(['github']);
 }
 
 /**
@@ -22,11 +32,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['list', { verbose: true }],
-    ['html', { open: 'never', outputFolder: 'playwright-report' }],
-    ['junit', { outputFile: './test-results/results.xml' }],
-  ],
+  reporter: reporters,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: process.env.BASE_URL

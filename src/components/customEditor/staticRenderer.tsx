@@ -14,7 +14,7 @@ export const StaticRenderer = ({ content }: { content: JSONContent }) => {
   }, [content]);
 
   return (
-    <div id="blog" className="tiptap flow-root p-2">
+    <div id="blog" className="tiptap flow-root p-2" data-testid="blog-content">
       {output}
     </div>
   );

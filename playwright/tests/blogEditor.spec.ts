@@ -20,13 +20,13 @@ test.describe('Blog Editor', () => {
     blogEditor = new BlogEditorPage(page);
   });
 
-  test('Verify Blog Editor Page Metadata', async ({ page }) => {
+  test('Verify blog editor page metadata', async ({ page }) => {
     await blogEditor.goToBlog('a-test-blog');
 
     await expect(page).toHaveTitle('TheQAGuy | Blog Editor');
   });
 
-  test('Verify Blog Content For Existing Blog Post', async ({ page }) => {
+  test('Verify blog content for existing blog post', async ({ page }) => {
     await blogEditor.goToBlog('a-test-blog');
 
     const contentHeader = new ContentHeader(page);
@@ -38,13 +38,12 @@ test.describe('Blog Editor', () => {
     );
   });
 
-  test('Can edit Blog Post', async ({ page }) => {
+  test('Can edit blog post', async ({ page }) => {
     test.skip(
-      baseURL === 'https://theqaguy.co.nz',
+      baseURL === 'https://theqaguy.co.nz' ||
+        process.env.NODE_ENV === 'production',
       'Skipping test on production'
     );
-
-    const blog = new Blog(blogEditor.page);
 
     await blogEditor.goToBlog('a-test-blog');
 
@@ -64,14 +63,15 @@ test.describe('Blog Editor', () => {
 
     await page.goto('/qa-blog/a-test-blog');
 
-    await expect(blog.content.getByRole('paragraph').nth(2)).toContainText(
-      'Additional content added here.'
-    );
+    const blog = new Blog(page);
+
+    await expect(blog.content).toBeVisible();
+    await expect(blog.content).toContainText('Additional content added here.');
 
     await seedDatabase();
   });
 
-  test('Can Add Codeblock to Blog Post', async ({ page }) => {
+  test('Can add custom codeblock to blog post', async ({ page }) => {
     await blogEditor.goToBlog();
 
     await blogEditor.clickToolbarButton('Code Block');
@@ -98,7 +98,7 @@ test.describe('Blog Editor', () => {
     );
   });
 
-  test('Verify Blog Editor Content For New Blog Post', async ({ page }) => {
+  test('Verify blog editor content for new blog post', async ({ page }) => {
     await blogEditor.goToBlog();
 
     const contentHeader = new ContentHeader(page);
