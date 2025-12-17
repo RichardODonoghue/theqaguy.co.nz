@@ -77,7 +77,6 @@ export const Toolbar = ({
       summary: summary,
       slug: newSlug,
       published: published,
-      publishedAt: published ? new Date() : null,
       tags: tags,
     };
   };
@@ -124,7 +123,7 @@ export const Toolbar = ({
     try {
       await updateBlogBySlug(slug, {
         published: !published,
-        publishedAt: !published ? new Date() : undefined,
+        publishedAt: !published ? new Date() : null,
       });
       setPublished(!published);
       toast.success(

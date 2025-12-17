@@ -36,7 +36,9 @@ export class BlogEditorPage {
     this.codeblock = {
       element: page.getByTestId('code-block'),
       languageDropdown: page.getByRole('combobox'),
-      content: page.getByTestId('code-block-content'),
+      content: page
+        .getByTestId('code-block-content')
+        .locator('div[data-node-view-content-react=""]'),
     };
     this.paragraph = page.getByRole('paragraph');
   }
@@ -73,6 +75,7 @@ export class BlogEditorPage {
   }
 
   async editBlogParagraph(content: string, paragraphIndex = 0) {
-    await this.editor.getByRole('paragraph').nth(paragraphIndex).fill(content);
+    await this.editor.getByRole('paragraph').nth(paragraphIndex).click();
+    await this.page.keyboard.insertText(content);
   }
 }

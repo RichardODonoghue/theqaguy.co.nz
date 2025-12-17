@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "test:e2e": "playwright test",
     "prepare": "husky",
+    "playwright:test": "playwright test",
     "playwright:dev": "PW_TEST_CONNECT_WS_ENDPOINT=ws://127.0.0.1:3001/ npx playwright test --ui",
     "playwright:server": "docker run --network=host --rm --init -it --workdir /home/pwuser --user pwuser mcr.microsoft.com/playwright:v1.57.0-noble /bin/sh -c 'npx -y playwright@1.57.0 run-server --port 3001 --host 0.0.0.0'"
   },

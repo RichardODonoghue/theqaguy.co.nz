@@ -25,7 +25,7 @@ export class Blog {
 
   constructor(page: Page) {
     this.page = page;
-    this.content = page.locator('#blog');
+    this.content = page.getByTestId('blog-content');
     this.title = page.locator('#blog-title');
     this.summary = page.locator('#blog-summary');
     this.footer = page.getByTestId('blog-footer');

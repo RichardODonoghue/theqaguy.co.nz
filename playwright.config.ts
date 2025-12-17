@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, ReporterDescription } from '@playwright/test';
 import path from 'path';
 
 // If not running in CI, load environment variables from .env file
@@ -8,11 +8,21 @@ if (!process.env.CI) {
   });
 }
 
+const reporters: ReporterDescription[] = [
+  ['list'],
+  ['html', { open: 'never', outputFolder: 'playwright-report' }],
+  ['junit', { outputFile: './test-results/results.xml' }],
+];
+
+if (process.env.CI) {
+  reporters.push(['github']);
+}
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './playwright',
+  testDir: './playwright/tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,7 +32,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: reporters,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: process.env.BASE_URL
@@ -37,7 +47,11 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+    {
+      name: 'setup',
+      testDir: './playwright/config',
+      testMatch: /.*\.setup\.ts/,
+    },
     {
       name: 'chromium',
       use: {
