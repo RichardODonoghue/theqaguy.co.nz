@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { technologies } from '@/constants/technologies';
+import { technologies } from '@/app/about-me/technologiesData';
 import {
   Tooltip,
   TooltipContent,

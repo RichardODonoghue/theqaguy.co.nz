@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Project } from '@/constants/projects';
+import { Project } from '@/app/projects/projects';
 import { Typography } from '@/components/ui/typography';
 
 import { Card } from '@/components/ui/card';

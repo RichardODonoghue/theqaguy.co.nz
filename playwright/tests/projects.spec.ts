@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import config from '../../playwright.config';
-import { projects } from '@/constants/projects';
+import { projects } from '@/app/projects/projects';
 import { ProjectPage } from '../models/projects';
 import { ContentHeader } from '../models/contentHeader';
 import { Menu } from '../models/menu';

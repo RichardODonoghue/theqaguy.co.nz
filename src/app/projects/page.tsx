@@ -1,7 +1,7 @@
 import { ContentHeader } from '@/components/ui/contentHeader';
 
 import { Typography } from '@/components/ui/typography';
-import { projects } from '@/constants/projects';
+import { projects } from '@/app/projects/projects';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ProjectCard } from './projectCard';
 
