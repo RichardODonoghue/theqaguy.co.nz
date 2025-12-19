@@ -29,7 +29,6 @@ export const technologies: Technologies = {
     { name: 'BitBucket', logo: 'BitBucket.svg' },
     { name: 'DBeaver', logo: 'DBeaver.svg' },
     { name: 'Docker', logo: 'Docker.svg' },
-    { name: 'ESLint', logo: 'ESLint.svg' },
     { name: 'Git', logo: 'git.svg' },
   ],
   Infrastructure: [
@@ -49,9 +48,10 @@ export const technologies: Technologies = {
     { name: 'Jira', logo: 'Jira.svg' },
   ],
   'Operating Systems': [
-    { name: 'Fedora', logo: 'Fedora.svg' },
+    { name: 'Mac OS', logo: 'apple.svg' },
     { name: 'Linux', logo: 'Linux.svg' },
     { name: 'Windows', logo: 'Windows.svg' },
+    { name: 'Android', logo: 'android.svg' },
   ],
   'Test Frameworks & Tools': [
     { name: 'Cypress', logo: 'Cypress.svg' },

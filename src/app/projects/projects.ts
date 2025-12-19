@@ -9,6 +9,7 @@ export interface Project {
   url?: string;
 }
 
+// TODO: Move this into the database later and maybe fetch most of these details from Github?
 export const projects: Record<Classification, Project[]> = {
   Software: [
     {
