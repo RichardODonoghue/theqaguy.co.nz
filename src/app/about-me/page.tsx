@@ -68,7 +68,7 @@ export default function AboutMe() {
                 className="my-8 text-center"
                 as="h3"
               >
-                Technologies I have professional experience with
+                Technologies I Have Professional Experience With
               </Typography>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-5">
                 <Technologies />

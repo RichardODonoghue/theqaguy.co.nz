@@ -6,6 +6,8 @@ export class AboutMePage {
   readonly profileDetails: Locator;
   readonly hobbiesCard: Locator;
   readonly hobbiesList: Locator;
+  readonly highlightsSection: Locator;
+  readonly highlights: Promise<Locator>;
   readonly techSection: Locator;
 
   constructor(page: Page) {
@@ -15,6 +17,10 @@ export class AboutMePage {
     this.hobbiesCard = page.getByTestId('hobby-card');
     this.hobbiesList = page.getByTestId('hobbies-list');
     this.techSection = page.locator('#about-me-technologies');
+    this.highlightsSection = page.locator('#about-me-highlights');
+    this.highlights = Promise.resolve(
+      this.highlightsSection.locator('[data-testid^="highlight-"]')
+    );
   }
 
   async goto(): Promise<void> {

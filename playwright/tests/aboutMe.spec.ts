@@ -3,7 +3,12 @@ import config from '../../playwright.config';
 import { AboutMePage } from '../models/aboutMe';
 import { ContentHeader } from '../models/contentHeader';
 import { Menu } from '../models/menu';
-import { technologies } from '@/constants/technologies';
+import {
+  craziestBug,
+  greatestAchievement,
+  greatestChallenge,
+} from '@/app/about-me/highlights';
+import { technologies } from '@/app/about-me/technologiesData';
 import AxeBuilder from '@axe-core/playwright';
 
 const baseURL = config.use?.baseURL as string;
@@ -76,6 +81,34 @@ test.describe('About Me Page', () => {
         'Spending time with my family',
       ].join('')
     );
+
+    await aboutMePage.highlightsSection.scrollIntoViewIfNeeded();
+    await expect(
+      aboutMePage.highlightsSection.getByRole('heading', {
+        name: 'Professional Highlights & Achievements',
+      })
+    ).toBeVisible();
+
+    const highlights = await aboutMePage.highlights;
+
+    await expect(highlights).toHaveCount(3);
+    for (const highlight of await highlights.all()) {
+      await expect(highlight).toBeVisible();
+    }
+
+    await expect(
+      aboutMePage.highlightsSection.getByTestId('highlight-craziest-bug')
+    ).toContainText(craziestBug);
+
+    await expect(
+      aboutMePage.highlightsSection.getByTestId(
+        'highlight-greatest-achievement'
+      )
+    ).toContainText(greatestAchievement);
+
+    await expect(
+      aboutMePage.highlightsSection.getByTestId('highlight-greatest-challenge')
+    ).toContainText(greatestChallenge);
 
     await expect(
       aboutMePage.techSection.getByRole('heading', {
