@@ -1,6 +1,11 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import {
@@ -18,13 +23,13 @@ interface BlogCardProps {
 }
 
 const BlogCardTitle = ({ title }: { title: string }) => {
-  const formattedTitle = truncateString(title, 24);
+  const formattedTitle = truncateString(title, 48);
 
   return (
     <Tooltip disableHoverableContent={!formattedTitle.isTruncated}>
       <TooltipTrigger asChild>
-        <div className="min-w-0 w-full">
-          <h2 className="block text-left w-full text-lg font-bold sm:text-xl md:text-2xl">
+        <div className="min-w-0 w-full p-0">
+          <h2 className="text-left w-full text-lg font-bold sm:text-xl md:text-2xl">
             {formattedTitle.text}
           </h2>
         </div>
@@ -40,41 +45,49 @@ export const BlogCard = ({ blog }: BlogCardProps) => {
     : 'Unpublished';
   const formattedSummary = truncateString(blog.summary, 100);
 
-  return (
-    <Card
-      width="w-80"
+  /*
+width="w-80"
       height="h-90"
       overrides="flex flex-col border-2 border-transparent hover:border-2 hover:border-accent"
+*/
+
+  return (
+    <Card
+      className="w-80 sm:w-100 h-60 md:w-full border-2 border-transparent hover:border-2 hover:border-accent p-0"
       data-testid={`blog-card-${blog.slug}`}
     >
-      <Link href={`/qa-blog/${blog.slug}`} className="flex flex-col flex-grow">
-        <div className="my-0">
-          <CldImage
-            src={blog.image || 'theqaguy.co.nz/blog/fallback_wdpalc'}
-            width={300}
-            height={200}
-            alt="Blog Thumbnail"
-            crop="fit"
-            className="rounded-sm w-full mb-5 mt-0 py-0"
-          />
+      <CldImage
+        src={blog.image || 'theqaguy.co.nz/blog/fallback_wdpalc'}
+        width={400}
+        height={400}
+        alt="Blog Thumbnail"
+        crop="mfit"
+        className="w-full h-full rounded-2xl absolute object-cover object-center z-0"
+      />
+      <div className="absolute inset-0 bg-gray-800/40 rounded-2xl z-0" />
+      <Link
+        href={`/qa-blog/${blog.slug}`}
+        className=" h-full w-full z-10 border-2 border-transparent hover:border-2 hover:border-accent border-solid rounded-2xl"
+      >
+        <CardHeader className="h-30 pb-0">
           <BlogCardTitle title={blog.title} />
+        </CardHeader>
+        <CardContent className="px-2 my-0 h-20 py-0">
           <Typography
             id="blog-summary"
-            variant="md/normal"
+            variant="md/medium"
             as="p"
-            className="text-left p-0 my-0 h-10"
+            className="text-left p-2 my-0"
           >
             {formattedSummary.text}
           </Typography>
-        </div>
-        <div className="mt-auto">
-          <Separator className="my-2" />
-          <div className="flex justify-between">
-            <Typography id="blog-published-date" variant="sm/normal" as="span">
-              Posted {formattedPublishedAt}
-            </Typography>
-          </div>
-        </div>
+        </CardContent>
+        <Separator />
+        <CardFooter className="p-2">
+          <Typography id="blog-published-date" variant="sm/normal" as="span">
+            Posted {formattedPublishedAt}
+          </Typography>
+        </CardFooter>
       </Link>
     </Card>
   );
