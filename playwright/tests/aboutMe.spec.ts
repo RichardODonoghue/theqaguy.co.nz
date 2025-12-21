@@ -3,11 +3,7 @@ import config from '../../playwright.config';
 import { AboutMePage } from '../models/aboutMe';
 import { ContentHeader } from '../models/contentHeader';
 import { Menu } from '../models/menu';
-import {
-  craziestBug,
-  greatestAchievement,
-  greatestChallenge,
-} from '@/app/about-me/highlights';
+import { highlights } from '@/app/about-me/highlights';
 import { technologies } from '@/app/about-me/technologiesData';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -89,26 +85,25 @@ test.describe('About Me Page', () => {
       })
     ).toBeVisible();
 
-    const highlights = await aboutMePage.highlights;
+    const highLightCards = await aboutMePage.highlights;
 
-    await expect(highlights).toHaveCount(3);
-    for (const highlight of await highlights.all()) {
-      await expect(highlight).toBeVisible();
+    await expect(highLightCards).toHaveCount(3);
+
+    // Verify rendered card content matches data
+    for (const card of await highLightCards.all()) {
+      await expect(card).toBeVisible();
+      const id = await card.getAttribute('data-testid');
+      const match = highlights.find((h) => id === h.testId);
+
+      if (!match) {
+        throw new Error('No matching highlight found for card');
+      }
+
+      await expect(
+        card.getByRole('heading', { name: match.title })
+      ).toBeVisible();
+      await expect(card).toContainText(match.description);
     }
-
-    await expect(
-      aboutMePage.highlightsSection.getByTestId('highlight-craziest-bug')
-    ).toContainText(craziestBug);
-
-    await expect(
-      aboutMePage.highlightsSection.getByTestId(
-        'highlight-greatest-achievement'
-      )
-    ).toContainText(greatestAchievement);
-
-    await expect(
-      aboutMePage.highlightsSection.getByTestId('highlight-greatest-challenge')
-    ).toContainText(greatestChallenge);
 
     await expect(
       aboutMePage.techSection.getByRole('heading', {
