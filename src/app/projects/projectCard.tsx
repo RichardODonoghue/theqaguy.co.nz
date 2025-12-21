@@ -72,7 +72,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
     <Card
       key={project.name}
       data-testid={`project-${project.name}`}
-      className="py-2 px-0 w-100"
+      className="py-2 px-0 w-80 md:w-100"
     >
       <CardHeader>
         <CardTitle className="text-center">
