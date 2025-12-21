@@ -50,7 +50,7 @@ export default function Projects() {
               aria-labelledby={`${classification}-projects`}
               key={classification}
               id={classification.toLowerCase() + '-projects'}
-              className="mx-5"
+              className="mx-auto"
             >
               <Typography
                 variant="3xl/bold"
@@ -59,7 +59,7 @@ export default function Projects() {
               >
                 {classification}
               </Typography>
-              <div className="grid lg:grid-cols-3">
+              <div className="grid lg:grid-cols-3 gap-8">
                 {projects.map((project) => (
                   <ProjectCard key={project.name} project={project} />
                 ))}
