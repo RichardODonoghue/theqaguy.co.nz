@@ -54,7 +54,7 @@ export const Highlights = () => (
       >
         <CardHeader className="p-0 h-10 mb-5">
           <CardTitle className="text-center p-0">
-            <Typography variant="3xl/extrabold" as="h2" className="p-0 my-0">
+            <Typography variant="3xl/extrabold" as="h2">
               {title}
             </Typography>
           </CardTitle>
