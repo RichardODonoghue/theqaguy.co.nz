@@ -27,7 +27,7 @@ export const ProfileCard = () => (
         </Typography>
       </CardTitle>
     </CardHeader>
-    <Separator className="mb-4" />
+    <Separator />
     <CardContent className="w-full mx-auto px-4" data-testid="profile-details">
       {Object.entries(profileDetails).map(([key, value]) => (
         <Typography
