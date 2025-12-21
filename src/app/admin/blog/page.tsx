@@ -3,7 +3,7 @@ import { DataTable } from '@/components/dataTable';
 import { ContentHeader } from '@/components/ui/contentHeader';
 import { columns } from '@/components/blogTable/columns';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Card, CardAction, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 
 export default async function Blogs() {
@@ -12,13 +12,15 @@ export default async function Blogs() {
   return (
     <>
       <ContentHeader>Admin_Blogs</ContentHeader>
-      <Card width="w-full" height="h-auto" overrides="mx-auto">
-        <div className="flex my-5">
+      <Card className="w-full h-auto mx-auto">
+        <CardAction className="flex my-5 ml-6">
           <Button className="flex" asChild>
             <Link href="/admin/blog/new">New Blog</Link>
           </Button>
-        </div>
-        <DataTable columns={columns} data={blogs} testId="blog-table" />
+        </CardAction>
+        <CardContent>
+          <DataTable columns={columns} data={blogs} testId="blog-table" />
+        </CardContent>
       </Card>
     </>
   );
