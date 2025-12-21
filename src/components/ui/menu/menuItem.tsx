@@ -30,7 +30,9 @@ export const MenuItem = ({ item, onClick }: MenuItemProps) => {
       >
         <div className="inline-block">
           <Typography variant="2xl/medium">{item.label}</Typography>
-          {isSelected && <div className="bg-accent h-1" />}
+          <div
+            className={`bg-accent h-1 ${isSelected ? 'visible' : 'invisible'}`}
+          />
         </div>
       </Link>
     </li>
