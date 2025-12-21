@@ -16,7 +16,7 @@ export const highlights: Highlight[] = [
           vulnerability. Despite middleware attempting to redirect
           unauthenticated users to a login page, the viewer remained fully
           interactive and visible on that page. By manipulating URL parameters,
-          I was able to gain full access any table in the database.`,
+          I was able to gain full access to any table in the database.`,
     testId: 'highlight-craziest-bug',
   },
   {
