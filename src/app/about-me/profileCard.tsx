@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 
@@ -12,12 +12,23 @@ const profileDetails = {
 };
 
 export const ProfileCard = () => (
-  <Card width="w-full max-w-md" overrides="md:p-4" data-testid="profile-card">
-    <Typography variant="3xl/extrabold" className="mb-8 text-center" as="h2">
-      Profile
-    </Typography>
+  <Card
+    className="w-100 md:w-full max-w-md p-2 md:p-4"
+    data-testid="profile-card"
+  >
+    <CardHeader className="p-0 h-10 mb-5">
+      <CardTitle>
+        <Typography
+          variant="3xl/extrabold"
+          className="mb-8 text-center"
+          as="h2"
+        >
+          Profile
+        </Typography>
+      </CardTitle>
+    </CardHeader>
     <Separator className="mb-4" />
-    <div className="w-full mx-auto px-4" data-testid="profile-details">
+    <CardContent className="w-full mx-auto px-4" data-testid="profile-details">
       {Object.entries(profileDetails).map(([key, value]) => (
         <Typography
           key={key}
@@ -30,6 +41,6 @@ export const ProfileCard = () => (
           </Typography>
         </Typography>
       ))}
-    </div>
+    </CardContent>
   </Card>
 );

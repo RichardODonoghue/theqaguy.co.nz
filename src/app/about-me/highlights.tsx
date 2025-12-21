@@ -49,7 +49,7 @@ export const Highlights = () => (
     {highlights.map(({ title, description, testId }) => (
       <Card
         key={testId}
-        className="w-full max-w-md md:p-4"
+        className="w-full max-w-md p-2 md:p-4"
         data-testid={testId}
       >
         <CardHeader className="p-0 h-10 mb-5">
