@@ -11,7 +11,7 @@ import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentation
 import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api';
 
 export function register() {
-  diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
+  // diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
   const otelEndpoint = process.env.OTEL_ENDPOINT;
 
@@ -41,9 +41,9 @@ export function register() {
         url: `${otelEndpoint}/v1/logs`,
       }),
       {
-        maxExportBatchSize: 512,
-        scheduledDelayMillis: 5000,
-        exportTimeoutMillis: 30000,
+        maxExportBatchSize: 1000,
+        scheduledDelayMillis: 10000,
+        exportTimeoutMillis: 60000,
       }
     ),
     instrumentations: [
