@@ -1,9 +1,10 @@
 import { Worker, Queue } from 'bullmq';
 import IORedis from 'ioredis';
 import { playwrightTestRunner } from './playwrightTestRunner';
+import logger from './logger';
 
 const redisUrl = process.env.REDIS_SERVER!;
-console.log('Connecting to Redis at:', redisUrl);
+
 const connection = new IORedis(redisUrl, { maxRetriesPerRequest: null });
 const pub = connection;
 
@@ -29,7 +30,7 @@ export const worker = new Worker(
       // Signal completion with exit code
       pub.publish(`test-output:${jobId}`, `__END__:${exitCode}`);
     } catch (error) {
-      console.error(`Test job ${jobId} failed:`, error);
+      logger.error(`Test job ${jobId} failed:`, { error });
       pub.publish(`test-output:${jobId}`, `__END__:-1`);
       throw error; // Re-throw to mark job as failed
     }
@@ -38,5 +39,5 @@ export const worker = new Worker(
 );
 
 worker.on('completed', (job) => {
-  console.log(`${job.id} has completed!`);
+  logger.info(`${job.id} has completed!`);
 });
