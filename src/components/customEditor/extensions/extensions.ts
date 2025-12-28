@@ -4,6 +4,7 @@ import Image from '@tiptap/extension-image';
 import { all, createLowlight } from 'lowlight';
 import { CloudinaryImage } from './cloudinaryImage';
 import { CustomCodeBlock } from './customCodeBlock';
+import { CustomTableExtensions } from './customTable';
 
 const lowlight = createLowlight(all);
 
@@ -20,6 +21,7 @@ const extensions: Extensions = [
     lowlight,
     // Apply the class for styling
   }),
+  ...CustomTableExtensions,
 ];
 
 export default extensions;
