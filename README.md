@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# theqaguy.co.nz
 
-## Getting Started
+Project Description
 
-First, run the development server:
+- **Purpose:** Personal website and portfolio for myself showcasing projects, blog posts, and technical writing.
+- **Stack:** Next.js (App Router), TypeScript, BetterAuth, ShadCN, Tailwind CSS, Prisma (Postgres), Playwright tests, Tiptap editor for rich content, and Docker for local development.
+- **Structure:** Static content in `public/`, server code in `src/`, database schema in `prisma/`, and Playwright tests in `playwright/`.
+
+Features
+
+- Clean, responsive portfolio and blog site with accessible components.
+- Ability to run full suite of playwright tests from the home page (jobs created and queued through Redis)
+- WYSIWYG rich text editor with custom Tiptap extensions (tables, code blocks, etc.).
+- Server-side rendering with optimized assets and image handling.
+- End-to-end tests with Playwright and automated accessibility reports.
+- Database-backed content using Prisma and a Postgres database.
+- Docker configuration for reproducible local development and CI.
+
+Setup
+
+1. Prerequisites
+
+   - Node.js 22 (or current LTS)
+   - npm
+   - Postgres
+   - Redis/Valkey
+   - Docker - required for running the playwright tests
+   - Add local.theqaguy.co.nz to your hostfile for localhost as this hostname is used for generating a local https certificate automatically when you start the development server
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Environment
+
+- Copy the example env file and adapt values:
+
+```bash
+cp .env.example .env
+```
+
+4. Database
+
+```bash
+# run migrations and seed (if using Prisma)
+npx prisma migrate dev --name init
+npx prisma db seed
+```
+
+5. Run the app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# open https://local.theqaguy.co.nz:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Create admin user
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Ensure you have set an admin username, password and better auth secret in your env file
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+curl --location 'https://local.theqaguy.co.nz/api/initialize?secret=<YOUR_BETTER_AUTH_SECRET>'
+```
 
-## Learn More
+7. Running tests
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Start playwright docker server
+npm run playwright:server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start playwright UI with websocket to docker server
+npm run playwright:dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Notes
 
-## Deploy on Vercel
+- Content is authored in the custom editor under `src/components/customEditor/`.
+- If you run into styling or layout differences between the editor and the static renderer, check the Tiptap NodeViews and table extensions in `src/components/customEditor/extensions/`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Fork the repo, create a branch, make changes, and open a pull request.
+- Run tests locally before submitting.
+
+License
+
+- Licensed under the terms in the `LICENSE` file.
