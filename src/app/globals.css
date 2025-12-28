@@ -125,6 +125,12 @@ h5 {
   overflow: auto; /* Ensures paragraphs wrap around floated elements */
 }
 
+.tiptap table p,
+.tiptap td p,
+.tiptap th p {
+  @apply text-sm;
+}
+
 .ProseMirror {
   @apply px-5;
 }

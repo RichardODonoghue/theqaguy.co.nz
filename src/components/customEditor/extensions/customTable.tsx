@@ -16,13 +16,13 @@ import {
 const TableNode = () => {
   return (
     <NodeViewWrapper className="my-4 flex justify-center w-full">
-      <div className="rounded-md border w-[80%] max-w-full">
+      <div className="rounded-md border w-full max-w-full">
         <div className="relative w-full">
           <table className="w-full caption-bottom text-sm table-fixed">
             <NodeViewContent
               // @ts-ignore needs to be specified for DOM semantics
               as="tbody"
-              className="[&_tr:last-child]:border-0"
+              className="[&_tr:last-child]:border-0 text-center"
             />
           </table>
         </div>
@@ -57,13 +57,13 @@ const CustomTable = Table.extend({
             'table',
             mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
               'data-slot': 'table',
-              class: 'w-full caption-bottom text-sm',
+              class: 'w-full caption-bottom text-sm table-fixed',
             }),
             [
               'tbody',
               {
                 'data-slot': 'table-body',
-                class: '[&_tr:last-child]:border-0 text-center',
+                class: '[&_tr:last-child]:border-0 text-center w-full',
               },
               0,
             ],
@@ -81,7 +81,7 @@ const CustomTableRow = TableRow.extend({
       mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
         'data-slot': 'table-row',
         class:
-          'border-b transition-colors hover:bg-secondary/50 data-[state=selected]:bg-muted w-full text-center',
+          'border-b transition-colors hover:bg-secondary/50 data-[state=selected]:bg-muted text-center w-full',
       }),
       0,
     ];
@@ -89,14 +89,23 @@ const CustomTableRow = TableRow.extend({
 });
 
 const CustomTableHeader = TableHeader.extend({
-  content: 'inline*',
   renderHTML({ HTMLAttributes }) {
+    const attrs: Record<string, any> = { ...HTMLAttributes };
+    if (attrs.colspan !== undefined) {
+      attrs.colSpan = attrs.colspan;
+      delete attrs.colspan;
+    }
+    if (attrs.rowspan !== undefined) {
+      attrs.rowSpan = attrs.rowspan;
+      delete attrs.rowspan;
+    }
+
     return [
       'th',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+      mergeAttributes(this.options.HTMLAttributes, attrs, {
         'data-slot': 'table-head',
         class:
-          'text-base text-center text-foreground py-2 align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] bg-slate-700 first:rounded-tl-md last:rounded-tr-md break-words',
+          'text-base text-center text-foreground px-2 align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] bg-slate-700 first:rounded-tl-md last:rounded-tr-md break-words',
       }),
       0,
     ];
@@ -104,14 +113,23 @@ const CustomTableHeader = TableHeader.extend({
 });
 
 const CustomTableCell = TableCell.extend({
-  content: 'inline*',
   renderHTML({ HTMLAttributes }) {
+    const attrs: Record<string, any> = { ...HTMLAttributes };
+    if (attrs.colspan !== undefined) {
+      attrs.colSpan = attrs.colspan;
+      delete attrs.colspan;
+    }
+    if (attrs.rowspan !== undefined) {
+      attrs.rowSpan = attrs.rowspan;
+      delete attrs.rowspan;
+    }
+
     return [
       'td',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+      mergeAttributes(this.options.HTMLAttributes, attrs, {
         'data-slot': 'table-cell',
         class:
-          'text-base py-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-center',
+          'text-base px-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-center',
       }),
       0,
     ];
@@ -121,6 +139,6 @@ const CustomTableCell = TableCell.extend({
 export const CustomTableExtensions = [
   CustomTable.configure({ resizable: false }),
   CustomTableRow,
-  CustomTableHeader,
   CustomTableCell,
+  CustomTableHeader,
 ];
