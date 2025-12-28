@@ -3,7 +3,7 @@
 Project Description
 
 - **Purpose:** Personal website and portfolio for myself showcasing projects, blog posts, and technical writing.
-- **Stack:** Next.js (App Router), TypeScript, BetterAuth, ShadCN, Tailwind CSS, Prisma (Postgres), Playwright tests, Tiptap editor for rich content, and Docker for local development.
+- **Stack:** Next.js (App Router), TypeScript, BetterAuth, ShadCN, Tailwind CSS, Prisma (Postgres), Playwright tests, Tiptap editor for rich content, Open-Telemetry integration for APM, and Docker for local development.
 - **Structure:** Static content in `public/`, server code in `src/`, database schema in `prisma/`, and Playwright tests in `playwright/`.
 
 Features
