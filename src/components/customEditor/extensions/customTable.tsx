@@ -17,12 +17,12 @@ const TableNode = () => {
   return (
     <NodeViewWrapper className="my-4 flex justify-center w-full">
       <div className="rounded-md border w-full max-w-full">
-        <div className="relative w-full">
-          <table className="w-full caption-bottom text-sm table-fixed">
+        <div className="relative w-full overflow-x-auto md:overflow-visible">
+          <table className="w-full caption-bottom text-sm md:text-base table-auto md:table-fixed">
             <NodeViewContent
               // @ts-ignore needs to be specified for DOM semantics
               as="tbody"
-              className="[&_tr:last-child]:border-0 text-center"
+              className="[&_tr:last-child]:border-0 text-center whitespace-normal break-words"
             />
           </table>
         </div>
@@ -51,19 +51,21 @@ const CustomTable = Table.extend({
           'div',
           {
             'data-slot': 'table-container',
-            class: 'relative w-full',
+            class: 'relative w-full overflow-x-auto md:overflow-visible',
           },
           [
             'table',
             mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
               'data-slot': 'table',
-              class: 'w-full caption-bottom text-sm table-fixed',
+              class:
+                'w-full caption-bottom text-sm md:text-base table-auto md:table-fixed',
             }),
             [
               'tbody',
               {
                 'data-slot': 'table-body',
-                class: '[&_tr:last-child]:border-0 text-center w-full',
+                class:
+                  '[&_tr:last-child]:border-0 text-center whitespace-normal break-words w-full',
               },
               0,
             ],
@@ -105,7 +107,7 @@ const CustomTableHeader = TableHeader.extend({
       mergeAttributes(this.options.HTMLAttributes, attrs, {
         'data-slot': 'table-head',
         class:
-          'text-base text-center text-foreground px-2 align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] bg-slate-700 first:rounded-tl-md last:rounded-tr-md break-words',
+          'text-sm md:text-base text-center text-foreground px-2 py-1 md:px-3 md:py-2 whitespace-normal align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] bg-slate-700 first:rounded-tl-md last:rounded-tr-md break-words max-w-[16rem] md:max-w-none',
       }),
       0,
     ];
@@ -129,7 +131,7 @@ const CustomTableCell = TableCell.extend({
       mergeAttributes(this.options.HTMLAttributes, attrs, {
         'data-slot': 'table-cell',
         class:
-          'text-base px-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-center',
+          'text-sm md:text-base px-2 py-1 md:px-3 md:py-2 align-middle whitespace-normal break-words [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-center max-w-[16rem] md:max-w-none',
       }),
       0,
     ];
