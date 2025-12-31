@@ -1,31 +1,23 @@
-import { spawn } from 'child_process';
+import { PrismaClient } from '@prisma/client';
+import { testBlogs } from '@/constants/testBlogs';
 
 export const seedDatabase = async () => {
-  return new Promise<void>((resolve, reject) => {
-    const child = spawn('npx', ['tsx', './prisma/seed_blogs.ts']);
-
-    let errorOutput = '';
-
-    child.stdout.on('data', (data) => {
-      console.log(data.toString());
-    });
-
-    child.stderr.on('data', (data) => {
-      const error = data.toString();
-      console.error(error);
-      errorOutput += error;
-    });
-
-    child.on('close', (code) => {
-      if (code === 0) {
-        resolve();
-      } else {
-        reject(
-          new Error(
-            `Seeding blogs process exited with code ${code}\n${errorOutput}`
-          )
-        );
-      }
-    });
+  const prisma = new PrismaClient({
+    datasourceUrl: process.env.TEST_DATABASE_URL,
   });
+
+  try {
+    await prisma.$connect();
+    await prisma.blog.deleteMany({});
+    const result = await prisma.blog.createMany({
+      data: testBlogs,
+    });
+
+    return result;
+  } catch (error) {
+    console.error('Error seeding database: ', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
 };
