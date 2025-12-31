@@ -131,6 +131,10 @@ h5 {
   @apply text-sm;
 }
 
+.tiptap a {
+  @apply underline underline-offset-2 decoration-1 decoration-accent text-accent-foreground hover:text-accent;
+}
+
 .ProseMirror {
   @apply px-5;
 }
