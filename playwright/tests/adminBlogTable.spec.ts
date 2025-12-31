@@ -49,10 +49,12 @@ test.describe('Admin Blog Table Page', () => {
     });
   });
 
-  test('Verify New Blog Button Navigation', async () => {
+  test('Verify New Blog Button Navigation', async ({ page }) => {
     await expect(adminBlogPage.newBlogButton).toBeVisible();
     await adminBlogPage.newBlogButton.click();
-    await expect(adminBlogPage.page).toHaveURL(/\/admin\/blog\/new$/);
+
+    await expect(page).toHaveURL(/\/admin\/blog\/new$/);
+    await expect(page.getByPlaceholder('Enter blog title')).toBeVisible();
   });
 
   test('Accessibility Audit', async ({ page }) => {
