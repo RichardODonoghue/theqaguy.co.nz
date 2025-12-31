@@ -39,12 +39,6 @@ test.describe('Blog Editor', () => {
   });
 
   test('Can edit blog post', async ({ page }) => {
-    test.skip(
-      baseURL === 'https://theqaguy.co.nz' ||
-        process.env.NODE_ENV === 'production',
-      'Skipping test on production'
-    );
-
     await blogEditor.goToBlog('a-test-blog');
 
     await expect(blogEditor.editor.getByRole('paragraph').nth(2)).toBeVisible();

@@ -35,8 +35,8 @@ export default defineConfig({
   reporter: reporters,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: process.env.BASE_URL
-      ? process.env.BASE_URL
+    baseURL: process.env.TEST_ENV_URL
+      ? process.env.TEST_ENV_URL
       : 'https://local.theqaguy.co.nz:3000',
     contextOptions: {
       ignoreHTTPSErrors: true,
