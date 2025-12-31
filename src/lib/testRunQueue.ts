@@ -35,7 +35,7 @@ export const worker = new Worker(
       throw error; // Re-throw to mark job as failed
     }
   },
-  { connection, concurrency: 5 }
+  { connection, concurrency: 2 }
 );
 
 worker.on('completed', (job) => {
