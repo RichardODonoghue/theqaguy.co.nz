@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
 /**
  * @description: Page Component Object Model for Projects Section
@@ -10,13 +11,12 @@ import { Page, Locator } from '@playwright/test';
  * @returns {ProjectPage} An instance of the ProjectPage class.
  */
 
-export class ProjectPage {
-  readonly page: Page;
+export class ProjectPage extends BaseModel {
   readonly projectCards: Promise<Locator[]>;
   projectDialog: Locator | null = null;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.projectCards = page.getByTestId(/^project-card-/).all();
     this.projectDialog = null;
   }

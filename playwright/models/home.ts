@@ -1,14 +1,14 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
-export class Home {
-  readonly page: Page;
+export class Home extends BaseModel {
   readonly heroSection: Locator;
   readonly runTestsButton: Locator;
   readonly testLog: Locator;
   readonly confettiCanvas: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.heroSection = page.locator('#hero');
     this.runTestsButton = page.getByRole('button', {
       name: 'Click Here To Test My Website!',

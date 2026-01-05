@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
 /**
  * @description: Page Component Object Model for Menu
@@ -10,14 +11,13 @@ import { Page, Locator } from '@playwright/test';
  * @returns {Menu} An instance of the Menu class.
  */
 
-export class Menu {
-  readonly page: Page;
+export class Menu extends BaseModel {
   readonly menuItems: Promise<Locator[]>;
   readonly selectedMenuItem: Locator;
   isMobile: boolean = false;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.menuItems = page.getByTestId(/^menu-item-/).all();
     this.selectedMenuItem = page.getByTestId('selected-menu-item');
   }

@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
 /**
  * @description: Page Component Object Model for Blogs page
@@ -9,12 +10,11 @@ import { Page, Locator } from '@playwright/test';
  * @returns {BlogsPage} An instance of the BlogsPage class.
  */
 
-export class BlogsPage {
-  readonly page: Page;
+export class BlogsPage extends BaseModel {
   readonly blogCards: Promise<Locator[]>;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.blogCards = page.getByTestId(/^blog-card-/).all();
   }
 

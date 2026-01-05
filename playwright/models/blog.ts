@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
 /**
  * @description: Page Component Object Model for Blog Page
@@ -14,8 +15,7 @@ import { Page, Locator } from '@playwright/test';
  * @returns {Blog} An instance of the Blog class.
  */
 
-export class Blog {
-  readonly page: Page;
+export class Blog extends BaseModel {
   readonly content: Locator;
   readonly title: Locator;
   readonly summary: Locator;
@@ -24,7 +24,7 @@ export class Blog {
   readonly lastUpdated: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.content = page.getByTestId('blog-content');
     this.title = page.locator('#blog-title');
     this.summary = page.locator('#blog-summary');

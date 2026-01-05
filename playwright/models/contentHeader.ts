@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
 /**
  * @description: Page Component Object Model for Content Header
@@ -11,15 +12,14 @@ import { Page, Locator } from '@playwright/test';
  * @returns {ContentHeader} An instance of the ContentHeader class.
  */
 
-export class ContentHeader {
-  readonly page: Page;
+export class ContentHeader extends BaseModel {
   readonly header: Locator;
   readonly mobileMenuButton: Locator;
   readonly headerText: Locator;
   isMobile: boolean;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.header = page.getByTestId('content-header');
     this.isMobile = false;
     this.mobileMenuButton = page.getByTestId('mobile-menu-button');

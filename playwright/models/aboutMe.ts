@@ -1,7 +1,7 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
-export class AboutMePage {
-  readonly page: Page;
+export class AboutMePage extends BaseModel {
   readonly profileCard: Locator;
   readonly profileDetails: Locator;
   readonly hobbiesCard: Locator;
@@ -11,7 +11,7 @@ export class AboutMePage {
   readonly techSection: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.profileCard = page.getByTestId('profile-card');
     this.profileDetails = page.getByTestId('profile-details');
     this.hobbiesCard = page.getByTestId('hobby-card');
