@@ -9,25 +9,29 @@ import { MenuItem } from './menuItem';
 
 export const DesktopMenu = ({ menuItems }: MenuProps) => {
   return (
-    <div className="flex flex-col p-4" data-testid="desktop-menu">
-      <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl ">
-        <Link href="/" className="m-0 w-full p-0">
-          <Image
-            src="/theqaguy.png"
-            alt="theqaguy"
-            width="250"
-            height="250"
-            className="rounded-lg mx-auto"
-          />
-        </Link>
+    <div className="flex flex-col p-4 h-full" data-testid="desktop-menu">
+      <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl">
+        <div className="h-50">
+          <Link href="/" className="m-0 w-full p-0">
+            <Image
+              src="/theqaguy.png"
+              alt="theqaguy"
+              width="250"
+              height="250"
+              className="rounded-lg mx-auto"
+            />
+          </Link>
+        </div>
         <Separator className="my-10" />
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col justify-center space-y-4 h-80 gap-y-3">
           <ul>
             {menuItems.map((item: MenuItemData, index) => (
               <MenuItem key={index} item={item} />
             ))}
           </ul>
-          <Separator className="my-10" />
+        </div>
+        <Separator className="my-10 space-y-2" />
+        <div className="h-80 flex flex-col justify-center space-y-4">
           <Link
             href="https://github.com/RichardODonoghue"
             aria-label="Check out my Github Profile"
