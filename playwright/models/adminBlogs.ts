@@ -1,7 +1,7 @@
 import { Page, Locator } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
-export class AdminBlogPage {
-  readonly page: Page;
+export class AdminBlogPage extends BaseModel {
   readonly newBlogButton: Locator;
   readonly table: Locator;
   tableRow:
@@ -16,7 +16,7 @@ export class AdminBlogPage {
     | undefined;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.table = page.getByTestId('blog-table');
     this.newBlogButton = page.getByRole('link', { name: 'New Blog' });
   }

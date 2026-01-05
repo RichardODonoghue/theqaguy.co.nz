@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BaseModel } from './baseModel';
 
 /**
  * @description: Page Component Object Model for Blog Editor Page
@@ -12,8 +13,7 @@ import { Page, Locator, expect } from '@playwright/test';
  * @returns {BlogEditor} An instance of the BlogEditor class.
  */
 
-export class BlogEditorPage {
-  readonly page: Page;
+export class BlogEditorPage extends BaseModel {
   readonly title: Locator;
   readonly summary: Locator;
   readonly toolbar: Locator;
@@ -28,7 +28,7 @@ export class BlogEditorPage {
   readonly separator?: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.editor = page.getByTestId('editor');
     this.title = page.locator('#blog-title');
     this.summary = page.locator('#blog-summary');
