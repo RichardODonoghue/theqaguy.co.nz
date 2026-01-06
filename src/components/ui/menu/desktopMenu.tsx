@@ -31,7 +31,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
           </ul>
         </div>
         <Separator className="my-10 space-y-2" />
-        <div className="h-80 flex flex-col justify-center space-y-4">
+        <div className="h-60 lg:h-80 flex flex-col justify-center space-y-4">
           <Link
             href="https://github.com/RichardODonoghue"
             aria-label="Check out my Github Profile"
