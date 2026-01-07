@@ -22,15 +22,15 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
             />
           </Link>
         </div>
-        <Separator className="my-10" />
-        <div className="flex flex-col justify-center space-y-4 h-80 gap-y-3">
+        <Separator className="my-5" />
+        <div className="flex flex-col justify-center h-80 gap-y-3">
           <ul>
             {menuItems.map((item: MenuItemData, index) => (
               <MenuItem key={index} item={item} />
             ))}
           </ul>
         </div>
-        <Separator className="my-10 space-y-2" />
+        <Separator className="my-10" />
         <div className="h-60 lg:h-80 flex flex-col justify-center space-y-4">
           <Link
             href="https://github.com/RichardODonoghue"
