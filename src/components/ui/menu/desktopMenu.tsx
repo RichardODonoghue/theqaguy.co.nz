@@ -9,9 +9,12 @@ import { MenuItem } from './menuItem';
 
 export const DesktopMenu = ({ menuItems }: MenuProps) => {
   return (
-    <div className="flex flex-col p-4 h-full" data-testid="desktop-menu">
-      <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl">
-        <div className="h-50">
+    <div
+      className="flex flex-col p-4 h-dvh overflow-hidden"
+      data-testid="desktop-menu"
+    >
+      <nav className="rounded-2xl flex-1 p-4 backdrop-blur-3xl bg-slate-700/30 shadow-2xl flex flex-col max-h-full">
+        <div className="flex-shrink-0">
           <Link href="/" className="m-0 w-full p-0">
             <Image
               src="/theqaguy.png"
@@ -23,7 +26,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
           </Link>
         </div>
         <Separator className="my-5" />
-        <div className="flex flex-col justify-center h-80 gap-y-3">
+        <div className="flex-1 flex flex-col justify-center gap-y-3 overflow-y-hidden">
           <ul>
             {menuItems.map((item: MenuItemData, index) => (
               <MenuItem key={index} item={item} />
@@ -31,7 +34,7 @@ export const DesktopMenu = ({ menuItems }: MenuProps) => {
           </ul>
         </div>
         <Separator className="my-10" />
-        <div className="h-60 lg:h-80 flex flex-col justify-center space-y-4">
+        <div className="flex-shrink-0 flex flex-col justify-center space-y-4">
           <Link
             href="https://github.com/RichardODonoghue"
             aria-label="Check out my Github Profile"
