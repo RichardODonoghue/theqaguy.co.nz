@@ -51,6 +51,9 @@ export const metadata: Metadata = {
     siteName: "Richard O'Donoghue | QA Engineer",
     images: ['/theqaguy.png'],
   },
+  verification: {
+    google: '2Qji__XDmHsrjKmX9e638EwAtxohH9jTBoNaGlzUj18',
+  },
 };
 
 export default async function RootLayout({
