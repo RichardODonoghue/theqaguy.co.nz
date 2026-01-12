@@ -10,17 +10,17 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
 
   if (!isProd) {
     return {
-      rules: [{ userAgent: '*', disallow: '/' }],
+      rules: { userAgent: '*', disallow: '/' },
       sitemap: [],
     };
   }
 
   return {
-    rules: [
-      { userAgent: '*', allow: '/' },
-      { userAgent: '*', disallow: '/admin' },
-      { userAgent: '*', disallow: '/login' },
-    ],
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: ['/admin', '/login'],
+    },
     sitemap: ['https://theqaguy.co.nz/sitemap.xml'],
     host: 'https://theqaguy.co.nz',
   };
