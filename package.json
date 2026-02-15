@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest",
     "prepare": "husky",
     "playwright:test": "playwright test",
     "playwright:dev": "PW_TEST_CONNECT_WS_ENDPOINT=ws://127.0.0.1:3001/ npx playwright test --ui",
@@ -68,7 +67,6 @@
     "@types/node": "^20",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^4.5.2",
     "dotenv": "^17.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.7",
@@ -78,9 +76,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
     "tw-animate-css": "^1.3.4",
-    "typescript": "^5",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
+    "typescript": "^5"
   },
   "overrides": {
     "@types/react": "19.2.7",
