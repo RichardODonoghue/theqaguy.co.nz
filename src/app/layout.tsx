@@ -43,6 +43,17 @@ export const metadata: Metadata = {
     'AI Testing',
   ],
   authors: [{ name: "Richard O'Donoghue", url: 'https://theqaguy.co.nz' }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   creator: "Richard O'Donoghue",
   openGraph: {
     title: "Richard O'Donoghue | QA Engineer",
@@ -50,6 +61,9 @@ export const metadata: Metadata = {
     url: 'https://theqaguy.co.nz',
     siteName: "Richard O'Donoghue | QA Engineer",
     images: ['/theqaguy.png'],
+  },
+  verification: {
+    google: '2Qji__XDmHsrjKmX9e638EwAtxohH9jTBoNaGlzUj18',
   },
 };
 
